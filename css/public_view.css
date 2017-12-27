@@ -1,0 +1,91 @@
+body{
+    padding: 10px;
+    font-family: FontAwesome;
+    background-color: rgba(255, 255, 255, 0.507);
+}
+div>a>img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 150px;
+    margin-left: 2px;
+}
+.right{
+    float:right;
+}
+.searchbox{
+    border-radius:25px; 
+    float:right;
+}
+.views{
+    position: relative;
+    left: 15%;
+}
+.comments{
+    position: relative;
+    left: 50%;
+}
+.navbar-brand{
+    padding: 7px 7px;
+}
+marquee{
+    font-weight: 500;
+}
+.bubble{
+    background-color: rgb(243, 69, 69);
+    border-radius: 50%;
+    color: whitesmoke;
+}
+.navbar-default {
+    background-color: #1760a59c;
+    border-color: #e7e7e7;
+}
+img{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+img:hover,.content:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+.title{
+    margin:5px;
+}
+a, a:hover{
+    color: black;
+}
+.center{
+   text-align: center;
+}
+.content{
+    max-height: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.459);
+    border-radius:10px; 
+    margin: 10px;
+}   
+.recent_news{
+    height: 200px;
+    overflow-y: scroll;
+    padding-left:20% ;
+    font: 2em FontAwesome;
+}
+.comment_list{
+    border: 1px solid rgba(0, 0, 0, 0.342);
+    border-radius: 10px;
+    padding: 5px;
+}
+.n_date{
+float: right;    
+}
+div>h3{
+    font: 2.5em FontAwesome;
+}
+textarea{
+    resize: none;
+}
+.author{
+    float: right;
+    margin-right:5px; 
+}
+.modal button{
+    background-color: rgb(102, 158, 233);
+}
