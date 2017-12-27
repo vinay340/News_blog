@@ -12,6 +12,7 @@
 <?php
 $errEmail = $errPass= $errName="";
 if(isset($_POST["submit"])) {
+  
  
 $email = $_POST['email'];
 $name = $_POST['user'];
