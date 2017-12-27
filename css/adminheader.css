@@ -1,0 +1,51 @@
+.menu
+{
+background-color: #00547E;
+border-bottom: 4px solid #04A3ED;
+width:100%;
+height: auto;
+padding: 0 10px;
+position: fixed;
+margin: 0px;
+z-index: 1;
+opacity: 0.9;
+}
+
+.menu  .navbar-nav > .active > a
+{
+background-color : #04A3ED;
+color: white;
+font-weight: bold;
+}
+.menu  .navbar-nav li   a
+{
+font-size: 20px;
+color: white;
+padding: 23px 35px;
+
+}
+
+.menu .nav li a:focus {
+    text-decoration: none;
+    background-color: #04A3ED;
+}
+img{
+    height: 60px;
+    width: 60px;
+    border-radius: 40px;
+}
+.name{
+    font-size: 40px;
+    padding: 0 10px;
+    color:white;
+padding: 23px 35px;
+    
+    
+}
+.name:hover{
+    background-color: #04A3ED;
+    color:white;
+	text-decoration-line: none;
+    
+
+}

@@ -1,0 +1,13 @@
+.top{
+    margin-top: 80px;
+    margin-left: 220px;
+}
+.pull-left{
+    font-size: 30px;
+}
+.pull-right{
+    font-size: 80px;
+}
+#panel1{
+   border: 1px solid black;
+}

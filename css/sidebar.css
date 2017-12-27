@@ -1,0 +1,35 @@
+
+.sidebar .nav li a{
+    color: white;
+    font-size: 20px;
+    padding:20px;
+
+}
+.sidebar .nav li a:hover{
+    font-weight: 100px;
+    background-color: #04A3ED;
+
+}
+.sidebar .nav li a:focus{
+    background-color: #04A3ED;
+    font-weight: bold;
+}
+.t_name{
+    color:white;
+}
+.nav_sidebar{
+ background-color: #00547E;
+ top: 72px;
+ left:15px;
+ width: 200px;
+ position: fixed;
+ height: 100%;
+ overflow-y: auto;
+ z-index: 1000;
+ transition: all 0.4s ease 0s;
+ overflow: hidden;
+}   
+#nav-tabs {
+    border-bottom:none;
+}                   
+
