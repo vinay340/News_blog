@@ -1,0 +1,63 @@
+body{
+    padding: 10px;
+    font-family: FontAwesome;
+    background-color: rgba(255, 255, 255, 0.507);
+}
+.public_content{
+    position: relative;
+    top: 50px;
+}
+
+/* --------------------------author_header----------------------------------- */
+.right{
+    float:right;
+}
+.navbar-brand{
+    padding: 7px 7px;
+}
+.navbar-default {
+    background-color: #1760a59c;
+    border-color: #e7e7e7;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%;
+}
+.logo_img{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}   
+.bubble{
+    background-color: rgb(243, 69, 69);
+    border-radius: 50%;
+    color: whitesmoke;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: rgb(0, 0, 0);
+    font: 2em FontAwesome;
+}
+div>textarea{
+    resize: none;   
+}
+.circle{
+    border-radius: 50%;
+}
+/* --------------------------author_header - END----------------------------------- */
+
+/* --------------------------author_dashboard----------------------------------- */
+
+.btn-primary{
+    width: 250px;       
+}
+
+
+/* --------------------------Create_ news----------------------------------- */
+
+.field{
+    border: 1px soild black;
+}
