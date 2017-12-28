@@ -4,10 +4,33 @@
 }
 .pull-left{
     font-size: 30px;
+    float: left;
+}
+.panel .panel-body .pull-left:hover{
+    text-shadow: #04A3ED;
 }
 .pull-right{
     font-size: 80px;
+    float: right;
 }
 #panel1{
-   border: 1px solid black;
+   border: 1px solid rgba(0, 0, 0, 0.541);
+
+}
+.panel .panel-body:hover{
+    box-shadow: 0 0 2px 1px #04A3ED;
+    border: 1.2px solid;
+
+}
+.nav-pills li a{
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+}
+#tab{
+    margin-left: 30px;
+    padding-bottom: 20px;
+}
+.list-group .list-group-item{
+    float: left;
 }
