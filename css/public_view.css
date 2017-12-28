@@ -3,7 +3,11 @@ body{
     font-family: FontAwesome;
     background-color: rgba(255, 255, 255, 0.507);
 }
-div>a>img {
+.public_content{
+    position: relative;
+    top: 50px;
+}
+.img1 {
     border: 1px solid #ddd;
     border-radius: 4px;
     width: 150px;
@@ -38,6 +42,10 @@ marquee{
 .navbar-default {
     background-color: #1760a59c;
     border-color: #e7e7e7;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%;
+    z-index: 1;
 }
 img{
     border: 1px solid #ddd;
@@ -52,9 +60,6 @@ img:hover,.content:hover {
 }
 a, a:hover{
     color: black;
-}
-.center{
-   text-align: center;
 }
 .content{
     max-height: 50%;

@@ -9,26 +9,26 @@
 <?php
     
 ?>
-<body>
+<body >
     <?php 
     include('public_view_header.php');
     ?>
-    <hr>
-    <marquee behavior="scroll">Important news text goes here <sup><span class="bubble">new</span></marquee>
-    <hr>   
-    <div class=row>
-        <div class="col-md-8 col-xs-8 ">
-            <a href="news_view.php">
-            <fieldset class="content">
-                <div class="wrapper recent-updated"> 
-                    <div id="upadtes-box" role="tabpanel" class="collapse show">
-                        <ul class="news list-unstyled">
-                            <li class="d-flex justify-content-between" *ngFor="let n of news" > 
-                                <div class="left-col d-flex">
-                                    <div class="title">
-                                        <strong><h3>Headline<b class="n_date">12dec</b></h3></strong>
-                                    </div> 
-                                    <div class="row">
+    <div class="public_content">
+        <hr>
+        <marquee behavior="scroll">Important news text goes here <sup><span class="bubble">new</span></marquee>
+        <hr>   
+        <div class=row>
+            <div class="col-md-8 col-xs-8 ">
+                <a href="news_view.php">
+                <fieldset class="content">
+                    <div class="wrapper recent-updated"> 
+                        <div id="upadtes-box" role="tabpanel" class="collapse show">
+                            <ul class="news list-unstyled">
+                                <li class="d-flex justify-content-between" *ngFor="let n of news" > 
+                                    <div class="left-col d-flex">
+                                        <div class="title">
+                                            <strong><h3>Headline<b class="n_date">12dec</b></h3></strong>
+                                        </div> 
                                         <div class="col-md-2 col-xs-12">
                                             <img  class ="img1" src="assets/images/download.jpeg">
                                         </div>
@@ -42,23 +42,21 @@
                                             </p>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </fieldset> 
-            </a>
-            <fieldset class="content">
-                <div class="wrapper recent-updated"> 
-                    <div id="upadtes-box" role="tabpanel" class="collapse show">
-                        <ul class="news list-unstyled">
-                            <li class="d-flex justify-content-between" *ngFor="let n of news" > 
-                                <div class="left-col d-flex">
-                                    <div class="title">
-                                        <strong><h3>Headline<b class="n_date">12dec</b></h3></strong>
-                                    </div> 
-                                    <div class="row">
+                </fieldset> 
+                </a>
+                <fieldset class="content">
+                    <div class="wrapper recent-updated"> 
+                        <div id="upadtes-box" role="tabpanel" class="collapse show">
+                            <ul class="news list-unstyled">
+                                <li class="d-flex justify-content-between" *ngFor="let n of news" > 
+                                    <div class="left-col d-flex">
+                                        <div class="title">
+                                            <strong><h3>Headline<b class="n_date">12dec</b></h3></strong>
+                                        </div> 
                                         <div class="col-md-2 col-xs-12">
                                             <img  class ="img1" src="assets/images/download.jpeg">
                                         </div>
@@ -72,45 +70,44 @@
                                             </p>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                </fieldset>
+                <div class="col-md-2 col-xs-12">
+                    <img class ="img1"src="assets/images/download.png">
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
+                    vulputate eu pharetra nec, mattis ac neque.
+                    </p>
                 </div>
-            </fieldset>
-            <div class="col-md-2 col-xs-12">
-                <img src="assets/images/download.png">
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
-                vulputate eu pharetra nec, mattis ac neque.
-                </p>
+                <div class="col-md-2 col-xs-12">
+                    <img class ="img1"src="assets/images/download.png">
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
+                    vulputate eu pharetra nec, mattis ac neque.
+                    </p>
+                </div>
+                <div class="col-md-2 col-xs-12">
+                    <img class ="img1"src="assets/images/download.png">
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
+                    vulputate eu pharetra nec, mattis ac neque.
+                    </p>
+                </div>
+                <div class="col-md-2 col-xs-12">
+                    <img class ="img1"src="assets/images/download.png">
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
+                    vulputate eu pharetra nec, mattis ac neque.
+                    </p>
+                </div>  
             </div>
-            <div class="col-md-2 col-xs-12">
-                <img src="assets/images/download.png">
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
-                vulputate eu pharetra nec, mattis ac neque.
-                </p>
-            </div>
-            <div class="col-md-2 col-xs-12">
-                <img src="assets/images/download.png">
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
-                vulputate eu pharetra nec, mattis ac neque.
-                </p>
-            </div>
-            <div class="col-md-2 col-xs-12">
-                <img src="assets/images/download.png">
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
-                vulputate eu pharetra nec, mattis ac neque.
-                </p>
-            </div>  
+            <?php 
+            include('public_view_rightmenu.php');
+            ?>
         </div>
-        <?php 
-        include('public_view_rightmenu.php');
-        ?>
     </div>
-
 </body>
 </html>
