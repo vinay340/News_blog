@@ -1,0 +1,23 @@
+.err_msg{
+ 
+    float:right;    
+  }
+  .well{
+    width :max-content;
+    
+  }
+  h2{
+    padding: 0 100px 10px;
+  }
+  .form-signin{
+      width:350px;
+  }
+  .class{
+    padding: 185px 300px;
+  }
+  .btn{
+      padding:10px 80px ;   
+      margin-left: 40px;                       
+  }
+
+  
