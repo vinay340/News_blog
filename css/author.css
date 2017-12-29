@@ -50,14 +50,30 @@ div>textarea{
 /* --------------------------author_header - END----------------------------------- */
 
 /* --------------------------author_dashboard----------------------------------- */
-
-.btn-primary{
-    width: 250px;       
-}
-
+div a button {
+        color: #000;
+        background-color: #ef8400b3;
+        border-color: #2e6da4;
+    }
 
 /* --------------------------Create_ news----------------------------------- */
-
+.caption{
+    text-align: center;
+}
 .field{
     border: 1px soild black;
+}
+.submit_button:hover{
+    color: #000;
+    background-color: rgba(58, 248, 0, 0.534);
+}
+.cancel_button:hover{
+    color: #000;
+    background-color: rgba(252, 80, 80, 0.712);
+}
+.submit_button{
+    box-shadow: 0px 0px 10px #000;
+}
+.cancel_button{
+    box-shadow: 0px 0px 10px #000;
 }

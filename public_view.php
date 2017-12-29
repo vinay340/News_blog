@@ -15,7 +15,7 @@
     ?>
     <div class="public_content">
         <hr>
-        <marquee behavior="scroll">Important news text goes here <sup><span class="bubble">new</span></marquee>
+        <marquee behavior="scroll">Important news text goes here <sup><span class="bubble">new</span></sup></marquee>
         <hr>   
         <div class=row>
             <div class="col-md-8 col-xs-8 ">

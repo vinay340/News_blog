@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Create News</title>
+  <title>EDIT News</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <div class="col-md-8 col-xs-12">
-            <h2 class="caption">CREATE NEWS</h2>
+            <h2 class="caption">EDIT NEWS</h2>
             <form action="author_dashboard.php">
                 <div class="form-group">
                     <input type="text"class="form-control" id="title" placeholder="Title" name="title">
@@ -30,9 +30,10 @@
                 <div class="checkbox">
                     <label><input type="checkbox" name="remember"> Save to Drafts</label>   
                 </div>
-                <button type="submit" class="btn btn-default col-md-4 submit_button">CREATE</button>
-                <button type="canel" class="btn btn-default col-md-4 cancel_button  right" href="author_dashboard.php" class="btn btn-default">CANCEL</button>
-
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default col-md-4 submit_button">EDIT</button>
+                    <button type="canel" class="btn btn-default col-md-4 right cancel_button  " href="author_dashboard.php" class="btn btn-default">CANCEL</button>
+                </div>
             </form>
         </div>
     </div>
