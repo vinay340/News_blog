@@ -34,3 +34,6 @@
 .list-group .list-group-item{
     float: left;
 }
+#comment :hover{
+    box-shadow: 0 0 2px 1px #04A3ED;
+}

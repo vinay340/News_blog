@@ -15,7 +15,7 @@
     include("mysql_conn.php");
      
 $sql = 'SELECT title,description,content,date,id FROM news';  
-$sql1='SELECT id,content FROM comment';
+$sql1='SELECT news_id,content,created_date,commented_by FROM comment';
 $retval=mysqli_query($conn, $sql); 
 $retval1=mysqli_query($conn, $sql1);  
  
@@ -134,7 +134,7 @@ echo $title."<br>";
                                     <fieldset class="col-xs-12">
                                         <h2>Activities</h2>
                                         <div class="tabs">
-                                           <div > <ul class="nav nav-pills col-md-12" id="tab" >
+                                           <div > <ul class="nav nav-pills nav-justified col-md-12" id="tab" >
                                                 <li class="active col-md-4"><a href="#recent_news" data-toggle="tab">Recently Published</a></li>
                                                 <li class="col-md-4"><a href="#recent_comment" data-toggle="tab">Recently Commented</a></li>
                                             </ul>
@@ -142,8 +142,10 @@ echo $title."<br>";
                                             
                                             <div class="tab-content">
                                                 <div id="recent_news" class="tab-pane fade in active">
+                                                            <marquee class="marquee " direction="up"  scrolldelay="100">
+
                                                    <?php while($row = mysqli_fetch_assoc($retval)){?>
-                                                        <fieldset class="well" id="element">
+                                                        <fieldset class="well" >
                                                             <div class="row">
                                                                 <div class="col-md-6 col-sm-6 col-xs-8">
                                                                     <strong><?php echo $row['id'] ?></strong>
@@ -163,25 +165,28 @@ echo $title."<br>";
                                                                     </p>
                                                                 </div>
                                                             </div>
-        <!-- ........... -->      <div class="ansbox"></div>
+        <!-- ........... -->   
                                                         </fieldset>
+
                                                     <?php } ?>
+                                                    </marquee>
                                                 </div>
                                                 <div id="recent_comment"class="tab-pane fade ">
+                                                <marquee class="marquee" direction="down"  scrolldelay="100" > 
                                                 <?php while($row1 = mysqli_fetch_assoc($retval1)){?>
-                                                    <fieldset class="well" id="element">
+                                                    <fieldset class="well" id ="comment" >
                                                             <div class="row">
                                                                 <div class="col-md-6 col-sm-6 col-xs-8">
-                                                                    <strong><?php echo $row1['id']?></strong>
+                                                                    <strong><?php echo $row1['news_id']?></strong>
                                                                     </div>
                                                                         <div class="col-md-6 col-sm-6 col-xs-4 text-right">
-                                                                        <?php echo 'vinay'?>
+                                                                        <?php echo $row1['created_date']?>
                                                                         </div>
                                                                     </div>
                                                                 <br>
                                                             <div class="row">
                                                                 <div class="col-md-2 col-sm-12 col-xs-12">
-                                                                    <h4>Comment by :</h4>
+                                                                    <h4> commented by:<?php echo $row1['commented_by'] ?></h4>
                                                                 </div>
                                                                 <div class="col-md-10 col-sm-12 col-xs-12">
                                                                     <p><?php echo $row1 ['content']?>
@@ -190,7 +195,7 @@ echo $title."<br>";
                                                             </div>
                                                         </fieldset>
                                                     <?php }?>
-                                                  
+                                                  </marquee>            
                                                 </div>
                                             </div>
                                         </div>  
@@ -216,8 +221,3 @@ echo $title."<br>";
                  </div>
 </body>
 </html>
-<script>
-   for(var i =1; i<= 6; i++){
-    $('#element').append($('<div/>', { id: 'r' + i, 'class' : 'ansbox'}))
-  }
-</script>

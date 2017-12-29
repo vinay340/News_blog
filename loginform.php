@@ -74,7 +74,7 @@ echo "The form has been submitted";
         </div>
 <div class="form-group row">
 <div class=" col-md-12 offset-sm-2 col-sm-10">
-<a href="adminheader.php" type="submit" value="Log in" name="submit" class="btn btn-primary">LOG IN</a>
+<a href="admindashboard.php" type="submit" value="Log in" name="submit" class="btn btn-primary">LOG IN</a>
 </div>
 </div>
 <a href="registeration.php" class="<col-md-12></col-md-12> col-sm-12 col-xs-12">Are you new user?  Register here...</a> 

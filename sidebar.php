@@ -28,7 +28,7 @@ include("adminheader.php");
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="admin_ref.php">
           <i class="fa fa-users icon"></i>
           <i class="t_name">Authors</i>
         </a>
@@ -40,7 +40,7 @@ include("adminheader.php");
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="posts.php">
           <i class="fa fa-newspaper-o icon"></i>
           <i class="t_name">Posts</i>
         </a>

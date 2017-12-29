@@ -1,0 +1,51 @@
+.author_img{
+    height:180px;
+    width:180px;
+    margin-left: 35px;
+}
+.top{
+    margin-top: 80px;
+    margin-left: 220px;
+}
+.nav-pills li a{
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+}
+#tab{
+    margin-left: 30px;
+    padding-bottom: 20px;
+}
+.radio-group label {
+    overflow: hidden;
+ } .radio-group input {
+     /* This is on purpose for accessibility. Using display: hidden is evil.
+     This makes things keyboard friendly right out tha box! */
+    height: 1px;
+    width: 1px;
+    position: absolute;
+    top: -20px;
+ } .radio-group .not-active  {
+    color: #3276b1;
+    background-color: #fff;
+ }
+ .funkyradio input[type="checkbox"]:empty ~ label:before {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  width: 2.5em;
+  background: #D1D3D4;
+  border-radius: 3px 0 0 3px;
+}
+.btn-group .btn-success{
+    font-size: 19px;
+}
+.btn-group .btn-danger{
+    font-size: 19px;
+}
+#check_btn{
+    float: right;
+}
