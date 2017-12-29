@@ -12,6 +12,11 @@
 <body >
     <?php 
     include('public_view_header.php');
+    include('mysql_conn.php');
+$sql = 'SELECT title,description,content,date,id, created_date FROM news';  
+
+$retval=mysqli_query($conn, $sql);
+ 
     ?>
     <div class="public_content">
         <hr>
@@ -19,27 +24,28 @@
         <hr>   
         <div class=row>
             <div class="col-md-8 col-xs-8 ">
-                <a href="news_view.php">
+                <?php while($row =mysqli_fetch_assoc($retval)) { ?>
+
                 <fieldset class="content">
                     <div class="wrapper recent-updated"> 
                         <div id="upadtes-box" role="tabpanel" class="collapse show">
                             <ul class="news list-unstyled">
-                                <li class="d-flex justify-content-between" *ngFor="let n of news" > 
+                                <li class="d-flex justify-content-between" > 
                                     <div class="left-col d-flex">
                                         <div class="title">
-                                            <strong><h3>Headline<b class="n_date">12dec</b></h3></strong>
+                                            <strong><h3><?php echo $row['title']?><b class="n_date"><?php echo $row['created_date']?></b></h3></strong>
                                         </div> 
                                         <div class="col-md-2 col-xs-12">
                                             <img  class ="img1" src="assets/images/download.jpeg">
                                         </div>
                                         <div class="col-md-10 col-xs-12">
-                                            <p><b>18 DEC,Bengaluru.</b><br>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
-                                                vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, 
-                                                ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, 
-                                                et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-                                                Aenean velit odio
+                                             <a class="alink"  href="news_view.php">
+                                            
+                                            <p><b><?php echo $row['date']?>,Bengaluru.</b><br>
+
+                                            <?php echo $row['description']?>
                                             </p>
+                                                 </a>
                                         </div>
                                     </div>
                                 </li>
@@ -47,34 +53,8 @@
                         </div>
                     </div>
                 </fieldset> 
-                </a>
-                <fieldset class="content">
-                    <div class="wrapper recent-updated"> 
-                        <div id="upadtes-box" role="tabpanel" class="collapse show">
-                            <ul class="news list-unstyled">
-                                <li class="d-flex justify-content-between" *ngFor="let n of news" > 
-                                    <div class="left-col d-flex">
-                                        <div class="title">
-                                            <strong><h3>Headline<b class="n_date">12dec</b></h3></strong>
-                                        </div> 
-                                        <div class="col-md-2 col-xs-12">
-                                            <img  class ="img1" src="assets/images/download.jpeg">
-                                        </div>
-                                        <div class="col-md-10 col-xs-12">
-                                            <p><b>18 DEC,Bengaluru.</b><br>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
-                                                vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, 
-                                                ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, 
-                                                et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-                                                Aenean velit odio
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </fieldset>
+                <?php }?>
+               
                 <div class="col-md-2 col-xs-12">
                     <img class ="img1"src="assets/images/download.png">
                     <p>

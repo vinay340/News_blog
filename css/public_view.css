@@ -58,8 +58,9 @@ img:hover,.content:hover {
 .title{
     margin:5px;
 }
-a, a:hover{
+div .alink:hover{
     color: black;
+    text-decoration-line: none;
 }
 .content{
     max-height: 50%;

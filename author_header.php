@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/author.css">
 </head>
+
+
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="public_view.php"><img class="logo_img"src="assets/images/new_balance.gif" alt="logo"height="50px" width="50px" ></a>
+                <a class="navbar-brand" href="author_dashboard.php"><img class="logo_img"src="assets/images/new_balance.gif" alt="logo"height="50px" width="50px" ></a>
             </div>
             <div>
             <ul class="nav navbar-nav">

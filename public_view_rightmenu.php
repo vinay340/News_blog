@@ -8,22 +8,34 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
 </head>
+<?php
+    include("mysql_conn.php");
+     
+$sql = 'SELECT category_name FROM category';  
+$sql1='SELECT description FROM news';
+$retval=mysqli_query($conn, $sql); 
+$retval1=mysqli_query($conn, $sql1);  
+ 
+ 
+    ?>
 <body>
 <div class="col-md-4 col-xs-4">
             <div >
                 <h3 class="center">Recent-News</h3>
                 <ul class="recent_news">
-                    <li>first news description</li>
-                    <li>second news description</li>
-                    <li>second news description</li>
+                <?php while($row1 =mysqli_fetch_assoc($retval1)) { ?>
+                    <li> <?php echo $row1['description']?>
+                    </li>
+                <?php }?>   
                 </ul>
             </div>
             <div >
                 <h3 class="center">Category</h3>
                 <ul class="recent_news">
-                    <li>Sports</li>
-                    <li>Politics</li>
-                    <li>Technology</li>
+                        <?php while($row =mysqli_fetch_assoc($retval)) { ?>
+                    <li><?php echo $row['category_name']?></li>
+                    
+                    <?php }?>
                 </ul>
             </div>
             <div >

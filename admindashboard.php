@@ -19,21 +19,7 @@ $sql1='SELECT news_id,content,created_date,commented_by FROM comment';
 $retval=mysqli_query($conn, $sql); 
 $retval1=mysqli_query($conn, $sql1);  
  
-  //$title = $id=$description=$content=$date="";
-
-   
-
-/* while($row = mysqli_fetch_assoc($retval)){  
-    $description=  $row['description'];
-    $content= $row['content'];              
-      $date=$row['date'];           
-        $id=$row['id'];
-     $title=$row['title'];
-       // "--------------------------------<br>";  
-echo $title."<br>";
-//echo "0 results";  
-} */ 
-
+ 
     ?>
   
 
@@ -174,7 +160,7 @@ echo $title."<br>";
                                                 <div id="recent_comment"class="tab-pane fade ">
                                                 <marquee class="marquee" direction="down"  scrolldelay="100" > 
                                                 <?php while($row1 = mysqli_fetch_assoc($retval1)){?>
-                                                    <fieldset class="well" id ="comment" >
+                                                    <fieldset class="well"  >
                                                             <div class="row">
                                                                 <div class="col-md-6 col-sm-6 col-xs-8">
                                                                     <strong><?php echo $row1['news_id']?></strong>
@@ -205,10 +191,10 @@ echo $title."<br>";
                                 <div class= "col-md-4 well">
                                     <fieldset class="col-xs-12">
                                     <ul class="list-group col-md-6">
-                                        <li class="list-group-item col-md-6" >All <span class="badge ">12</span></li>
-                                        <li class="list-group-item col-md-6">Pending<span class="badge col-md-2">12</span></li>
-                                        <li class="list-group-item col-md-6">Approved<span class="badge col-md-2">5</span></li>
-                                        <li class="list-group-item  col-md-6">Trash<span class="badge col-md-2">3</span></li>
+                                        <li class="list-group-item col-md-6" ><a>All</a> <span class="badge ">12</span></li>
+                                        <li class="list-group-item col-md-6"><a>Pending</a><span class="badge col-md-2">12</span></li>
+                                        <li class="list-group-item col-md-6"><a>Approved</a><span class="badge col-md-2">5</span></li>
+                                        <li class="list-group-item  col-md-6"><a>Trash</a><span class="badge col-md-2">3</span></li>
                                     </ul>    
                                     </fieldset>
 

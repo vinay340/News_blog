@@ -27,6 +27,7 @@
                 <div class="form-group">
                     <input type="date" class="form-control" id="content" placeholder="Event date" name="date">
                 </div>
+                
                 <div class="checkbox">
                     <label><input type="checkbox" name="remember"> Save to Drafts</label>   
                 </div>

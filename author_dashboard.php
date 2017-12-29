@@ -10,6 +10,13 @@
 <body>
     <?php 
     include('author_header.php');
+    include('mysql_conn.php');
+$sql = 'SELECT title,description,content,date,id, created_date FROM news WHERE author_id = 3';  
+$sql1 = 'SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date FROM news AS a, user AS b WHERE a.author_id = 4 && a.author_id=b.id';  
+
+$retval=mysqli_query($conn, $sql);
+$retval1=mysqli_query($conn, $sql1); 
+ 
     ?>
     <div class="public_content">
         <div class="container-fluid ">
@@ -18,7 +25,7 @@
                     <marquee behavior="scroll">Your last post reached 1500 views...</marquee>
                 </div>
                 <div class="col-md-4 col-xs-12 right">
-                    <a href="create_news.php"><button type="button" class="btn btn-primary col-md-12">CREATE NEWS</button></a>
+                    <a href="create_news.php"><button type="button" id ="btnn" class="btn btn-primary col-md-12">CREATE NEWS</button></a>
                 </div>
             </div>
             <div class="tab">
@@ -28,6 +35,8 @@
                 </ul>
                 <div class="tab-content" >
                     <div id="me" class="tab-pane fade in active">
+                    <?php while($row = mysqli_fetch_assoc($retval)){?>
+
                         <fieldset class="content">
                                 <div class="wrapper recent-updated"> 
                                     <div id="upadtes-box" role="tabpanel" class="collapse show">
@@ -36,19 +45,15 @@
                                                 <div class="left-col d-flex">
                                                     <div class="title">
                                                         <strong>
-                                                            <h3>Headline <a href="edit_news.php"><i class="fa fa-pencil-square-o right" aria-hidden="true"></i>&nbsp;</a><b class="right">12dec</b></h3>
+                                                            <h3><?php echo $row['title']?> <a href="edit_news.php"><i class="fa fa-pencil-square-o right" aria-hidden="true"></i>&nbsp;</a><b class="right"><?php echo $row['created_date']?></b></h3>
                                                         </strong>
                                                     </div> 
                                                     <div class="col-md-2 col-xs-12">
                                                         <img  class ="img1" src="assets/images/download.jpeg">
                                                     </div>
                                                     <div class="col-md-10 col-xs-12">
-                                                        <p><b>18 DEC,Bengaluru.</b><br>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
-                                                            vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, 
-                                                            ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, 
-                                                            et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-                                                            Aenean velit odio
+                                                        <p><b><?php echo $row['date']?></b><br>
+                                                        <?php echo $row['description']?>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -57,34 +62,34 @@
                                     </div>
                                 </div>
                         </fieldset>
+                    <?php }?>
                     </div>
                     <div id="others" class="tab-pane fade">
+                    <?php while($row1  = mysqli_fetch_assoc($retval1)){?>
+                        
                         <fieldset class="content" id="others" >
                             <div class="wrapper recent-updated"> 
                                 <ul class="news list-unstyled">
-                                    <li class="d-flex justify-content-between" *ngFor="let n of news" > 
+                                    <li class="d-flex justify-content-between" > 
                                         <div class="left-col d-flex">
                                             <div class="title">
-                                                <strong><h3>Headline<b class="n_date">12dec</b></h3></strong>
+                                                <strong><h3><?php echo $row1['title']?><b class="right"><?php echo $row1['created_date']?></b></h3></strong>
                                             </div> 
                                             <div class="col-md-2 col-xs-12">
                                                 <img  class ="img1" src="assets/images/download.jpeg">
                                             </div>
                                             <div class="col-md-10 col-xs-12">
-                                                <p><b>18 DEC,Bengaluru.</b><br>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
-                                                    vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, 
-                                                    ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, 
-                                                    et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-                                                    Aenean velit odio
+                                                <p><b><?php echo $row1['date']?></b><br>
+                                                <?php echo $row1['description']?>                                                   
                                                 </p>
-                                                <p>author name</p>
+                                                <p><?php echo $row1['name']?></p>
                                             </div>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </fieldset>
+                    <?php }?>
                     </div>
                 </div>
             </div>
