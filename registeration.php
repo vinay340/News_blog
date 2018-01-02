@@ -16,101 +16,78 @@ h2{
   }
 </style>
 <body>
-<div class=" class container">
+
+
 <?php
-$errEmail = $errPass=$errName=$errPhone="";
-
-
-if(isset($_POST["submit"])) {
-$email = $_POST['email'];
-$password = $_POST['password'];
-$Name = $_POST['Name'];
-$password = $_POST['phoneno'];
-
-
-$valid=true;
-
-// Check if email has been entered and is valid
-if(empty($_POST['email'])){
-$errEmail = '**Please enter a valid email address';
-$valid=false;
-}
-if(empty($_POST['Name'])){
-    $errName = '**Please enter a valid Name';
-    $valid=false;
-    }
-    if(empty($_POST['phoneno'])){
-        $errPhone = '**Please enter a valid Phone number';
-        $valid=false;
+include ('mysql_conn.php');
+// If form submitted, insert values into the database.
+if (isset($_POST['name'])){
+        // removes backslashes
+	$username = stripslashes($_REQUEST['name']);
+        //escapes special characters in a string
+	$username = mysqli_real_escape_string($conn,$username); 
+	$email = stripslashes($_REQUEST['email']);
+	$email = mysqli_real_escape_string($conn,$email);
+	$password = stripslashes($_REQUEST['password']);
+	$password = mysqli_real_escape_string($conn,$password);
+	//$trn_date = date("Y-m-d H:i:s");
+        $query = "INSERT into `user` (name, email, password)
+VALUES ('$username', '$email','".md5($password)."')";
+        $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($dbcon));
+        if($result){
+            echo "<div class='form'>
+<h3>You are registered successfully.</h3>
+<br/>Click here to <a href='loginform.php'>Login</a></div>";
         }
-if(empty($_POST['password'])){
-  $errPass = '**Please enter a valid password';
-  $valid=false;
-  }
-//if(empty($_POST['password']) || (preg_match("/^.*(?=.{8,})(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$/", $_POST["password"]) === 0)) {
-//$errPass = '<p class="errText">Password must be at least 8 characters and must contain at least one lower case letter, one upper case letter and one digit</p>';
-//$valid=false;
-//}
-if($valid){
-echo "The form has been submitted";
-}
- 
-}
+    }else{
 ?>
 <!-- end php code -->
+<div class=" class container">
 <div class="wrapper">
 <fieldset class="well col-md-6 " >
-<form role="form-signin" class=" form-signin col-md-10 col-sm-12 c0l-xs-12" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<form role="form-signin" class=" form-signin col-md-10 col-sm-12 c0l-xs-12" method="post" action=""  name="registration" >
 <h2 class="form-signin-heading heading"><p>REGISTER</p></h2>
 
 
 
   
-<div class="form-group row">
+    <div class="form-group row">
         <div class=" inputGroupContainer">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      <input name="Name" placeholder="User Name" class="form-control" id="name" type="text">
-     
+          <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <input name="name" placeholder="User Name" class="form-control" id="name" type="text" required />
+          </div>
         </div>
-        <div class="err_msg"> <?php echo $errName;?> </div>
-      </div>
     </div>
 
   
-<div class="form-group row">
-        <div class="inputGroupContainer">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-      <input name="email" placeholder="E-Mail Address" class="form-control" id="inputEmail" type="email">
-     
-        </div>
-        <div class="err_msg"> <?php echo $errEmail;?> </div>
-      </div>
+    <div class="form-group row">
+          <div class="inputGroupContainer">
+              <div class="input-group">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                   <input name="email" placeholder="E-Mail Address" class="form-control" id="inputEmail" type="email" required />
+              </div>
+         </div>
     </div>
 
-      
+<!--       
 <div class="form-group row">
         <div class="inputGroupContainer">
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
       <input name="phoneno" placeholder="phone Number" class="form-control" id="phoneno" type="number">
      
-        </div>
-        <div class="err_msg"> <?php echo $errPhone;?> </div>
-      </div>
-    </div>
+      
+    </div> -->
 
     <div class="form-group row">
         <div class="inputGroupContainer">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
-           
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required />
+           </div>
         </div>
-        <div class="err_msg">
-            <?php echo $errPass; ?></div>
-      </div>
+      
     </div>
 
 <!-- <div class="checkbox">
@@ -121,13 +98,13 @@ echo "The form has been submitted";
         </div> -->
 <div class="form-group row">
 <div class=" col-md-12 offset-sm-2 col-sm-10">
-<input type="submit" value="REGISTER" name="submit" class="btn btn-primary">                           
+<input type="submit" value="Register" name="submit" class="btn btn-primary">                           
 </div>
 </div>
 </form>
 </fieldset>
 </div>
 </div>
- 
+<?php } ?>
 </body>
 </html>

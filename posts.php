@@ -13,7 +13,7 @@
 include("sidebar.php");
 include("mysql_conn.php");  
 
-$sql = 'SELECT a.title,a.description,a.content,a.date,a.id,b.name  FROM news AS a , user AS b  where a.author_id=b.id';  
+$sql = 'SELECT a.title,a.description,a.content,a.date,a.id,b.name  FROM news AS a , user AS b  where a.author_id=b.id and status = 0';  
 $retval=mysqli_query($conn, $sql); 
 
     ?>
@@ -22,11 +22,14 @@ $retval=mysqli_query($conn, $sql);
            <div class="container-fluid">
                <div class="wrapper col-xs-12">
                    <div class=" col-mx-12 ">
+                       <h2>NEWS LIST</h2>
                         <fieldset class="well col-md-12" >
                                    <div class="row " id="check_btn">
+                                   <form action="post_approve.php" method="post">
+
                                    <div class="btn-group">
                                         <button type="button" class="btn btn-primary">view</button>
-                                        <button type="button" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <button type="submit" class="btn btn-success" name="post_conf" id="post_conf"><i class="fa fa-check" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-danger"><i class="fa fa-close" aria-hidden="true"></i></button>
                                     </div>
 
@@ -53,6 +56,8 @@ $retval=mysqli_query($conn, $sql);
                                                          <tbody>
                                                              <tr>
                                                             <td><?php echo $row['id']?></td>
+                                                            <input type="hidden" value= <?php echo $row ['id']?> name="post_id[]"></td>
+                                                             
                                                             <td><?php echo $row['title']?></td>
                                                             <td><?php echo $row['description']?></td>
                                                             <td><?php echo $row['name'] ?></td>
@@ -60,8 +65,10 @@ $retval=mysqli_query($conn, $sql);
                                                             <td><?php echo $row['date']?></td>
                                                             
                                                             <td>
-                                                            <div class="checkbox">
-                                                                <label><input type="checkbox" name="optradio"></label>
+                                                            <div class="form">
+                                                                <label><input type="checkbox" name="accept_post_<?php echo $row['id'] ?>" value="1"></label>
+                                                                <!-- <label class="btn btn-primary not-active">approve <input type="checkbox" value ="1" name="accept_post_"></label> -->
+
                                                             </div>                                       
                                                             </td>
                                                              </tr>
@@ -75,6 +82,7 @@ $retval=mysqli_query($conn, $sql);
                                              
                                          
                                         </div>
+                                        </form>
                         </fieldset>
                     </div>
                 </div>
@@ -82,3 +90,11 @@ $retval=mysqli_query($conn, $sql);
         </div>
     </body>
 </html>
+<script>
+    $(function() {
+      // Input radio-group visual controls
+      $('.radio-group label').on('click', function(){
+          $(this).removeClass('not-active').siblings().addClass('not-active');
+      });
+  });
+</script>

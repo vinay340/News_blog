@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="css/adminheader.css">
 
 </head>
-
+<?php
+require('mysql_conn.php');
+include("auth.php");
+?>
 <body>
         <div class="wrapper">
         <div class="menu">
@@ -21,8 +24,8 @@
             </div>
                                  
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" ><span class="glyphicon glyphicon-user"></span> Admin name</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <li><a href="#" ><span class="glyphicon glyphicon-user"></span>  <?php echo $_SESSION['name']?></a></li>
+                    <li><a href="Logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 </ul>
            
         </div>

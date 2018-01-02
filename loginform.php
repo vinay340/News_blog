@@ -19,7 +19,36 @@ session_start();//session starts here
 </style>  
   
 <body>  
-  
+<?php
+include ('mysql_conn.php');
+session_start();
+// If form submitted, insert values into the database.
+if (isset($_POST['name'])){
+        // removes backslashes
+	$username = stripslashes($_REQUEST['name']);
+        //escapes special characters in a string
+	$username = mysqli_real_escape_string($conn,$username);
+	$password = stripslashes($_REQUEST['password']);
+	$password = mysqli_real_escape_string($conn,$password);
+	//Checking is user existing in the database or not
+        $query = "SELECT * FROM `user` WHERE name='$username'
+and password='".md5($password)."'";
+    $result = mysqli_query($conn,$query) or die(mysql_error());
+    
+    $rows = mysqli_num_rows($result);
+        if($rows==1){
+        $_SESSION['name'] = $username;
+        $_SESSION['id'] = $result['id'];
+        
+            // Redirect user to index.php
+	    header("Location: admindashboard.php");
+         }else{
+	echo "<div class='form'>
+<h3>Username/password is incorrect.</h3>
+<br/>Click here to <a href='loginform.php'>Login</a></div>";
+	}
+    }else{
+?> 
   
 <div class="container">  
     <div class="row">  
@@ -33,15 +62,15 @@ session_start();//session starts here
                         <fieldset>  
                             <div class="form-group input-group"  > 
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>  
+                                <input class="form-control"  type="text" name="name" placeholder="Username" required  autofocus>  
                             </div>  
                             <div class="form-group input-group">  
                             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                <input class="form-control" placeholder="Password" name="password" type="text" value="">  
+                                <input class="form-control" placeholder="Password" name="password" type="password" value="">  
                             </div>  
   
   
-                                <input class="btn btn-lg btn-success btn-block" type="submit" value="login" name="login" >  
+                                <input class="btn btn-lg btn-success btn-block" type="submit" value="Login" name="submit" >  
   
                             <!-- Change this to a button or input when using this as a form -->  
                           <!--  <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a> -->  
@@ -53,7 +82,7 @@ session_start();//session starts here
         </div>  
     </div>  
 </div>  
-  
+<?php } ?> 
   
 </body>  
   
@@ -76,7 +105,7 @@ if(isset($_POST['login']))
     {  
         echo "<script>window.open('admindashboard.php','_self')</script>";  
   
-        $_SESSION['email']=$user_email;//here session is used and value of $user_email store in $_SESSION.  
+        $_SESSION['email']=$user_email; 
   
     }  
     else  

@@ -11,10 +11,38 @@
 
 </head>
 <body>
+
+<?php
+include ('mysql_conn.php');
+// If form submitted, insert values into the database.
+if (isset($_POST['title'])){
+    $title=$_REQUEST['title'];
+    
+    $description=$_REQUEST['description'];
+    $content=$_REQUEST['content'];
+    $date=$_REQUEST['date'];
+    
+	$title = mysqli_real_escape_string($conn,$title); 
+	$description = mysqli_real_escape_string($conn,$description);
+    $content = mysqli_real_escape_string($conn,$content);
+	$date = mysqli_real_escape_string($conn,$date);
+    
+	//$trn_date = date("Y-m-d H:i:s");
+        $query = "INSERT into `news` (title, description,content,date,approved_by,created_date)
+VALUES ('$title','$description','$content','$date',CURDATE())";
+        $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($dbcon));
+        if($result){
+            echo "<div class='form'>
+<h3>succesfully news updated.</h3>
+<br/>Click here to <a href='author_dashboard.php'>Create another news</a></div>";
+        }
+    }else{
+?>
+
     <div class="container">
         <div class="col-md-8 col-xs-12">
             <h2 class="caption">CREATE NEWS</h2>
-            <form action="author_dashboard.php">
+            <form action="" method="post" name="create_news">
                 <div class="form-group">
                     <input type="text"class="form-control" id="title" placeholder="Title" name="title">
                  </div>
@@ -37,5 +65,8 @@
             </form>
         </div>
     </div>
+
+    <?php } ?>
+  
 </body>
 </html>

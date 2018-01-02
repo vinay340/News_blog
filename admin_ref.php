@@ -14,7 +14,7 @@ include ("sidebar.php");
 include ("mysql_conn.php");
 $sql = 'SELECT name,email,phone_no FROM user WHERE role_id =1';  
 $sql1 = 'SELECT name,email,phone_no FROM user WHERE role_id =2';  
-$sql2 = 'SELECT name,email,phone_no FROM user WHERE role_id =3';  
+$sql2 = 'SELECT name,email,phone_no,id FROM user WHERE role_id =3';  
 
 
 $retval=mysqli_query($conn, $sql); 
@@ -119,12 +119,14 @@ $retval2=mysqli_query($conn, $sql2);
                                     </div>
                                     <div id="new_reg" class="tab-pane fade">
                                    <div class="row " id="check_btn">
+                                   <form action="approval.php" method="post">
                                    <div class="btn-group">
+
                                         <button type="button" class="btn btn-primary">view</button>
-                                        <button type="button" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        <button type="submit" class="btn btn-success" name="confirm" id="confirm"><i class="fa fa-check" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-danger"><i class="fa fa-close" aria-hidden="true"></i></button>
                                     </div>
-
+                                    
                                    </div>
                                    
                                     <div class="row" >
@@ -135,17 +137,20 @@ $retval2=mysqli_query($conn, $sql2);
                                                        
                                                         <thead>
                                                         <tr>
+                                                        <th>id</th>
 
                                                         <th>Name</th>
                                                         <th>Email</th>
                                                         <th>Phone number</th>
                                                         <th>Role</th>
-                                                        <th>#</th>
+                                                        <!-- <th>#</th> -->
                                                         </tr>
                                                          </thead>
                                                          <?php while($row2 = mysqli_fetch_assoc($retval2)){?>
                                                          <tbody>
                                                              <tr>
+                                                            <td><?php echo $row2['id']?><input type="hidden" value= <?php echo $row2['id'] ?> name="author_id[]"></td>
+                                                             
                                                             <td><?php echo $row2['name']?></td>
                                                             <td><?php echo $row2['email']?></td>
                                                             <td><?php echo $row2['phone_no']?></td>
@@ -153,29 +158,22 @@ $retval2=mysqli_query($conn, $sql2);
                                                                     <div class=" inputGroupContainer">
                                                                         <div class="input-group">
                                                                             <div class="btn-group radio-group">
-                                                                            <label class="btn btn-primary not-active">Admin <input type="radio" value="admin" name="admin"></label>
-                                                                            <label class="btn btn-primary not-active">Author <input type="radio" value="author" name="author"></label>
+                                                                            <label class="btn btn-primary not-active">Admin <input type="radio" value ="1" name="role_<?php echo $row2['id'] ?>"></label>
+                                                                            <label class="btn btn-primary not-active">Author <input type="radio" value="2" name="role_<?php echo $row2['id'] ?>"></label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>                                 
                                                              </td>
-                                                            <td>
-                                                            <div class="radio">
-                                                                <label><input type="checkbox" name="optradio"></label>
-                                                            </div>                                       
-                                                            </td>
+                                                            
                                                              </tr>
                                                          </tbody>
                                                          <?php } ?> 
                                                     </table>
                                                 </div>
-                                               
-                                   
                                             </div>
-                                             
-                                         
                                         </div>
+                                        </form>
                                     </div>
                             </div>
                         </fieldset>
@@ -184,6 +182,8 @@ $retval2=mysqli_query($conn, $sql2);
            </div>
 
        </div> 
+
+       
     </body>
 </html>
 <script>
@@ -194,4 +194,3 @@ $retval2=mysqli_query($conn, $sql2);
       });
   });
 </script>
-
