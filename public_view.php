@@ -13,7 +13,7 @@
     <?php 
     include('public_view_header.php');
     include('mysql_conn.php');
-$sql = 'SELECT title,description,content,date,id, created_date FROM news';  
+$sql = 'SELECT title,description,content,date,id, created_date FROM news where status = 1';  
 
 $retval=mysqli_query($conn, $sql);
  
@@ -24,9 +24,10 @@ $retval=mysqli_query($conn, $sql);
         <hr>   
         <div class=row>
             <div class="col-md-8 col-xs-8 ">
-                <?php while($row =mysqli_fetch_assoc($retval)) { ?>
 
-                <fieldset class="content">
+                <?php while($row =mysqli_fetch_assoc($retval)) { ?>
+<form name ="form" method="post" action="news_view.php">
+                 <fieldset class="content">
                     <div class="wrapper recent-updated"> 
                         <div id="upadtes-box" role="tabpanel" class="collapse show">
                             <ul class="news list-unstyled">
@@ -39,13 +40,13 @@ $retval=mysqli_query($conn, $sql);
                                             <img  class ="img1" src="assets/images/download.jpeg">
                                         </div>
                                         <div class="col-md-10 col-xs-12">
-                                             <a class="alink"  href="news_view.php">
+                                             <button type="submit" class="alink"  name="view_content" value= <?php echo $row['id']?>>more</button>
                                             
                                             <p><b><?php echo $row['date']?>,Bengaluru.</b><br>
 
                                             <?php echo $row['description']?>
                                             </p>
-                                                 </a>
+                                                 
                                         </div>
                                     </div>
                                 </li>
@@ -53,6 +54,7 @@ $retval=mysqli_query($conn, $sql);
                         </div>
                     </div>
                 </fieldset> 
+                </form>
                 <?php }?>
                
                 <div class="col-md-2 col-xs-12">

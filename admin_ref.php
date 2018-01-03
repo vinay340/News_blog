@@ -13,7 +13,7 @@
 include ("sidebar.php");
 include ("mysql_conn.php");
 $sql = 'SELECT name,email,phone_no FROM user WHERE role_id =1';  
-$sql1 = 'SELECT name,email,phone_no FROM user WHERE role_id =2';  
+$sql1 = 'SELECT a.name,a.email,a.phone_no,a.id,b.author_id FROM  user as a , news as b WHERE a.id=b.author_id and a.role_id =2';  
 $sql2 = 'SELECT name,email,phone_no,id FROM user WHERE role_id =3';  
 
 
@@ -63,10 +63,7 @@ $retval2=mysqli_query($conn, $sql2);
                                                         <th>Phone number</th>
                                                             <td><?php echo $row['phone_no']?></td>
                                                         </tr>
-                                                        <tr>
-                                                        <th>Number of posts</th>
-                                                            <td>30</td>
-                                                        </tr>
+                                                    
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -105,7 +102,7 @@ $retval2=mysqli_query($conn, $sql2);
                                                         </tr>
                                                         <tr>
                                                         <th>Number of posts</th>
-                                                            <td>30</td>
+                                                            <td><?php echo count($row1['author_ id']) ?></td>
                                                         </tr>
                                                         </tbody>
                                                     </table>

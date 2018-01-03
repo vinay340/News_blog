@@ -14,7 +14,7 @@
     include("sidebar.php");
     include("mysql_conn.php");
      
-$sql = 'SELECT title,description,content,date,id FROM news ';  
+$sql = 'SELECT title,description,content,date,id FROM news where status =1';  
 $sql1='SELECT news_id,content,created_date,commented_by FROM comment';
 $retval=mysqli_query($conn, $sql); 
 $retval1=mysqli_query($conn, $sql1);  

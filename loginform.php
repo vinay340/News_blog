@@ -21,7 +21,7 @@ session_start();//session starts here
 <body>  
 <?php
 include ('mysql_conn.php');
-session_start();
+//session_start();
 // If form submitted, insert values into the database.
 if (isset($_POST['name'])){
         // removes backslashes
@@ -34,20 +34,32 @@ if (isset($_POST['name'])){
         $query = "SELECT * FROM `user` WHERE name='$username'
 and password='".md5($password)."'";
     $result = mysqli_query($conn,$query) or die(mysql_error());
-    
+   
     $rows = mysqli_num_rows($result);
-        if($rows==1){
-        $_SESSION['name'] = $username;
-        $_SESSION['id'] = $result['id'];
+        if($rows==0){
+        //$_SESSION['name'] = $username;
         
             // Redirect user to index.php
-	    header("Location: admindashboard.php");
-         }else{
-	echo "<div class='form'>
-<h3>Username/password is incorrect.</h3>
-<br/>Click here to <a href='loginform.php'>Login</a></div>";
-	}
-    }else{
+	    //header("Location: admindashboard.php");
+         } else {             
+            while($row = mysqli_fetch_assoc($result)){
+                print_r($row);
+                session_regenerate_id();
+                $_SESSION['sess_user_id'] = $row['id'];
+                $_SESSION['sess_username'] = $row['name'];
+                $_SESSION['sess_userrole'] = $row['role_id'];
+
+                session_write_close();                
+            }
+            if( $_SESSION['sess_userrole'] == 1){                        
+                header('Location: admindashboard.php');
+            } else {
+                header('Location: author_dashboard.php');
+            }
+        
+            
+            }
+    } else {
 ?> 
   
 <div class="container">  
@@ -55,7 +67,7 @@ and password='".md5($password)."'";
         <div class="col-md-4 col-md-offset-4">  
             <div class="login-panel panel panel-success">  
                 <div class="panel-heading">  
-                    <h3 class="panel-title">Log In</h3>  
+                    <h3 class="panel-title">Log In </h3>  
                 </div>  
                 <div class="panel-body">  
                     <form role="form" method="post" action="loginform.php">  

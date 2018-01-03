@@ -13,7 +13,11 @@
 <body>
 
 <?php
+    include('adminheader.php');
+
 include ('mysql_conn.php');
+include("auth.php");
+$a =$_SESSION['sess_user_id'];
 // If form submitted, insert values into the database.
 if (isset($_POST['title'])){
     $title=$_REQUEST['title'];
@@ -28,13 +32,13 @@ if (isset($_POST['title'])){
 	$date = mysqli_real_escape_string($conn,$date);
     
 	//$trn_date = date("Y-m-d H:i:s");
-        $query = "INSERT into `news` (title, description,content,date,approved_by,created_date)
-VALUES ('$title','$description','$content','$date',CURDATE())";
-        $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($dbcon));
+        $query = "INSERT into `news` (title, description,content,date, author_id,created_date)
+VALUES ('$title','$description','$content','$date', '$a' , CURDATE())";
+        $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
         if($result){
-            echo "<div class='form'>
+            echo "<div class='form'>    
 <h3>succesfully news updated.</h3>
-<br/>Click here to <a href='author_dashboard.php'>Create another news</a></div>";
+<br/>Click here to <a href='author_dashboard.php'>view</a></div>";
         }
     }else{
 ?>
@@ -60,7 +64,7 @@ VALUES ('$title','$description','$content','$date',CURDATE())";
                     <label><input type="checkbox" name="remember"> Save to Drafts</label>   
                 </div>
                 <button type="submit" class="btn btn-default col-md-4 submit_button">CREATE</button>
-                <button type="canel" class="btn btn-default col-md-4 cancel_button  right" href="author_dashboard.php" class="btn btn-default">CANCEL</button>
+                <a class="btn btn-default col-md-4 cancel_button  right" href="author_dashboard.php" >CANCEL</a>
 
             </form>
         </div>

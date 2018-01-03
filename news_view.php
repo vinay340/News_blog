@@ -10,10 +10,24 @@
 <?php 
     include('public_view_header.php');
     include('mysql_conn.php');
-$sql = 'SELECT title,description,content,date,id, created_date FROM news';  
+    include("auth.php");
+//$sql = 'SELECT title,description,content,date,id, created_date FROM news';  
 
-$retval=mysqli_query($conn, $sql);
+//$retval=mysqli_query($conn, $sql);
  
+    ?>
+    <?php
+    
+    $post_id = $_REQUEST['view_content'];
+      
+    $sql2 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date  FROM news AS a , user AS b  where a.author_id=b.id and a.id = '$post_id'";  
+
+               $sql = "SELECT * FROM comment  where id = '$post_id'";
+            
+                $retval=mysqli_query($conn,$sql2) or die(mysqli_error());
+                $retval1=mysqli_query($conn,$sql) or die(mysqli_error());
+                
+    
     ?>
     <div class=row>
         <div class="col-md-8 col-xs-8 ">
@@ -37,7 +51,7 @@ $retval=mysqli_query($conn, $sql);
                                             <?php echo $row['description']?><br>
                                             <?php echo $row['content']?>
                                             </p>
-                                            <p class="author"><b>Author:jerry</b></p>
+                                            <p class="author"><b><?php echo $row['name']?></b></p>
                                         </div>
                                     </div>
                                 </div>
@@ -48,18 +62,18 @@ $retval=mysqli_query($conn, $sql);
             </fieldset> 
         <?php }?>
            <h5> <i class="fa fa-eye fa-2x views" aria-hidden="true">10,300</i><i class="fa fa-comment-o fa-2x comments" aria-hidden="true">1,500</i></h5>
+        <?php while($row2 =mysqli_fetch_assoc($retval1)) { ?>
+           
            <div class="comment_list">
                 <h3>Comments..</h3>
-                <p><b>john</b><br>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
-                ulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus,
+                <p><b><?php echo $row2['commented_by']?></b><br>
+                <?php echo $row2['content']?>
                 </p>
-                <p><b>jacer</b><br>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, 
-                ulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus,
-                </p>
+                
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">ADD Comment</button>
             </div>
+        <?php } ?>
+            
              <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">

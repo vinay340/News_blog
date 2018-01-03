@@ -9,10 +9,10 @@
 </head>
 <body>
     <?php 
-    include('author_header.php');
-    include('mysql_conn.php');
-$sql = 'SELECT title,description,content,date,id, created_date FROM news WHERE author_id = 3';  
-$sql1 = 'SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date FROM news AS a, user AS b WHERE a.author_id = 4 && a.author_id=b.id';  
+    include('adminheader.php');
+    $a= $_SESSION['sess_user_id'];
+$sql = "SELECT title,description,content,date,id, created_date,status FROM news WHERE author_id = $a";  
+$sql1 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date FROM news AS a, user AS b WHERE a.author_id != $a  && a.author_id=b.id";  
 
 $retval=mysqli_query($conn, $sql);
 $retval1=mysqli_query($conn, $sql1); 
@@ -35,7 +35,9 @@ $retval1=mysqli_query($conn, $sql1);
                 </ul>
                 <div class="tab-content" >
                     <div id="me" class="tab-pane fade in active">
-                    <?php while($row = mysqli_fetch_assoc($retval)){?>
+                        <form role="form" action="edit_news.php" method="post">
+                        <a href="edit_news.php   "> <button type="submit" class="fa fa-pencil-square-o right" aria-hidden="true">&nbsp;</button> </a>
+                        <?php while($row = mysqli_fetch_assoc($retval)){?>
 
                         <fieldset class="content">
                                 <div class="wrapper recent-updated"> 
@@ -45,15 +47,19 @@ $retval1=mysqli_query($conn, $sql1);
                                                 <div class="left-col d-flex">
                                                     <div class="title">
                                                         <strong>
-                                                            <h3><?php echo $row['title']?> <a href="edit_news.php"><i class="fa fa-pencil-square-o right" aria-hidden="true"></i>&nbsp;</a><b class="right"><?php echo $row['created_date']?></b></h3>
+                                                            <h3><?php echo $row['id']?>.<?php echo $row['title']?><b class="right"><?php echo $row['created_date']?></b></h3>
                                                         </strong>
                                                     </div> 
                                                     <div class="col-md-2 col-xs-12">
+                                                   <span><input type="radio" name="edit_news"  value= "<?php echo $row['id']?>" ></span> 
                                                         <img  class ="img1" src="assets/images/download.jpeg">
                                                     </div>
                                                     <div class="col-md-10 col-xs-12">
                                                         <p><b><?php echo $row['date']?></b><br>
-                                                        <?php echo $row['description']?>
+                                                        <?php echo $row['description']?><br>
+                                                       STATUS: <?php echo $row['status']?>
+                                                        
+
                                                         </p>
                                                     </div>
                                                 </div>
@@ -63,6 +69,9 @@ $retval1=mysqli_query($conn, $sql1);
                                 </div>
                         </fieldset>
                     <?php }?>
+                        
+                        </form>
+                        
                     </div>
                     <div id="others" class="tab-pane fade">
                     <?php while($row1  = mysqli_fetch_assoc($retval1)){?>

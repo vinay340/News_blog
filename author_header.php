@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/author.css">
 </head>
-
+<?php
+require('mysql_conn.php');
+include("auth.php");
+?>
 
 <body>
     <nav class="navbar navbar-default">
@@ -22,7 +25,9 @@
             </ul>
             </div>
             <div class="right">
-                <img class="circle" src="assets/images/profile.jpeg" alt="PROFILE" height="50px" width="50px"><span><b>Author</b></span>&nbsp;<span class="fa fa-caret-down"></span>
+                <img class="circle" src="assets/images/profile.jpeg" alt="PROFILE" height="50px" width="50px"><span><b> <?php echo $_SESSION['sess_username']?></b></span>&nbsp;<span class="fa fa-caret-down"></span>
+                <li><a href="Logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
             </div>
         </div>
     </nav> 
