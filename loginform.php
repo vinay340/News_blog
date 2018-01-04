@@ -43,7 +43,6 @@ and password='".md5($password)."'";
 	    //header("Location: admindashboard.php");
          } else {             
             while($row = mysqli_fetch_assoc($result)){
-                print_r($row);
                 session_regenerate_id();
                 $_SESSION['sess_user_id'] = $row['id'];
                 $_SESSION['sess_username'] = $row['name'];
@@ -53,14 +52,18 @@ and password='".md5($password)."'";
             }
             if( $_SESSION['sess_userrole'] == 1){                        
                 header('Location: admindashboard.php');
-            } else {
+            } else if( $_SESSION['sess_userrole'] == 2){
                 header('Location: author_dashboard.php');
             }
-        
-            
+            else{
+                ?>
+                 <div class="alert alert-warning">
+                <strong>Warning!</strong> You are not approved by Admin
+              </div>
+            <?php }
             }
-    } else {
-?> 
+            } else {
+            ?> 
   
 <div class="container">  
     <div class="row">  
@@ -78,7 +81,7 @@ and password='".md5($password)."'";
                             </div>  
                             <div class="form-group input-group">  
                             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">  
+                                <input class="form-control" placeholder="Password" name="password" type="password" value="" required  autofocus>  
                             </div>  
   
   

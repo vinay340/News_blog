@@ -13,8 +13,10 @@
 include ("sidebar.php");
 include ("mysql_conn.php");
 $sql = 'SELECT name,email,phone_no FROM user WHERE role_id =1';  
-$sql1 = 'SELECT a.name,a.email,a.phone_no,a.id,b.author_id FROM  user as a , news as b WHERE a.id=b.author_id and a.role_id =2';  
+//$sql1 = 'SELECT a.name,a.email,a.phone_no,a.id,b.author_id FROM  user as a , news as b WHERE  a.role_id =2';  
 $sql2 = 'SELECT name,email,phone_no,id FROM user WHERE role_id =3';  
+$sql1 = 'SELECT name,email,phone_no,id FROM user WHERE role_id =2';  
+
 
 
 $retval=mysqli_query($conn, $sql); 
@@ -23,6 +25,8 @@ $retval2=mysqli_query($conn, $sql2);
 
 
 ?>
+
+
     <body>
        <div class="top">
            <div class="container-fluid">
@@ -39,97 +43,100 @@ $retval2=mysqli_query($conn, $sql2);
                                     <div id="admin" class="tab-pane fade in active">
     
                                         <div class="row">
-                                         <?php while($row = mysqli_fetch_assoc($retval)){?>
                                             
                                         <fieldset class="well">
-                                            <div class="col-md-2 col-sm-12 col-xs-12">
-                                                <img src="assets/images/NB.jpg" class="author_img">
-                                            </div>
+                                           <h2>List Of Admins</h2>
                                             <div class="col-md-10 col-sm-12 col-xs-12">
                                                 
-                                                <div class="table-responsive">          
+                                                <div class="table-responsive table-hover">          
                                                     <table class="table">
                                                        
-                                                        <tbody>
+                                                        <thead>
                                                         <tr>
                                                         <th>Name</th>
-                                                            <td><?php echo $row['name']?></td>
-                                                        </tr>
-                                                        <tr>
                                                         <th>Email</th>
-                                                            <td><?php echo $row['email']?>@sds</td>
-                                                        </tr>
-                                                        <tr>
                                                         <th>Phone number</th>
-                                                            <td><?php echo $row['phone_no']?></td>
+                                                        </thead>
+                                         <?php while($row = mysqli_fetch_assoc($retval)){?>
+                                                        
+                                                        <tbody>
+                                                        <tr>
+                                                        <td><?php echo $row['name']?></td>
+                                                        <td><?php echo $row['email']?></td>
+                                                        <td><?php echo $row['phone_no']?></td>
                                                         </tr>
-                                                    
+                                                        
                                                         </tbody>
+                                            <?php } ?> 
+                                                        
                                                     </table>
                                                 </div>
                                                
                                    
                                             </div>
                                             </fieldset>
-                                            <?php } ?> 
                                         </div>
                                     </div>
                                     <div id="authors" class="tab-pane fade">
                                     <div class="row">
-                                         <?php while($row1 = mysqli_fetch_assoc($retval1)){?>
                                             
                                         <fieldset class="well">
-                                            <div class="col-md-2 col-sm-12 col-xs-12">
-                                                <img src="assets/images/NB.jpg" class="author_img">
-                                            </div>
+                                        <h2>List Of Authors</h2>
+                                           
                                             <div class="col-md-10 col-sm-12 col-xs-12">
                                                 
-                                                <div class="table-responsive">          
+                                                <div class="table-responsive table-hover">          
                                                     <table class="table">
                                                        
-                                                        <tbody>
+                                                        <thead>
                                                         <tr>
                                                         <th>Name</th>
-                                                            <td><?php echo $row1['name']?></td>
-                                                        </tr>
-                                                        <tr>
                                                         <th>Email</th>
-                                                            <td><?php echo $row1['email']?></td>
-                                                        </tr>
-                                                        <tr>
                                                         <th>Phone number</th>
-                                                            <td><?php echo $row1['phone_no']?></td>
                                                         </tr>
+                                                        </thead>
+                                         <?php while($row1 = mysqli_fetch_assoc($retval1)){?>
+                                                        
+                                                        <tbody>
                                                         <tr>
-                                                        <th>Number of posts</th>
-                                                            <td><?php echo count($row1['author_ id']) ?></td>
+                                                        <td><?php echo $row1['name']?></td>
+                                                        <td><?php echo $row1['email']?></td>
+                                                        <td><?php echo $row1['phone_no']?></td>
                                                         </tr>
+                                                        
+                                                        
                                                         </tbody>
+                                            <?php } ?> 
+                                                       
                                                     </table>
                                                 </div>
                                                
                                    
                                             </div>
                                             </fieldset>
-                                            <?php } ?> 
                                         </div>
                                     </div>
                                     <div id="new_reg" class="tab-pane fade">
+                                   <h2 class="left">List Of New Registrations</h2>
+                                        
                                    <div class="row " id="check_btn">
                                    <form action="approval.php" method="post">
-                                   <div class="btn-group">
 
-                                        <button type="button" class="btn btn-primary">view</button>
-                                        <button type="submit" class="btn btn-success" name="confirm" id="confirm"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-danger"><i class="fa fa-close" aria-hidden="true"></i></button>
-                                    </div>
+                                       <!-- <button type="button" class="btn btn-primary">view</button> -->
+                                        <button type="submit" class="btn btn-success right" name="confirm" id="confirm">Approve</i></button>
+                                       <!-- // <button type="button" class="btn btn-danger"><i class="fa fa-close" aria-hidden="true"></i></button> -->
                                     
                                    </div>
                                    
                                     <div class="row" >
                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                 
-                                                <div class="table-responsive">          
+                                                <div class="table-responsive table-hover"> 
+                                                <?php if(mysqli_num_rows($retval2)==0) {?>
+                                                                    <div class="alert alert-warning">
+                                                                    <strong>Sorry!</strong> Nothing to display
+                                                                    </div>
+                                                                <?php }else{?>         
                                                     <table class="table">
                                                        
                                                         <thead>
@@ -143,9 +150,13 @@ $retval2=mysqli_query($conn, $sql2);
                                                         <!-- <th>#</th> -->
                                                         </tr>
                                                          </thead>
-                                                         <?php while($row2 = mysqli_fetch_assoc($retval2)){?>
+                                                         
+                                                               
+                                                                <?php while($row2 = mysqli_fetch_assoc($retval2)){?>
                                                          <tbody>
-                                                             <tr>
+                                                             
+                                                                    <tr>
+                                                            
                                                             <td><?php echo $row2['id']?><input type="hidden" value= <?php echo $row2['id'] ?> name="author_id[]"></td>
                                                              
                                                             <td><?php echo $row2['name']?></td>
@@ -165,8 +176,10 @@ $retval2=mysqli_query($conn, $sql2);
                                                             
                                                              </tr>
                                                          </tbody>
-                                                         <?php } ?> 
+                                                             
+                                                             <?php } ?> 
                                                     </table>
+                                                    <?php }?>
                                                 </div>
                                             </div>
                                         </div>

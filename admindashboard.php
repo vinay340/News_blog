@@ -16,12 +16,37 @@
      
 $sql = 'SELECT title,description,content,date,id FROM news where status =1';  
 $sql1='SELECT news_id,content,created_date,commented_by FROM comment';
+//$sql2='SELECT count(id) from user where role_id =1';
+
+//$sql3='SELECT count(id) from user where role_id =2';
+
 $retval=mysqli_query($conn, $sql); 
-$retval1=mysqli_query($conn, $sql1);  
+$retval1=mysqli_query($conn, $sql1);
+//$retval2=mysqli_query($conn, $sql2);  
  
- 
+
+//     
     ?>
-  
+    <?php
+$query = "SELECT count(*) from user where role_id = '1'";
+$result = mysqli_query($conn,$query);
+$rows = mysqli_fetch_assoc($result);
+ ?>
+   <?php
+$query1 = "SELECT count(*) from user where role_id = '2'";
+$result1 = mysqli_query($conn,$query1);
+$rows1 = mysqli_fetch_assoc($result1);
+ ?>
+ <?php
+$query2 = "SELECT count(*) from user where role_id = '3'";
+$result2 = mysqli_query($conn,$query2);
+$rows2 = mysqli_fetch_assoc($result2);
+ ?>
+ <?php
+$query3 = "SELECT count(*) from news";
+$result3 = mysqli_query($conn,$query3);
+$rows3 = mysqli_fetch_assoc($result3);
+ ?>
 
                <div class="container-fluid">
                   <div class="wrapper top">
@@ -30,7 +55,7 @@ $retval1=mysqli_query($conn, $sql1);
                                 <div class="panel"id="panel1"> 
                                     <div class="panel-body">
                                         <div class="pull-left col-md-9 col-sm-6">
-                                            <span class="stats-number">1000</span>
+                                            <span class="stats-number"></span>
                                             <p class="stats-info">Number of views</p>
                                         </div>
                                         <div class="pull-right col-md-3 col-sm-6">
@@ -44,7 +69,7 @@ $retval1=mysqli_query($conn, $sql1);
                                 <div class="panel"id="panel1"> 
                                     <div class="panel-body">
                                         <div class="pull-left col-md-9 col-sm-6">
-                                            <span class="stats-number">1000</span>
+                                            <span class="stats-number"><?php echo $rows3['count(*)'];?></span>
                                             <p class="stats-info">Number of Posts</p>
                                         </div>
                                         <div class="pull-right col-md-3 col-sm-6">
@@ -58,7 +83,7 @@ $retval1=mysqli_query($conn, $sql1);
                                 <div class="panel"id="panel1"> 
                                     <div class="panel-body">
                                         <div class="pull-left col-md-9 col-sm-6">
-                                            <span class="stats-number">1000</span>
+                                            <span class="stats-number"></span>
                                             <p class="stats-info">Number of Comments</p>
                                         </div>
                                         <div class="pull-right col-md-3 col-sm-6">
@@ -75,7 +100,7 @@ $retval1=mysqli_query($conn, $sql1);
                                 <div class="panel"id="panel1"> 
                                     <div class="panel-body">
                                         <div class="pull-left col-md-9 col-sm-6">
-                                            <span class="stats-number">1000</span>
+                                            <span class="stats-number"><?php echo $rows['count(*)'];?></span>
                                             <p class="stats-info">Number of Admins</p>
                                         </div>
                                         <div class="pull-right col-md-3 col-sm-6">
@@ -89,7 +114,8 @@ $retval1=mysqli_query($conn, $sql1);
                                 <div class="panel"id="panel1"> 
                                     <div class="panel-body">
                                         <div class="pull-left col-md-9 col-sm-6">
-                                            <span class="stats-number">1000</span>
+                                        
+                                            <span class="stats-number"><?php echo $rows1['count(*)'];?></span>
                                             <p class="stats-info">Number of Authors</p>
                                         </div>
                                         <div class="pull-right col-md-3 col-sm-6">
@@ -103,7 +129,7 @@ $retval1=mysqli_query($conn, $sql1);
                                 <div class="panel"id="panel1"> 
                                     <div class="panel-body">
                                         <div class="pull-left col-md-9 col-sm-6">
-                                            <span class="stats-number">1000</span>
+                                            <span class="stats-number"><?php echo $rows2['count(*)'];?></span>
                                             <p class="stats-info">Number of Registrations</p>
                                         </div>
                                         <div class="pull-right col-md-3 col-sm-6">
@@ -128,7 +154,6 @@ $retval1=mysqli_query($conn, $sql1);
                                             
                                             <div class="tab-content">
                                                 <div id="recent_news" class="tab-pane fade in active">
-                                                            <marquee class="marquee " direction="up"  scrolldelay="100">
 
                                                    <?php while($row = mysqli_fetch_assoc($retval)){?>
                                                         <fieldset class="well" >
@@ -155,10 +180,8 @@ $retval1=mysqli_query($conn, $sql1);
                                                         </fieldset>
 
                                                     <?php } ?>
-                                                    </marquee>
                                                 </div>
                                                 <div id="recent_comment"class="tab-pane fade ">
-                                                <marquee class="marquee" direction="down"  scrolldelay="100" > 
                                                 <?php while($row1 = mysqli_fetch_assoc($retval1)){?>
                                                     <fieldset class="well"  >
                                                             <div class="row">
@@ -181,7 +204,6 @@ $retval1=mysqli_query($conn, $sql1);
                                                             </div>
                                                         </fieldset>
                                                     <?php }?>
-                                                  </marquee>            
                                                 </div>
                                             </div>
                                         </div>  

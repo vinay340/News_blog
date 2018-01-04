@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/author.css">
+  <link rel="stylesheet" href="css/admin_ref.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -42,8 +42,10 @@ VALUES ('$title','$description','$content','$date', '$a' , CURDATE())";
         }
     }
 ?>
-    <div class="container">
-        <div class="col-md-8 col-xs-12">
+
+    <div class="container-fluid">
+        <div class="top">
+        <div class="col-md-8 col-xs-12 top">
             <h2 class="caption">CREATE NEWS</h2>
             <form action="" method="post" name="create_news">
                 <div class="form-group">
@@ -59,16 +61,14 @@ VALUES ('$title','$description','$content','$date', '$a' , CURDATE())";
                     <input type="date" class="form-control" id="content" placeholder="Event date" name="date">
                 </div>
                 
-                <div class="checkbox">
-                    <label><input type="checkbox" name="remember"> Save to Drafts</label>   
-                </div>
+               
                 <button type="submit" class="btn btn-default col-md-4 submit_button">CREATE</button>
                 <a class="btn btn-default col-md-4 cancel_button  right" href="author_dashboard.php" >CANCEL</a>
 
             </form>
         </div>
     </div>
-
+    </div>
   
 </body>
 </html>

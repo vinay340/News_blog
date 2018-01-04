@@ -7,6 +7,9 @@
     margin-top: 80px;
     margin-left: 220px;
 }
+.a_header{
+    margin-top: 80px;
+}
 .nav-pills li a{
     padding: 15px;
     font-size: 20px;
@@ -15,6 +18,9 @@
 #tab{
     margin-left: 30px;
     padding-bottom: 20px;
+}
+textarea.form-control{
+    resize:none;
 }
 .radio-group label {
     overflow: hidden;
@@ -47,5 +53,11 @@
     font-size: 19px;
 }
 #check_btn{
+    float: right;
+}
+
+
+/* ................................. */
+#right{
     float: right;
 }
