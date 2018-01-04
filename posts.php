@@ -38,7 +38,7 @@ $retval=mysqli_query($conn, $sql);
                                   
                                                 <div class="wrapper col-xs-12">
                                                     <div class=" col-mx-12 ">
-                                                        <h2>Posts Approval List</h2>
+                                                        <h2 class="text-center">Posts Approval List</h2>
                                                                     <div class="row " id="check_btn">
                                                                     <form action="post_approve.php" method="post">
 
@@ -106,6 +106,7 @@ $retval=mysqli_query($conn, $sql);
                                     </div>
                                     <div id="view_posts" class="tab-pane fade">
                                     <div class="row">
+                                    <h2 class="text-center">List of Posts</h2>
                                             
                                         <fieldset class="well">
                                            
@@ -235,7 +236,7 @@ $retval=mysqli_query($conn, $sql);
 
                                             <div class="container">
                                                 <div class="col-md-8 col-xs-12">
-                                                    <h2 class="caption">CREATE NEWS</h2>
+                                                <h2 class="text-center">Create News</h2>
                                                     <form action="" method="post" name="create_news">
                                                         <div class="form-group">
                                                             <input type="text"class="form-control" id="title" placeholder="Title" name="title">

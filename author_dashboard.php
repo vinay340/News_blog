@@ -161,7 +161,7 @@ $retval1=mysqli_query($conn, $sql1);
                                 ?>
 
                                         <div class="container">
-                                            <fieldset class="  well">
+                                            <fieldset class="well">
                                         <div class="col-md-6 col-xs-12 top">
                                             <h2 class="text-center">Create Post</h2>
                                             <form action="" method="post" name="create_news">
