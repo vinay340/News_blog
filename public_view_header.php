@@ -19,8 +19,6 @@
             </div>
             <div>
             <h2>NEWS BLOG 
-                <i class="fa fa-search right" aria-hidden="true"></i>
-                <input class="searchbox right" placeholder="Search news..."type="text"/>
             </h2>
             </div>
         </div>

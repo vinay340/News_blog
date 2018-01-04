@@ -5,26 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
 </head>
 <?php
     include("mysql_conn.php");
      
-$sql = 'SELECT category_name FROM category';  
-$sql1='SELECT description FROM news';
+$sql = 'SELECT category_name,id FROM category';  
+$sql1='SELECT id,title,created_date FROM news where status=1 ORDER BY created_date desc LIMIT 5'  ;
 $retval=mysqli_query($conn, $sql); 
-$retval1=mysqli_query($conn, $sql1);  
- 
- 
+$retval2=mysqli_query($conn, $sql1);  
     ?>
 <body>
-<div class="col-md-4 col-xs-4">
+<div class="col-md-2 col-xs-2 right">
             <div >
-                <h3 class="center">Recent-News</h3>
+                <h3 class="center">Recent</h3>
                 <ul class="recent_news">
-                <?php while($row1 =mysqli_fetch_assoc($retval1)) { ?>
-                    <li> <?php echo $row1['description']?>
+                <?php while($row2 =mysqli_fetch_assoc($retval2)) { ?>
+                    <li><a href="news_view.php?id=<?php echo $row2['id']?>" ><?php echo $row2['title']?></a>
                     </li>
                 <?php }?>   
                 </ul>
@@ -33,17 +29,9 @@ $retval1=mysqli_query($conn, $sql1);
                 <h3 class="center">Category</h3>
                 <ul class="recent_news">
                         <?php while($row =mysqli_fetch_assoc($retval)) { ?>
-                    <li><?php echo $row['category_name']?></li>
+                    <li><a href="category_view.php?c_id=<?php echo $row['id']?>"><?php echo $row['category_name']?></a></li>
                     
                     <?php }?>
-                </ul>
-            </div>
-            <div >
-                <h3 class="center">Archivese</h3>
-                <ul class="recent_news">
-                    <li>November(120)</li>
-                    <li>December(110)</li>
-                    <li>October(220)</li>
                 </ul>
             </div>
         </div>  

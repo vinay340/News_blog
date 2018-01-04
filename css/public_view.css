@@ -10,8 +10,9 @@ body{
 .img1 {
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 150px;
-    margin-left: 2px;
+    width: 145px;
+    margin: 2px;
+
 }
 .right{
     float:right;
@@ -68,12 +69,6 @@ div .alink:hover{
     border-radius:10px; 
     margin: 10px;
 }   
-.recent_news{
-    height: 200px;
-    overflow-y: scroll;
-    padding-left:20% ;
-    font: 2em FontAwesome;
-}
 .comment_list{
     border: 1px solid rgba(0, 0, 0, 0.342);
     border-radius: 10px;
@@ -94,4 +89,14 @@ textarea{
 }
 .modal button{
     background-color: rgb(102, 158, 233);
+}
+.marq{
+    position: fixed;
+}
+.recent_news a{
+    color: rgba(0, 0, 0, 0.527);
+    font-size: 2em;
+}
+.recent_news a:hover{
+    text-decoration-line: none;
 }

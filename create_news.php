@@ -36,13 +36,12 @@ if (isset($_POST['title'])){
 VALUES ('$title','$description','$content','$date', '$a' , CURDATE())";
         $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
         if($result){
-            echo "<div class='form'>    
-<h3>succesfully news updated.</h3>
-<br/>Click here to <a href='author_dashboard.php'>view</a></div>";
+            echo " <div class='alert alert-success'>
+            <strong>Successfully created!!!</strong> Click here to <a href='author_dashboard.php'>view</a></div>
+          </div> ";
         }
-    }else{
+    }
 ?>
-
     <div class="container">
         <div class="col-md-8 col-xs-12">
             <h2 class="caption">CREATE NEWS</h2>
@@ -70,7 +69,6 @@ VALUES ('$title','$description','$content','$date', '$a' , CURDATE())";
         </div>
     </div>
 
-    <?php } ?>
   
 </body>
 </html>

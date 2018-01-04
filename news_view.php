@@ -10,24 +10,14 @@
 <?php 
     include('public_view_header.php');
     include('mysql_conn.php');
-    include("auth.php");
-//$sql = 'SELECT title,description,content,date,id, created_date FROM news';  
-
-//$retval=mysqli_query($conn, $sql);
- 
+    $tid=$_GET['id'];
     ?>
     <?php
-    
-    $post_id = $_REQUEST['view_content'];
-      
-    $sql2 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date  FROM news AS a , user AS b  where a.author_id=b.id and a.id = '$post_id'";  
-
-               $sql = "SELECT * FROM comment  where id = '$post_id'";
-            
-                $retval=mysqli_query($conn,$sql2) or die(mysqli_error());
-                $retval1=mysqli_query($conn,$sql) or die(mysqli_error());
-                
-    
+        $sql2 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date  FROM news AS a , user AS b  where a.author_id = b.id and a.id=$tid ";  
+        
+        $sql = "SELECT * FROM comment  where id = $tid";
+        $retval=mysqli_query($conn,$sql2) or die(mysqli_error());
+        $retval1=mysqli_query($conn,$sql) or die(mysqli_error());
     ?>
     <div class=row>
         <div class="col-md-8 col-xs-8 ">
@@ -61,7 +51,6 @@
                 </div>
             </fieldset> 
         <?php }?>
-           <h5> <i class="fa fa-eye fa-2x views" aria-hidden="true">10,300</i><i class="fa fa-comment-o fa-2x comments" aria-hidden="true">1,500</i></h5>
         <?php while($row2 =mysqli_fetch_assoc($retval1)) { ?>
            
            <div class="comment_list">
