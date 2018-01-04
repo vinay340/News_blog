@@ -12,6 +12,8 @@
                 }    
             } 
             if($result){
+                $message = "Username and/or Password incorrect.\\nTry again.";
+                echo "<script type='text/javascript'>alert('$message');</script>";
                 //echo "<script>window.open('admin_ref.php','_self')</script>";
                 header("Location: admin_ref.php");
             }

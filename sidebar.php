@@ -30,7 +30,7 @@ include("adminheader.php");
       <li>
         <a href="admin_ref.php">
           <i class="fa fa-users icon"></i>
-          <i class="t_name">Authors</i>
+          <i class="t_name">Users</i>
         </a>
       </li>
       <li>
@@ -45,16 +45,11 @@ include("adminheader.php");
           <i class="t_name">Posts</i>
         </a>
       </li> 
-      <li>
-        <a href="#">
-          <i class="fa fa-link  icon"></i>
-          <i class="t_name">Activities</i>
-        </a>
-      </li>
+    
           
         </ul>
       </div>
 </div>
 </div>
 </body>
-</html>
+</html>   
