@@ -14,7 +14,7 @@
     include("sidebar.php");
     include("mysql_conn.php");
      
-$sql = 'SELECT title,description,content,date,id FROM news where status =1';  
+$sql = 'SELECT title,description,content,date,id FROM news where status =1 ORDER BY created_date DESC LIMIT 5 ';  
 $sql1='SELECT news_id,content,created_date,commented_by FROM comment';
 //$sql2='SELECT count(id) from user where role_id =1';
 
@@ -27,6 +27,12 @@ $retval1=mysqli_query($conn, $sql1);
 
 //     
     ?>
+      <?php
+      $adminid=$_SESSION['sess_user_id'];
+$query5 = "SELECT count(*) from news where approved_by =$adminid ";
+$result5 = mysqli_query($conn,$query5);
+$rows5 = mysqli_fetch_assoc($result5);
+ ?>
     <?php
 $query = "SELECT count(*) from user where role_id = '1'";
 $result = mysqli_query($conn,$query);
@@ -47,30 +53,81 @@ $query3 = "SELECT count(*) from news";
 $result3 = mysqli_query($conn,$query3);
 $rows3 = mysqli_fetch_assoc($result3);
  ?>
+<?php
+$query4 = "SELECT count(*) from comment";
+$result4 = mysqli_query($conn,$query4);
+$rows4 = mysqli_fetch_assoc($result4);
+ ?>
 
                <div class="container-fluid">
                   <div class="wrapper top">
-                       <div class="col-md-12 col-sm-12 col-xs-12 row ">
-                           <div class="col-lg-4 col-md-4 col-sm-6">
+                  <div class="col-md-12 col-sm-12 col-xs-12 row ">
+                           <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php#admin','mywindow');" style="cursor: pointer;">
                                 <div class="panel"id="panel1"> 
                                     <div class="panel-body">
                                         <div class="pull-left col-md-9 col-sm-6">
-                                            <span class="stats-number"></span>
-                                            <p class="stats-info">Number of views</p>
+                                            <span class="stats-number"><?php echo $rows['count(*)'];?></span>
+                                            <p class="stats-info">Admins</p>
                                         </div>
                                         <div class="pull-right col-md-3 col-sm-6">
-                                            <i class="glyphicon glyphicon-eye-open"></i>
+                                            <i class="fa fa-user-secret"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 col-md-4 col-sm-6">
+                            <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php#authors','mywindow');" style="cursor: pointer;">
+                                <div class="panel"id="panel1"> 
+                                    <div class="panel-body">
+                                        <div class="pull-left col-md-9 col-sm-6">
+                                        
+                                            <span class="stats-number"><?php echo $rows1['count(*)'];?></span>
+                                            <p class="stats-info"> Authors</p>
+                                        </div>
+                                        <div class="pull-right col-md-3 col-sm-6">
+                                            <i class="fa fa-users"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6 " onclick="window.open('admin_ref.php#new_reg','mywindow');" style="cursor: pointer;">
+                                <div class="panel"id="panel1"> 
+                                    <div class="panel-body">
+                                        <div class="pull-left col-md-9 col-sm-6">
+                                            <span class="stats-number"><?php echo $rows2['count(*)'];?></span>
+                                            <p class="stats-info"> Pending Users</p>
+                                        </div>
+                                        <div class="pull-right col-md-3 col-sm-6">
+                                            <i class="fa fa-user-plus"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                <!-- second row -->
+
+                       <div class="col-md-12 col-sm-12 col-xs-12 row "onclick="window.open('posts.php','mywindow');" style="cursor: pointer;">
+                           <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="panel"id="panel1"> 
+                                    <div class="panel-body">
+                                        <div class="pull-left col-md-9 col-sm-6">
+                                            <span class="stats-number"><?php echo $rows5['count(*)'];?></span>
+                                            <p class="stats-info"> Approved Posts</p>
+                                        </div>
+                                        <div class="pull-right col-md-3 col-sm-6">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('posts.php','mywindow');" style="cursor: pointer;">
                                 <div class="panel"id="panel1"> 
                                     <div class="panel-body">
                                         <div class="pull-left col-md-9 col-sm-6">
                                             <span class="stats-number"><?php echo $rows3['count(*)'];?></span>
-                                            <p class="stats-info">Number of Posts</p>
+                                            <p class="stats-info"> Posts</p>
                                         </div>
                                         <div class="pull-right col-md-3 col-sm-6">
                                             <i class="fa fa-thumb-tack"></i>
@@ -79,12 +136,12 @@ $rows3 = mysqli_fetch_assoc($result3);
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 col-md-4 col-sm-6 ">
+                            <div class="col-lg-4 col-md-4 col-sm-6 " onclick="window.open('comments.php','mywindow');" style="cursor: pointer;" >
                                 <div class="panel"id="panel1"> 
                                     <div class="panel-body">
                                         <div class="pull-left col-md-9 col-sm-6">
-                                            <span class="stats-number"></span>
-                                            <p class="stats-info">Number of Comments</p>
+                                            <span class="stats-number"><?php echo $rows4['count(*)'];?></span>
+                                            <p class="stats-info">Comments</p>
                                         </div>
                                         <div class="pull-right col-md-3 col-sm-6">
                                             <i class="fa fa-comments"></i>
@@ -94,51 +151,7 @@ $rows3 = mysqli_fetch_assoc($result3);
                             </div>
                         </div>
 
-                <!-- second row -->
-                        <div class="col-md-12 col-sm-12 col-xs-12 row ">
-                           <div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="panel"id="panel1"> 
-                                    <div class="panel-body">
-                                        <div class="pull-left col-md-9 col-sm-6">
-                                            <span class="stats-number"><?php echo $rows['count(*)'];?></span>
-                                            <p class="stats-info">Number of Admins</p>
-                                        </div>
-                                        <div class="pull-right col-md-3 col-sm-6">
-                                            <i class="glyphicon glyphicon-eye-open"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <div class="panel"id="panel1"> 
-                                    <div class="panel-body">
-                                        <div class="pull-left col-md-9 col-sm-6">
-                                        
-                                            <span class="stats-number"><?php echo $rows1['count(*)'];?></span>
-                                            <p class="stats-info">Number of Authors</p>
-                                        </div>
-                                        <div class="pull-right col-md-3 col-sm-6">
-                                            <i class="fa fa-users"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-4 col-sm-6 ">
-                                <div class="panel"id="panel1"> 
-                                    <div class="panel-body">
-                                        <div class="pull-left col-md-9 col-sm-6">
-                                            <span class="stats-number"><?php echo $rows2['count(*)'];?></span>
-                                            <p class="stats-info">Number of Registrations</p>
-                                        </div>
-                                        <div class="pull-right col-md-3 col-sm-6">
-                                            <i class="fa fa-user-plus"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
                     <!-- 3rd row -->
                         <div class="row">
                             <div class="col-sm-12 col-xs-12">   
@@ -158,18 +171,12 @@ $rows3 = mysqli_fetch_assoc($result3);
                                                    <?php while($row = mysqli_fetch_assoc($retval)){?>
                                                         <fieldset class="well" >
                                                             <div class="row">
-                                                                <div class="col-md-6 col-sm-6 col-xs-8">
-                                                                    <strong><?php echo $row['id'] ?></strong>
-                                                                    </div>
                                                                         <div class="col-md-6 col-sm-6 col-xs-4 text-right">
                                                                             <?php echo $row['date'] ?>
                                                                         </div>
                                                                     </div>
                                                                 <br>
                                                             <div class="row">
-                                                                <div class="col-md-2 col-sm-12 col-xs-12">
-                                                                    <img src="assets/images/NB.jpg" class="R_img">
-                                                                </div>
                                                                 <div class="col-md-10 col-sm-12 col-xs-12">
                                                                     <h4><?php echo $row['title']?></h4>
                                                                     <p><?php echo $row['description']?>
@@ -185,7 +192,7 @@ $rows3 = mysqli_fetch_assoc($result3);
                                                 <?php while($row1 = mysqli_fetch_assoc($retval1)){?>
                                                     <fieldset class="well"  >
                                                             <div class="row">
-                                                                <div class="col-md-6 col-sm-6 col-xs-8">
+                                                                <div class="col-md-12 col-sm-12 col-xs-12">
                                                                     <strong><?php echo $row1['news_id']?></strong>
                                                                     </div>
                                                                         <div class="col-md-6 col-sm-6 col-xs-4 text-right">
@@ -209,18 +216,6 @@ $rows3 = mysqli_fetch_assoc($result3);
                                         </div>  
                                     
                                     </fieldset> 
-                                </div>
-                                <div class= "col-md-4 well">
-                                    <fieldset class="col-xs-12">
-                                    <ul class="list-group col-md-6">
-                                        <li class="list-group-item col-md-6" ><a>All</a> <span class="badge ">12</span></li>
-                                        <li class="list-group-item col-md-6"><a>Pending</a><span class="badge col-md-2">12</span></li>
-                                        <li class="list-group-item col-md-6"><a>Approved</a><span class="badge col-md-2">5</span></li>
-                                        <li class="list-group-item  col-md-6"><a>Trash</a><span class="badge col-md-2">3</span></li>
-                                    </ul>    
-                                    </fieldset>
-
-
                                 </div>
                             </div>
                         </div>

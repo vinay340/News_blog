@@ -34,7 +34,7 @@ include("adminheader.php");
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="comments.php">
           <i class="fa fa-comments icon"></i>
           <i class="t_name">Comments</i>
         </a>
