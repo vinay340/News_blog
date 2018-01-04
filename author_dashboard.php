@@ -49,7 +49,7 @@ $retval1=mysqli_query($conn, $sql1);
                                                     <div class="row">
                                                     <div class="title col-md-10">
                                                         <strong>
-                                                            <h3><?php echo $row['id']?>:<?php echo $row['title']?></h3>
+                                                            <h3>    <?php echo $row['title']?></h3>
                                                             </strong>
                                                     </div> 
                                                     <div class="col-md-2" id="right">

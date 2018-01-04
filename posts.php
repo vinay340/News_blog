@@ -110,7 +110,7 @@ $retval=mysqli_query($conn, $sql);
                                             
                                         <fieldset class="well">
                                            
-                                            <div class="col-md-10 col-sm-12 col-xs-12">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
                                                 
                                             <?php 
                                                 
@@ -123,7 +123,7 @@ $retval=mysqli_query($conn, $sql);
                                                 ?>                                            
                                                     <div class="public_content">
                                                         <div class=row>
-                                                            <div class="col-md-8 col-xs-8 ">
+                                                            <div class="col-md-12 col-xs-12 ">
 
                                                                           
                                                                                     <fieldset class="content">
@@ -151,9 +151,7 @@ $retval=mysqli_query($conn, $sql);
                                                                             
                                                                                             
                                                                                             <td>
-                                                                                            <div class="form">
-                                                                                            <a type="submit" class="alink" data-toggle="modal" data-target="#myModal_<?php echo $row['id']?>" name="view_content" value= <?php echo $row['id']?>>Read More...</a>
-                                                                                            </div>                                       
+                                                                                            <a type="submit" class="alink" data-toggle="modal" data-target="#myModal_<?php echo $row['id']?>" name="view_content" value= <?php echo $row['id']?>>More...</a>
                                                                                             </td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -252,8 +250,8 @@ $retval=mysqli_query($conn, $sql);
                                                         </div>
                                                         
                                                     
-                                                        <button type="submit" class="btn btn-default col-md-4 submit_button">CREATE</button>
-                                                        <a class="btn btn-default col-md-4 cancel_button  right" href="posts.php" >CANCEL</a>
+                                                        <button type="submit" class="btn btn-primary col-md-4 submit_button">CREATE</button>
+                                                        <a class="btn btn-warning    col-md-4 cancel_button  " id="right" href="posts.php" >CANCEL</a>
 
                                                     </form>
                                                 </div>

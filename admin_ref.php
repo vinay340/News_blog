@@ -45,8 +45,8 @@ $retval2=mysqli_query($conn, $sql2);
                                         <div class="row">
                                             
                                         <fieldset class="well">
-                                           <h2>List Of Admins</h2>
-                                            <div class="col-md-10 col-sm-12 col-xs-12">
+                                           <h2 class="text-center">List Of Admins</h2>
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
                                                 
                                                 <div class="table-responsive table-hover">          
                                                     <table class="table">
@@ -81,9 +81,9 @@ $retval2=mysqli_query($conn, $sql2);
                                     <div class="row">
                                             
                                         <fieldset class="well">
-                                        <h2>List Of Authors</h2>
+                                        <h2 class="text-center">List Of Authors</h2>
                                            
-                                            <div class="col-md-10 col-sm-12 col-xs-12">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
                                                 
                                                 <div class="table-responsive table-hover">          
                                                     <table class="table">
@@ -117,14 +117,12 @@ $retval2=mysqli_query($conn, $sql2);
                                         </div>
                                     </div>
                                     <div id="new_reg" class="tab-pane fade">
-                                   <h2 class="left">List Of New Registrations</h2>
+                                   <h2 class="text-center">List Of New Registrations</h2>
                                         
                                    <div class="row " id="check_btn">
                                    <form action="approval.php" method="post">
 
-                                       <!-- <button type="button" class="btn btn-primary">view</button> -->
                                         <button type="submit" class="btn btn-success right" name="confirm" id="confirm">Approve</i></button>
-                                       <!-- // <button type="button" class="btn btn-danger"><i class="fa fa-close" aria-hidden="true"></i></button> -->
                                     
                                    </div>
                                    
@@ -156,7 +154,6 @@ $retval2=mysqli_query($conn, $sql2);
                                                          <tbody>
                                                              
                                                                     <tr>
-                                                            
                                                             <td><?php echo $row2['id']?><input type="hidden" value= <?php echo $row2['id'] ?> name="author_id[]"></td>
                                                              
                                                             <td><?php echo $row2['name']?></td>
@@ -173,7 +170,6 @@ $retval2=mysqli_query($conn, $sql2);
                                                                     </div>
                                                                 </div>                                 
                                                              </td>
-                                                            
                                                              </tr>
                                                          </tbody>
                                                              
