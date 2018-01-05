@@ -29,31 +29,58 @@
                 $email = mysqli_real_escape_string($conn,$email);
                 $password = stripslashes($_REQUEST['password']);
                 $password = mysqli_real_escape_string($conn,$password);
+                $sql_u = "SELECT * FROM user WHERE name='$username'";
+                $sql_e = "SELECT * FROM user WHERE email='$email'";
+                
+                $res_u = mysqli_query($conn, $sql_u);
+                $res_e = mysqli_query($conn, $sql_e);
+                
+          
+                if (mysqli_num_rows($res_u) > 0) {
+                  echo '<div class="container">
+                            <div class="page-header">
+                                <h3> SORRY... username already taken please try another</h3>
+                            </div>
+                            <style>
+                            #name{
+                            border-color:red;
+                            }
+                            </style>
+                        </div>;';
+
+                } else if (mysqli_num_rows($res_e) > 0) {
+                  echo '<div class="container">
+                            <div class="page-header">
+                                <h3> SORRY... email exits</h3>
+                            </div>
+                            <style>
+                            #inputEmail{
+                            border-color:red;
+                            }
+                            </style>
+                        </div>;';
+
+                } else{
                 
                 $query = "INSERT into `user` (name, email, password) VALUES ('$username', '$email','".md5($password)."')";
-                $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($dbcon));
-                    
-                if($result)
-                {
-        ?> 
-                    <div class="container">
+                $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
+                echo '<div class="container">
                         <div class="page-header">
-                            <h3>Registration Complete</h3>
+                            <h3>Registration successfully completed</h3>
                         </div>
-                    </div>;
-                    <?php header('Location: loginform.php');
+                    </div>;';
                 }
             }
-            else
-            {
-                    ?>
+                ?>
+
                     <div class=" class container">
                         <div class="wrapper">
                             <fieldset class="well col-md-6 " >
-                                <form role="form-signin" class=" form-signin col-md-10 col-sm-12 c0l-xs-12" method="post" action=""  name="registration" >
+                                <form role="form-signin" class=" form-signin col-md-10 col-sm-12 c0l-xs-12" method="post" action="registeration.php"  name="registration" >
                                     <h2 class="form-signin-heading heading"><p>REGISTER</p></h2>
 
-                                    <div class="form-group row">
+                                    <div class="form-group row" > 
+                                    
                                         <div class=" inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -91,6 +118,5 @@
                             </fieldset>
                         </div>
                     </div>
-        <?php } ?>
     </body>
 </html>

@@ -1,7 +1,7 @@
 <?php  
   $host = 'localhost:3306';  
   $user = 'root';  
-  $pass = 'enter';  
+  $pass = 'root';  
   $dbname = 'news_blog';  
   $conn = mysqli_connect($host, $user, $pass,$dbname);  
   if(!$conn){  

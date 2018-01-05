@@ -11,44 +11,41 @@
   </head>
   <body>
     <div class=container-fluid      >
-<?php
-include("adminheader.php");
-include("admin_auth.php");
-?>
-</div>  
-
-<div class="navbar-nav nav_sidebar" >                                        
-<div  class="row-fluid">
-   
-<div class="sidebar">
-        <ul class="nav nav-tabs nav-stacked "id="nav-tabs" >
-        <li>
-        <a href="admindashboard.php">
-          <i class="fa fa-tachometer"></i>
-          <i class="t_name">Dashboard</i>
-        </a>
-      </li>
-      <li>
-        <a href="admin_ref.php">
-          <i class="fa fa-users icon"></i>
-          <i class="t_name">Users</i>
-        </a>
-      </li>
-      <li>
-        <a href="comments.php">
-          <i class="fa fa-comments icon"></i>
-          <i class="t_name">Comments</i>
-        </a>
-      </li>
-      <li>
-        <a href="posts.php">
-          <i class="fa fa-newspaper-o icon"></i>
-          <i class="t_name">Posts</i>
-        </a>
-      </li> 
-    
-          
-        </ul>
+      <?php
+        include("adminheader.php");
+        include("admin_auth.php");
+      ?>
+    </div>  
+    <div class="navbar-nav nav_sidebar" >                                        
+      <div  class="row-fluid">
+        <div class="sidebar">
+          <ul class="nav nav-tabs nav-stacked "id="nav-tabs" >
+            <li>
+              <a href="admindashboard.php">
+                <i class="fa fa-tachometer"></i>
+                <i class="t_name">Dashboard</i>
+              </a>
+            </li>
+            <li>
+              <a href="admin_ref.php">
+                <i class="fa fa-users icon"></i>
+                <i class="t_name">Users</i>
+              </a>
+            </li>
+            <li>
+              <a href="comments.php">
+                <i class="fa fa-comments icon"></i>
+                <i class="t_name">Comments</i>
+              </a>
+            </li>
+            <li>
+              <a href="posts.php">
+                <i class="fa fa-newspaper-o icon"></i>
+                <i class="t_name">Posts</i>
+               </a>
+            </li> 
+          </ul>
+        </div>
       </div>
     </div>
   </body>

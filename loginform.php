@@ -16,14 +16,32 @@
             session_start();//session starts here  
             include ('mysql_conn.php');
             // If form submitted, insert values into the database.
-            if (isset($_POST['name'])){
+            if (isset($_POST['name']))
+            {
                     // removes backslashes
                 $username = stripslashes($_REQUEST['name']);
                     //escapes special characters in a string
                 $username = mysqli_real_escape_string($conn,$username);
                 $password = stripslashes($_REQUEST['password']);
                 $password = mysqli_real_escape_string($conn,$password);
-                //Checking is user existing in the database or not
+
+                $sql_u = "SELECT * FROM user WHERE name='$username'and role_id ='3'";
+                $res_u = mysqli_query($conn, $sql_u);
+          
+                if (mysqli_num_rows($res_u)> 0) {
+                  echo '<div class="container">
+                            <div class="page-header">
+                                <h3> you are not approved user</h3>
+                            </div>
+                        </div>;';
+
+                }else if(mysqli_num_rows($res_u)==0){
+                    echo '<div class="container">
+                    <div class="page-header">
+                        <h3> you are not registered user please register </h3>
+                    </div>
+                </div>;';
+                }
                 $query = "SELECT * FROM `user` WHERE name='$username' and password='".md5($password)."' and role_id != '3'";
                 $result = mysqli_query($conn,$query) or die(mysql_error());
                 $rows = mysqli_num_rows($result);
@@ -31,27 +49,24 @@
                     //$_SESSION['name'] = $username;
                     
                         // Redirect user to index.php
-                    header("Location: loginform.php");
-                } else {             
-                    while($row = mysqli_fetch_assoc($result)){
-                        session_regenerate_id();
-                        $_SESSION['sess_user_id'] = $row['id'];
-                        $_SESSION['sess_username'] = $row['name'];
-                        $_SESSION['sess_userrole'] = $row['role_id'];
-                        session_write_close();                
-                }if( $_SESSION['sess_userrole'] == 1){                        
-                    header('Location: admindashboard.php');
-                } else if( $_SESSION['sess_userrole'] == 2){
-                    header('Location: author_dashboard.php');
-                }else{
-        ?>
-        <div class="alert alert-warning">
-            <strong>Warning!</strong> You are not approved by Admin
-        </div>
-        <?php 
-                    }
+                   // header("Location: loginform.php");
+                } else 
+                    {             
+                        while($row = mysqli_fetch_assoc($result))
+                        {
+                            session_regenerate_id();
+                            $_SESSION['sess_user_id'] = $row['id'];
+                            $_SESSION['sess_username'] = $row['name'];
+                            $_SESSION['sess_userrole'] = $row['role_id'];
+                            session_write_close();                
+                        }   
+                            if( $_SESSION['sess_userrole'] == 1){                        
+                                    header('Location: admindashboard.php');
+                                } else if( $_SESSION['sess_userrole'] == 2){
+                                    header('Location: author_dashboard.php');
+                                }
                     }   
-                }else {
+            }
         ?> 
         <div class="container">  
             <div class="row">  
@@ -80,8 +95,7 @@
                 </div>  
             </div>  
         </div>  
-        <?php } ?> 
-    </body>  
+    </body>         
 </html>  
 <?php  
     include("mysql_conn.php");  
