@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="tab">
-                    <ul class="nav nav-pills nav-justified" id="tab">
+                    <ul class="nav nav-pills nav-justified" id="tab1">
                         <li class="col-md-6 active" ><a  data-toggle="pill"  href="#me">Posts by me</a></li>
                         <li class="col-md-6"><a  data-toggle="pill"  href="#others">Posts by others</a></li>
                         <li class="col-md-6">  <a href="#create_news" data-toggle="pill">CREATE NEWS</a></li>
