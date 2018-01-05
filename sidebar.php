@@ -13,6 +13,7 @@
     <div class=container-fluid      >
 <?php
 include("adminheader.php");
+include("admin_auth.php");
 ?>
 </div>  
 
