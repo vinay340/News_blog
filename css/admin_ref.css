@@ -19,6 +19,10 @@
     padding-bottom: 20  px;
     background-color:white;
 }
+#tab1{
+    padding-bottom: 20  px;
+    background-color:whitesmoke;
+}
 textarea.form-control{
     resize:none;
 }

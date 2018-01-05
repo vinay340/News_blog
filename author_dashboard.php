@@ -14,7 +14,6 @@
             $a= $_SESSION['sess_user_id'];
             $sql = "SELECT title,description,content,date,id, created_date,status FROM news WHERE author_id = $a ORDER BY created_date DESC";  
             $sql1 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date FROM news AS a, user AS b WHERE a.author_id != $a  && a.author_id=b.id";  
-
             $retval=mysqli_query($conn, $sql);
             $retval1=mysqli_query($conn, $sql1); 
         ?>
@@ -25,7 +24,7 @@
                     </div>
                 </div>
                 <div class="tab">
-                    <ul class="nav nav-pills nav-justified" id="tab">
+                    <ul class="nav nav-pills nav-justified" id="tab1">
                         <li class="col-md-6 active" ><a  data-toggle="pill"  href="#me">Posts by me</a></li>
                         <li class="col-md-6"><a  data-toggle="pill"  href="#others">Posts by others</a></li>
                         <li class="col-md-6">  <a href="#create_news" data-toggle="pill">CREATE NEWS</a></li>
