@@ -203,7 +203,6 @@ $retval=mysqli_query($conn, $sql);
                                     </div>
                                     <div id="create_post" class="tab-pane fade">
                                    <div class="row " id="check_btn">
-                                     <form action="approval.php" method="post">
                                         <?php
 
                                         $a =$_SESSION['sess_user_id'];
@@ -227,11 +226,10 @@ $retval=mysqli_query($conn, $sql);
                                                 if($result){
                                                     echo "<div class='form'>    
                                         <h3>succesfully news updated.</h3>
-                                        <br/>Click here to <a href='author_dashboard.php'>view</a></div>";
+                                        <br/>Click here to <a href='#create_post'>view</a></div>";
                                                 }
-                                            }else{
+                                            }
                                         ?>
-
                                             <div class="container">
                                                 <div class="col-md-8 col-xs-12">
                                                 <h2 class="text-center">Create News</h2>
@@ -251,16 +249,14 @@ $retval=mysqli_query($conn, $sql);
                                                         
                                                     
                                                         <button type="submit" class="btn btn-primary col-md-4 submit_button">CREATE</button>
-                                                        <a class="btn btn-warning    col-md-4 cancel_button  " id="right" href="posts.php" >CANCEL</a>
+                                                        <a class="btn btn-warning col-md-4 cancel_button  " id="right" href="posts.php" >CANCEL</a>
 
                                                     </form>
                                                 </div>
                                             </div>
 
-                                            <?php } ?>
                                         
-                                    </form>
-                                    </div>
+                                    </div>              
                             </div>
                         </fieldset>
                    </div>

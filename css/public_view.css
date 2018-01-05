@@ -1,11 +1,7 @@
-body{
-    padding: 10px;
-    font-family: FontAwesome;
-    background-color: rgba(255, 255, 255, 0.507);
-}
+
 .public_content{
     position: relative;
-    top: 50px;
+    top: 80px;
 }
 .img1 {
     border: 1px solid #ddd;
@@ -14,6 +10,7 @@ body{
     margin: 2px;
 
 }
+
 .right{
     float:right;
 }
@@ -103,18 +100,4 @@ margin: 0px;
 z-index: 1;
 }
 
-.name{
-    font-size: 40px;
-    padding: 0 10px;
-    color:white;
-padding: 23px 35px;
-    
-    
-}
-.name:hover{
-    background-color: #04A3ED;
-    color:white;
-	text-decoration-line: none;
-    
 
-}

@@ -35,15 +35,14 @@ if (isset($_POST['name'])){
 VALUES ('$username', '$email','".md5($password)."')";
         $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($dbcon));
         if($result){
-            echo '
+         ?> 
             <div class="container">
              <div class="page-header">
                  <h3>Registration Complete</h3>
              </div>
-            </div>';
+            </div>;
      
-            header('Location: loginform.php');
-          
+            <?php header('Location: loginform.php');
 
         }
     }else{

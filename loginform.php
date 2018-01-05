@@ -31,8 +31,7 @@ if (isset($_POST['name'])){
 	$password = stripslashes($_REQUEST['password']);
 	$password = mysqli_real_escape_string($conn,$password);
 	//Checking is user existing in the database or not
-        $query = "SELECT * FROM `user` WHERE name='$username'
-and password='".md5($password)."'";
+    $query = "SELECT * FROM `user` WHERE name='$username' and password='".md5($password)."' and role_id != '3'";
     $result = mysqli_query($conn,$query) or die(mysql_error());
    
     $rows = mysqli_num_rows($result);
