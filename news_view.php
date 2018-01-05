@@ -19,7 +19,8 @@
         $retval=mysqli_query($conn,$sql2) or die(mysqli_error());
         $retval1=mysqli_query($conn,$sql) or die(mysqli_error());
     ?>
-    <div class=row>
+    <div class="public_content">
+    <div class="row">
         <div class="col-md-8 col-xs-8 ">
         <?php while($row =mysqli_fetch_assoc($retval)) { ?>
             
@@ -90,6 +91,7 @@
         <?php 
         include('public_view_rightmenu.php');
         ?>
+    </div>
     </div>
 </body>
 </html>

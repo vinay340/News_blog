@@ -1,10 +1,6 @@
 <?php  
-session_start();//session starts here  
-  
+    session_start();//session starts here  
 ?>  
-  
-  
-  
 <html>  
 <head lang="en">  
     <meta charset="UTF-8">  
@@ -13,57 +9,55 @@ session_start();//session starts here
     <title>Login</title>  
 </head>  
 <style>  
-    .login-panel {  
+    .login-panel 
+    {  
         margin-top: 150px;  
     }
 </style>  
-  
 <body>  
-<?php
-include ('mysql_conn.php');
-//session_start();
-// If form submitted, insert values into the database.
-if (isset($_POST['name'])){
-        // removes backslashes
-	$username = stripslashes($_REQUEST['name']);
-        //escapes special characters in a string
-	$username = mysqli_real_escape_string($conn,$username);
-	$password = stripslashes($_REQUEST['password']);
-	$password = mysqli_real_escape_string($conn,$password);
-	//Checking is user existing in the database or not
-        $query = "SELECT * FROM `user` WHERE name='$username'
-and password='".md5($password)."'";
-    $result = mysqli_query($conn,$query) or die(mysql_error());
-   
-    $rows = mysqli_num_rows($result);
-        if($rows==0){
-        //$_SESSION['name'] = $username;
+    <?php
+        include ('mysql_conn.php');
+        //session_start();
+        // If form submitted, insert values into the database.
+        if (isset($_POST['name'])){
+                // removes backslashes
+            $username = stripslashes($_REQUEST['name']);
+                //escapes special characters in a string
+            $username = mysqli_real_escape_string($conn,$username);
+            $password = stripslashes($_REQUEST['password']);
+            $password = mysqli_real_escape_string($conn,$password);
+            //Checking is user existing in the database or not
+            $query = "SELECT * FROM `user` WHERE name='$username' and password='".md5($password)."' and role_id != '3'";
+            $result = mysqli_query($conn,$query) or die(mysql_error());
         
-            // Redirect user to index.php
-	    //header("Location: admindashboard.php");
-         } else {             
-            while($row = mysqli_fetch_assoc($result)){
-                session_regenerate_id();
-                $_SESSION['sess_user_id'] = $row['id'];
-                $_SESSION['sess_username'] = $row['name'];
-                $_SESSION['sess_userrole'] = $row['role_id'];
-
-                session_write_close();                
-            }
-            if( $_SESSION['sess_userrole'] == 1){                        
-                header('Location: admindashboard.php');
-            } else if( $_SESSION['sess_userrole'] == 2){
-                header('Location: author_dashboard.php');
-            }
-            else{
-                ?>
-                 <div class="alert alert-warning">
-                <strong>Warning!</strong> You are not approved by Admin
-              </div>
-            <?php }
+            $rows = mysqli_num_rows($result);
+                if($rows==0){
+                //$_SESSION['name'] = $username;
+                
+                    // Redirect user to index.php
+                header("Location: loginform.php");
+                } else {             
+                    while($row = mysqli_fetch_assoc($result)){
+                        session_regenerate_id();
+                        $_SESSION['sess_user_id'] = $row['id'];
+                        $_SESSION['sess_username'] = $row['name'];
+                        $_SESSION['sess_userrole'] = $row['role_id'];
+                        session_write_close();                
+                    }
+                    if( $_SESSION['sess_userrole'] == 1){                        
+                        header('Location: admindashboard.php');
+                    } else if( $_SESSION['sess_userrole'] == 2){
+                        header('Location: author_dashboard.php');
+                    }
+                    else{
+    ?>
+        <div class="alert alert-warning">
+            <strong>Warning!</strong> You are not approved by Admin
+        </div>
+    <?php }
             }
             } else {
-            ?> 
+?> 
   
 <div class="container">  
     <div class="row">  

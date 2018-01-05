@@ -20,7 +20,7 @@
  
     ?>
     <div class="public_content">
-        <div class=row>
+        <div class= "row">
             <div class="col-md-8 col-xs-8  ">
             <?php while($row =mysqli_fetch_assoc($retval)) { ?>
                  <fieldset class="content">
@@ -29,10 +29,10 @@
                             <ul class="news list-unstyled">
                                 <li class="d-flex justify-content-between" > 
                                     <div class="left-col d-flex">
-                                        <div class="col-md-2 col-xs-12">
+                                        <div class="col-md-2 col-xs-2">
                                             <img  class ="img1" src="assets/images/download.jpeg">
                                         </div>
-                                        <div class="col-md-10 col-xs-12">
+                                        <div class="col-md-10 col-xs-10">
                                         <div class="title">
                                             <strong><h3><?php echo $row['title']?><b class="n_date"><?php echo $row['created_date']?></b></h3></strong>
                                         </div> 
@@ -66,6 +66,6 @@
             include('public_view_rightmenu.php');
             ?>
         </div>
-    </div>
+
 </body>
 </html>

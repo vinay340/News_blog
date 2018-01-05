@@ -1,11 +1,7 @@
-body{
-    padding: 10px;
-    font-family: FontAwesome;
-    background-color: rgba(255, 255, 255, 0.507);
-}
+
 .public_content{
     position: relative;
-    top: 50px;
+    top: 80px;
 }
 .img1 {
     border: 1px solid #ddd;
@@ -14,13 +10,11 @@ body{
     margin: 2px;
 
 }
+
 .right{
     float:right;
 }
-.searchbox{
-    border-radius:25px; 
-    float:right;
-}
+
 .views{
     position: relative;
     left: 15%;
@@ -29,9 +23,7 @@ body{
     position: relative;
     left: 50%;
 }
-.navbar-brand{
-    padding: 7px 7px;
-}
+
 marquee{
     font-weight: 500;
 }
@@ -40,14 +32,7 @@ marquee{
     border-radius: 50%;
     color: whitesmoke;
 }
-.navbar-default {
-    background-color: #1760a59c;
-    border-color: #e7e7e7;
-    position: fixed; /* Set the navbar to fixed position */
-    top: 0; /* Position the navbar at the top of the page */
-    width: 100%;
-    z-index: 1;
-}
+
 img{
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -100,3 +85,19 @@ textarea{
 .recent_news a:hover{
     text-decoration-line: none;
 }
+/* .......................... */
+
+
+.menu
+{
+background-color: #00547E;
+border-bottom: 4px solid #04A3ED;
+width:100%;
+height: auto;
+padding: 0 10px;
+position: fixed;
+margin: 0px;
+z-index: 1;
+}
+
+

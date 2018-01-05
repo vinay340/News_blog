@@ -12,16 +12,16 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default">
+<div class="menu">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="public_view.php"><img src="assets/images/new_balance.gif" alt="logo" hieght="50px" width="50px"></a>
+                <a class="navbar-brand name" href="public_view.php"><img src="assets/images/new_balance.gif" alt="logo" hieght="50px" width="50px"></a>
             </div>
             <div>
-            <h2>NEWS BLOG 
+            <h2 class="name">NEWS BLOG 
             </h2>
             </div>
         </div>
-    </nav> 
+</div> 
 </body>
 </html>

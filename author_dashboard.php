@@ -153,15 +153,14 @@ $retval1=mysqli_query($conn, $sql1);
                                 VALUES ('$title','$description','$content','$date', '$a' , CURDATE())";
                                         $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
                                         if($result){
-                                            echo "<div class='form'>    
-                                <h3>succesfully news updated.</h3>
-                                <br/>Click here to <a href='author_dashboard.php'>view</a></div>";
+                                            echo "<div class='form text-center'>    
+                                <h3>succesfully news updated.</h3>";
                                         }
-                                    }else{
+                                    }
                                 ?>
 
                                         <div class="container">
-                                            <fieldset class="  well">
+                                            <fieldset class="well">
                                         <div class="col-md-6 col-xs-12 top">
                                             <h2 class="text-center">Create Post</h2>
                                             <form action="" method="post" name="create_news">
@@ -187,7 +186,7 @@ $retval1=mysqli_query($conn, $sql1);
                                         </div>
                                         </fieldset>
                                     </div>
-                                    <?php } ?>
+                                    
   
 <!-- .................... -->
 
