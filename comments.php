@@ -8,14 +8,24 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-
     <?php
         include("sidebar.php");
-        $sql="SELECT * FROM comment";
+        $sql="SELECT * FROM comment WHERE status=1";
         $retval=mysqli_query($conn, $sql);
     ?>
     <div class="container-fluid">
         <div class="wrapper top">
+            <div class="wrapper col-xs-12">
+                <div class=" col-mx-12 ">
+                    <fieldset class="well col-md-12" >
+                        <ul class="nav nav-pills nav-justified" id="tab" >
+                            <li class="active"><a data-toggle="pill" href="#admin">Admins</a></li>
+                            <li><a data-toggle="pill" href="#authors">Authors</a></li>
+                            <li><a data-toggle="pill" href="#new_reg">New registrations</a></li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </div>
             <div class="col-md-12 col-sm-12 col-xs-12 row ">
                 <fieldset class="well">
                     <h2 class="text-center">List Of Comments</h2>
@@ -26,6 +36,7 @@
                                         <th>CONTENT</th>
                                         <th>COMMENTED BY</th>
                                         <th>COMMENTER EMAIL</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <?php while($row=mysqli_fetch_assoc($retval)){ ?>
@@ -34,10 +45,11 @@
                                         <td><?php echo $row['content']?></td>
                                         <td><?php echo $row['commented_by']?></td>
                                         <td><?php echo $row['commenter_email']?></td>
+                                        <td><input type="checkbox"></td>
                                     </tr> 
-                                    </tbody>
-                                    <?php } ?>
-                                </table>
+                                </tbody>
+                                <?php } ?>
+                            </table>
                         </div>
                 </fieldset>
             </div>
