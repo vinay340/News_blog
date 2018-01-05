@@ -39,28 +39,28 @@
                                         <ul class="news list-unstyled">
                                             <li class="d-flex justify-content-between" > 
                                                 <div class="left-col d-flex">
+                                                    <div class="col-md-2" id="right">
+                                                        <a href="edit_news.php?id= <?php echo $row['id']?>  ">
+                                                            <i type="submit"id="right" class="fa fa-pencil-square-o " aria-hidden="true">&nbsp;</i>
+                                                        </a><br>
+                                                        <b id="right"><?php echo $row['created_date']?></b><br>
+                                                    </div>
+                                                    <div></div>
                                                     <div class="row">
                                                         <div class="title col-md-10">
                                                             <strong><h3><?php echo $row['title']?></h3></strong>
                                                         </div> 
-                                                        <div class="col-md-2" id="right">
-                                                            <a href="edit_news.php?id= <?php echo $row['id']?>  ">
-                                                                <button type="submit"id="right" class="fa fa-pencil-square-o " aria-hidden="true">&nbsp;</button>
-                                                            </a>
-                                                        </div>
                                                     </div>
-                                                    <b id="right"><?php echo $row['created_date']?></b><br>
-                                                    <p id="right"> STATUS: <?php echo $row['status']?></p>
                                                     <div class="col-md-10 col-xs-12">
-                                                        <p><b><?php echo $row['date']?></b><br>             
-                                                            <?php echo $row['description']?><br>
-                                                        </p>
+                                                        <p id="fogblack"><b><?php echo $row['date']?></b></p><br>             
+                                                        <p><?php echo $row['description']?></p><br>
                                                     </div>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
+                                <p id="right"> STATUS: <?php if(($row['status'])==1){ echo 'APPROVED'; }else{ echo 'NOT APPROVED'; }?></p>
                             </fieldset>
                             <?php }?>
                         </div>
@@ -73,27 +73,22 @@
                                         <ul class="news list-unstyled">
                                             <li class="d-flex justify-content-between" > 
                                                 <div class="left-col d-flex">
+                                                    <b id="right"><?php echo $row1['created_date']?></b><br>
                                                     <div class="row">
                                                         <div class="title col-md-10">
-                                                            <strong><h3><?php echo $row1['id']?>.<?php echo $row1['title']?></h3></strong>
+                                                            <strong><h3><i><?php echo $row1['title']?></i></h3></strong>
                                                         </div> 
-                                                        <div class="col-md-2" id="right">
-                                                            <a href="edit_news.php?id= <?php echo $row1['id']?>  ">
-                                                                <button type="submit"id="right" class="fa fa-pencil-square-o " aria-hidden="true">&nbsp;</button>
-                                                            </a>
-                                                        </div>
                                                     </div>
-                                                    <b id="right"><?php echo $row1['created_date']?></b><br>
                                                     <div class="col-md-10 col-xs-12">
-                                                        <p><b><?php echo $row1['date']?></b><br>             
-                                                            <?php echo $row1['description']?><br>
-                                                        </p>
+                                                        <p id="fogblack"><b><?php echo $row1['date']?></b></p><br>             
+                                                        <p><?php echo $row1['description']?></p><br>
                                                     </div>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
+                                    <p id="right"><b>Author:</b><?php echo $row1['name']?></p>
                             </fieldset>
                             <?php }?>
                         </div>

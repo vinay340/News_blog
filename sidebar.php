@@ -51,5 +51,6 @@ include("admin_auth.php");
         </ul>
       </div>
     </div>
+</div>
   </body>
 </html>   
