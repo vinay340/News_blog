@@ -26,6 +26,7 @@
                                         <th>CONTENT</th>
                                         <th>COMMENTED BY</th>
                                         <th>COMMENTER EMAIL</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <?php while($row=mysqli_fetch_assoc($retval)){ ?>
@@ -34,6 +35,7 @@
                                         <td><?php echo $row['content']?></td>
                                         <td><?php echo $row['commented_by']?></td>
                                         <td><?php echo $row['commenter_email']?></td>
+                                        <td><input type="checkbox"></td>
                                     </tr> 
                                     </tbody>
                                     <?php } ?>

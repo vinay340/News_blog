@@ -13,6 +13,7 @@
 <?php
 require('mysql_conn.php');
 include("auth.php");
+//include("admin_auth.php");
 ?>
 <body>
         <div class="wrapper">

@@ -13,6 +13,7 @@
     <?php
     include("sidebar.php");
     include("mysql_conn.php");
+    include("admin_auth.php");
      
 $sql = 'SELECT title,description,content,date,id FROM news where status =1 ORDER BY created_date DESC LIMIT 5 ';  
 $sql1='SELECT news_id,content,created_date,commented_by FROM comment';
