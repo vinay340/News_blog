@@ -14,7 +14,6 @@
             $a= $_SESSION['sess_user_id'];
             $sql = "SELECT title,description,content,date,id, created_date,status FROM news WHERE author_id = $a ORDER BY created_date DESC";  
             $sql1 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date FROM news AS a, user AS b WHERE a.author_id != $a  && a.author_id=b.id";  
-
             $retval=mysqli_query($conn, $sql);
             $retval1=mysqli_query($conn, $sql1); 
         ?>
