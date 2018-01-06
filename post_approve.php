@@ -15,7 +15,9 @@
             } 
             if($result)
             {
+                $msg = "success";       
+                echo "<script type='text/javascript'>alert(<?php echo $msg; ?>);</script>";
                     //echo "<script>window.open('admin_ref.php','_self')</script>";
-                    header("Location: posts.php");
+                     header("Location: posts.php");
             }
 ?>        

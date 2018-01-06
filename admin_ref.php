@@ -132,7 +132,7 @@ $retval2=mysqli_query($conn, $sql2);
                                                 <div class="table-responsive table-hover"> 
                                                 <?php if(mysqli_num_rows($retval2)==0) {?>
                                                                     <div class="alert alert-warning">
-                                                                    <strong>Sorry!</strong> Nothing to display
+                                                                    <strong>Sorry!</strong> Nothing to display All registered users are aprroved
                                                                     </div>
                                                                 <?php }else{?>         
                                                     <table class="table">

@@ -48,7 +48,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 row ">
                     <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php#admin','mywindow');" style="cursor: pointer;">
                         <div class="panel"id="panel1"> 
-                            <div class="panel-body">
+                            <div class="panel-body"id="admins">
                                 <div class="pull-left col-md-9 col-sm-6">
                                     <span class="stats-number"><?php echo $rows['count(*)'];?></span>
                                     <p class="stats-info">Admins</p>
@@ -194,3 +194,6 @@
         </div>
     </body>
 </html>
+<script>
+
+</script>
