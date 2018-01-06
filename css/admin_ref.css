@@ -23,6 +23,11 @@
     padding-bottom: 20  px;
     background-color:whitesmoke;
 }
+#fogblack
+{
+    color: rgba(0, 0, 0, 0.527);
+
+}
 textarea.form-control{
     resize:none;
 }

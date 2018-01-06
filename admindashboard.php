@@ -86,7 +86,7 @@
                         </div>
                     </div>
                 </div>
-            <!-- second row -->
+                <!-- second row -->
                 <div class="col-md-12 col-sm-12 col-xs-12 row "onclick="window.open('posts.php','mywindow');" style="cursor: pointer;">
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="panel"id="panel1"> 
