@@ -14,7 +14,7 @@
         ?>
         <?php
                 $sql2 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date  FROM news AS a , user AS b  where a.author_id = b.id and a.id=$tid ";  
-                $sql = "SELECT * FROM comment  where id = $tid";
+                $sql = "SELECT * FROM comment  where news_id = $tid";
                 $retval=mysqli_query($conn,$sql2) or die(mysqli_error());
                 $retval1=mysqli_query($conn,$sql) or die(mysqli_error());
         ?>
@@ -50,17 +50,44 @@
                                 </div>
                             </div>
                         </fieldset> 
-                    <?php }?>
-
-                    <?php while($row2 =mysqli_fetch_assoc($retval1)) { ?>
+                        <h3>Comments..</h3>
+                        <?php
+                            // If form submitted, insert values into the database.
+                                if (isset($_POST['commented_by'])){
+                                    $name=$_POST['commented_by'];
+                                    $email=$_POST['commenter_email'];
+                                    $content=$_POST['comment'];
+                                    $news_id=$row['id'];
+                                    $name = mysqli_real_escape_string($conn,$name); 
+                                    $email = mysqli_real_escape_string($conn,$email);
+                                    $content = mysqli_real_escape_string($conn,$content);
+                                    $news_id = mysqli_real_escape_string($conn,$news_id);
+                                    $sql_n = "SELECT * FROM comment WHERE commented_by='$name' and content='$content'";
+                                    $res_n = mysqli_query($conn, $sql_n);
+                                    if (mysqli_num_rows($res_n) > 0) {
+                                        echo '<div class="container">
+                                                    <div class="page-header">
+                                                        <h5>comment already saved</h5>
+                                                    </div>
+                                                </div>;';
+                                    } else{
+                                        $query = "INSERT into `comment` (content, news_id,commented_by, commenter_email,created_date)
+                                        VALUES ('$content', '$news_id' ,'$name','$email', CURDATE())";
+                                        $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
+                                        if($result){
+                                            echo "<p>succesfully commented</p>";
+                                        }
+                                    }
+                                }
+                            ?>
                         <div class="comment_list">
-                                <h3>Comments..</h3>
-                                <p><b><?php echo $row2['commented_by']?></b><br>
-                                    <?php echo $row2['content']?>
-                                </p>
-                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">ADD Comment</button>
-                        </div>
+                    <?php while($row2 =mysqli_fetch_assoc($retval1)) { ?>
+                                <p><b><i><?php echo $row2['commented_by']?></i></b><br></p>
+                                <p><?php echo $row2['content']?></p>
                     <?php } ?>
+                        </div>
+                                
+                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">ADD Comment</button>
                     <!-- Modal -->
                     <div class="modal fade" id="myModal" role="dialog">
                         <div class="modal-dialog">
@@ -70,23 +97,26 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     <h4 class="modal-title">Provide Details</h4>
                                 </div>
+                                <form action="" method="post" name="comment_list">
                                 <div class="modal-body">
-                                    <input type="text" class="form-control" placeholder="Name">
-                                    <input type="email" class="form-control" placeholder="Email">
-                                    <input type="number" class="form-control" placeholder="Phone Number">
-                                    <textarea name="textarea" id="" cols="30" rows="10" class="form-control"  placeholder="Comment"></textarea>
+                                    <input type="text" class="form-control" placeholder="Name" name="commented_by">
+                                    <input type="email" class="form-control" placeholder="Email" name="commenter_email">
+                                    <textarea id="" cols="30" rows="10" class="form-control" name="comment" placeholder="Comment"></textarea>
                                     <button class="form-control">Comment</button>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>  
+                <?php }?>
                 <?php 
                 include('public_view_rightmenu.php');
                 ?>
+                
             </div>
         </div>
     </body>
