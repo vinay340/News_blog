@@ -13,12 +13,11 @@
         $content = mysqli_real_escape_string($conn,$content);
         $date = mysqli_real_escape_string($conn,$date);
         $ID = mysqli_real_escape_string($conn,$ID);
-        $query = "UPDATE news  SET title ='$title', description= '$description',content='$content',date='$date' ,created_date=CURDATE()    WHERE id = $ID";
+        $query = "UPDATE news  SET title ='$title', description= '$description',content='$content',date='$date' ,created_date=CURDATE(),status=0  WHERE id = $ID";
         $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
         if($result){
             echo "<div class='form'>
-            <h3>succesfully news updated.</h3>              
-            <br/>Click here to <a href='author_dashboard.php'>view</a></div>";
+            <h3>succesfully Post Edited.</h3>";             
         }
     }
 ?>

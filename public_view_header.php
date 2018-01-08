@@ -15,7 +15,7 @@
         <div class="menu">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand name" href="public_view.php"><img src="assets/images/new_balance.gif" alt="logo" hieght="50px" width="50px"></a>
+                        <a class="navbar-brand" href="public_view.php"><img src="assets/images/new_balance.gif" alt="logo" hieght="50px" width="50px"></a>
                     </div>
                     <div>
                     <h2 class="name">NEWS BLOG 

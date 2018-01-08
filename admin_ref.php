@@ -122,7 +122,6 @@ $retval2=mysqli_query($conn, $sql2);
                                    <div class="row " id="check_btn">
                                    <form action="approval.php" method="post">
 
-                                        <button type="submit" class="btn btn-success right" name="confirm" id="confirm">Approve</i></button>
                                     
                                    </div>
                                    
@@ -134,7 +133,11 @@ $retval2=mysqli_query($conn, $sql2);
                                                                     <div class="alert alert-warning">
                                                                     <strong>Sorry!</strong> Nothing to display All registered users are aprroved
                                                                     </div>
-                                                                <?php }else{?>         
+                                        <button type="submit" class="btn btn-success pull-right" name="confirm" id="confirm" disabled>Approve</i></button>
+                                                                    
+                                                                <?php }else{?>
+                                        <button type="submit" class="btn btn-success pull-right" name="confirm" id="confirm">Approve</i></button>
+                                                                             
                                                     <table class="table">
                                                        
                                                         <thead>

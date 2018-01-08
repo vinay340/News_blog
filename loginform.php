@@ -16,10 +16,10 @@
             session_start();//session starts here  
             include ('mysql_conn.php');
             // If form submitted, insert values into the database.
-            if (isset($_POST['name']))
+            if (isset($_POST['submit']))
             {
                     // removes backslashes
-                $username = stripslashes($_REQUEST['name']);
+                $username = stripslashes($_POST['name']);
                     //escapes special characters in a string
                 $username = mysqli_real_escape_string($conn,$username);
                 $password = stripslashes($_REQUEST['password']);
@@ -31,7 +31,7 @@
                 if (mysqli_num_rows($res_u)> 0) {
                   echo '<div class="container">
                             <div class="page-header">
-                                <h3> you are not approved user</h3>
+                                <h3>Sorry.. you are not approved user</h3>
                             </div>
                         </div>;';
 

@@ -39,7 +39,6 @@
                                             <form action="post_approve.php" method="post">
                                                 <div class="row " id="check_btn">
                                                     <div class="btn-group">
-                                                            <button type="submit" class="btn btn-success" name="post_conf" id="post_conf">Approve</button>
                                                             <!-- <button type="button" class="btn btn-danger"><i class="fa fa-close" aria-hidden="true"></i></button> -->
                                                     </div>
                                                  </div>
@@ -62,7 +61,10 @@
                                                                     <div class="alert alert-warning">
                                                                     <strong>Sorry!</strong> Nothing to display All posts are aprroved
                                                                     </div>
+                                                            <button type="submit" class="btn btn-success pull-right" name="post_conf" id="post_conf" disabled>Approve</button>
+                                                                    
                                                                 <?php }else{?>   
+                                                                    <button type="submit" class="btn btn-success pull-right" name="post_conf" id="post_conf">Approve</button>
 
                                                                 <?php while($row = mysqli_fetch_assoc($retval)){?>
                                                                     <tbody>
@@ -131,11 +133,11 @@
                                                                                         <div class="modal-content">
                                                                                             <div class="modal-header">
                                                                                                 <p class="a_name" id="right"><b>Author:</b> <i><?php echo $row['name']?></i></p>
-                                                                                                <h4 class="modal-title"><?php echo $row['title']?> </h4> 
+                                                                                                <h4 class="modal-title">TITLE :<?php echo $row['title']?> </h4> 
                                                                                             </div>
                                                                                             <div class="modal-body">
-                                                                                                <p> <?php echo $row['description']?></p>
-                                                                                                <p> <?php echo $row['content']?></p><br>
+                                                                                                <p> DESCRIPTION :<?php echo $row['description']?></p>
+                                                                                                <p> CONTENT:<?php echo $row['content']?></p><br>
                                                                                             </div>
                                                                                             <div class="modal-footer">
                                                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -192,7 +194,7 @@
                                                    if($result)
                                                    {
                                                      echo "<div class='form'>    
-                                                     <h3>succesfully news updated.</h3>
+                                                     <h3>succesfully Posted.</h3>
                                                        </div>";
                                                      }
                                                      }

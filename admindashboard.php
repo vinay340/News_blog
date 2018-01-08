@@ -46,7 +46,7 @@
         <div class="container-fluid">
             <div class="wrapper top">
                 <div class="col-md-12 col-sm-12 col-xs-12 row ">
-                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php#admin','mywindow');" style="cursor: pointer;">
+                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php#authors');" style="cursor: pointer;">
                         <div class="panel"id="panel1"> 
                             <div class="panel-body"id="admins">
                                 <div class="pull-left col-md-9 col-sm-6">
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php#authors','mywindow');" style="cursor: pointer;">
+                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php#authors');" style="cursor: pointer;">
                         <div class="panel"id="panel1"> 
                             <div class="panel-body">
                                 <div class="pull-left col-md-9 col-sm-6">
@@ -72,8 +72,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 " onclick="window.open('admin_ref.php#new_reg','mywindow');" style="cursor: pointer;">
-                        <div class="panel"id="panel1"> 
+                    <div class="col-lg-4 col-md-4 col-sm-6 " onclick="window.open('admin_ref.php#new_reg');" style="cursor: pointer;">
+                        <div class="panel"id="panel1">
                             <div class="panel-body">
                                 <div class="pull-left col-md-9 col-sm-6">
                                     <span class="stats-number"><?php echo $rows2['count(*)'];?></span>
@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <!-- second row -->
-                <div class="col-md-12 col-sm-12 col-xs-12 row "onclick="window.open('posts.php','mywindow');" style="cursor: pointer;">
+                <div class="col-md-12 col-sm-12 col-xs-12 row "onclick="window.open('posts.php');" style="cursor: pointer;">
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="panel"id="panel1"> 
                             <div class="panel-body">
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('posts.php','mywindow');" style="cursor: pointer;">
+                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('posts.php');" style="cursor: pointer;">
                         <div class="panel"id="panel1"> 
                             <div class="panel-body">
                                 <div class="pull-left col-md-9 col-sm-6">
@@ -114,7 +114,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 " onclick="window.open('comments.php','mywindow');" style="cursor: pointer;" >
+                    <div class="col-lg-4 col-md-4 col-sm-6 " onclick="window.open('comments.php');" style="cursor: pointer;" >
                         <div class="panel"id="panel1"> 
                             <div class="panel-body">
                                 <div class="pull-left col-md-9 col-sm-6">

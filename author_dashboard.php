@@ -113,8 +113,10 @@
                         </div>
                         <div id="create_news" class="tab-pane fade">
                             <?php
+
                             // If form submitted, insert values into the database.
-                                if (isset($_POST['title'])){
+                                if (isset($_POST['title']))
+                                {
                                     $title=$_REQUEST['title'];
                                     $description=$_REQUEST['description'];
                                     $content=$_REQUEST['content'];
@@ -123,13 +125,31 @@
                                     $description = mysqli_real_escape_string($conn,$description);
                                     $content = mysqli_real_escape_string($conn,$content);
                                     $date = mysqli_real_escape_string($conn,$date);
-                                    //$trn_date = date("Y-m-d H:i:s");
-                                    $query = "INSERT into `news` (title, description,content,date, author_id,created_date)
-                                    VALUES ('$title','$description','$content','$date', '$a' , CURDATE())";
-                                    $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
-                                    if($result){
-                                        echo "<div class='form text-center'>    
-                                        <h3>succesfully news updated.</h3>";
+
+
+                                    $sql_u = "SELECT * FROM news  WHERE title='$title'";
+                                    $sql_e = "SELECT * FROM news WHERE description='$description'";
+                                                
+                                    $res_u = mysqli_query($conn, $sql_u);
+                                    $res_e = mysqli_query($conn, $sql_e);
+                                    
+                                    if (mysqli_num_rows($res_u) > 0) {
+                                    echo '<div class="container">
+                                                <div class="page-header">
+                                                    <h3> post has been updated</h3>
+                                                </div>
+                                            </div>';
+                                    } else
+                                    {
+                                            
+                                        //$trn_date = date("Y-m-d H:i:s");
+                                        $query = "INSERT into `news` (title, description,content,date, author_id,created_date)
+                                        VALUES ('$title','$description','$content','$date', '$a' , CURDATE())";
+                                        $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
+                                        if($result){
+                                            echo "<div class='form text-center'>    
+                                            <h3>succesfully news updated.</h3>";
+                                        }
                                     }
                                 }
                             ?>
