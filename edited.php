@@ -16,8 +16,8 @@
         $query = "UPDATE news  SET title ='$title', description= '$description',content='$content',date='$date' ,created_date=CURDATE(),status=0  WHERE id = $ID";
         $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
         if($result){
-            echo "<div class='form'>
-            <h3>succesfully Post Edited.</h3>";             
+            echo "<script>window.open('author_dashboard.php?editid=edited&editmsg=Edited successfully','_self')</script>";
+  
         }
     }
 ?>

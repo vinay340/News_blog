@@ -11,8 +11,7 @@
 
     </head>
     <?php
-        include('adminheader.php');
-        include("author_auth.php");
+        include('authorheader.php');
         include("mysql_conn.php");
         $post_id = $_GET['id'];
         $sql2 = "SELECT * FROM news  where id = '$post_id'";

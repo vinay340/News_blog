@@ -30,14 +30,14 @@
           
                 if (mysqli_num_rows($res_u)> 0) {
                   echo '<div class="container">
-                            <div class="page-header">
+                            <div class="alert alert-warning">
                                 <h3>Sorry.. you are not approved user</h3>
                             </div>
                         </div>;';
 
                 }else if(mysqli_num_rows($res_u)==0){
                     echo '<div class="container">
-                    <div class="page-header">
+                    <div class="alert alert-danger">
                         <h3> you are not registered user please register </h3>
                     </div>
                 </div>;';

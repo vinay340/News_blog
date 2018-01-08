@@ -46,7 +46,7 @@
         <div class="container-fluid">
             <div class="wrapper top">
                 <div class="col-md-12 col-sm-12 col-xs-12 row ">
-                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php#authors');" style="cursor: pointer;">
+                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php?id=adminid','_self');" style="cursor: pointer;">
                         <div class="panel"id="panel1"> 
                             <div class="panel-body"id="admins">
                                 <div class="pull-left col-md-9 col-sm-6">
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php#authors');" style="cursor: pointer;">
+                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('admin_ref.php?id=authorid','_self');" style="cursor: pointer;">
                         <div class="panel"id="panel1"> 
                             <div class="panel-body">
                                 <div class="pull-left col-md-9 col-sm-6">
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 " onclick="window.open('admin_ref.php#new_reg');" style="cursor: pointer;">
+                    <div class="col-lg-4 col-md-4 col-sm-6 " onclick="window.open('admin_ref.php?id=regid','_self');"  style="cursor: pointer;">
                         <div class="panel"id="panel1">
                             <div class="panel-body">
                                 <div class="pull-left col-md-9 col-sm-6">
@@ -87,13 +87,13 @@
                     </div>
                 </div>
                 <!-- second row -->
-                <div class="col-md-12 col-sm-12 col-xs-12 row "onclick="window.open('posts.php');" style="cursor: pointer;">
-                    <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="col-md-12 col-sm-12 col-xs-12 row ">
+                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('posts.php?id=approvelist','_self');" style="cursor: pointer;">
                         <div class="panel"id="panel1"> 
                             <div class="panel-body">
                                 <div class="pull-left col-md-9 col-sm-6">
                                     <span class="stats-number"><?php echo $rows5['count(*)'];?></span>
-                                    <p class="stats-info"> Approved Posts</p>
+                                    <p class="stats-info"> Pending Posts</p>
                                 </div>
                                 <div class="pull-right col-md-3 col-sm-6">
                                     <i class="fa fa-check"></i>
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('posts.php');" style="cursor: pointer;">
+                    <div class="col-lg-4 col-md-4 col-sm-6" onclick="window.open('posts.php?id=view1','_self');" style="cursor: pointer;">
                         <div class="panel"id="panel1"> 
                             <div class="panel-body">
                                 <div class="pull-left col-md-9 col-sm-6">
@@ -114,7 +114,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 " onclick="window.open('comments.php');" style="cursor: pointer;" >
+                    <div class="col-lg-4 col-md-4 col-sm-6 " onclick="window.open('comments.php?id1=view2','_self');" style="cursor: pointer;" >
                         <div class="panel"id="panel1"> 
                             <div class="panel-body">
                                 <div class="pull-left col-md-9 col-sm-6">
@@ -131,7 +131,7 @@
                 <!-- 3rd row -->
                 <div class="row">
                     <div class="col-sm-12 col-xs-12">   
-                        <div class=" col-md-8 well">
+                        <div class=" col-md-12 well">
                             <fieldset class="col-xs-12">
                                 <h2>Activities</h2>
                                 <div class="tabs">
@@ -146,13 +146,13 @@
                                             <?php while($row = mysqli_fetch_assoc($retval)){?>
                                             <fieldset class="well" >
                                                 <div class="row">
-                                                    <div class="col-md-6 col-sm-6 col-xs-4 text-right">
+                                                    <div class="col-md-12 col-sm-6 col-xs-4 text-right">
                                                         <?php echo $row['date'] ?>
                                                     </div>
                                                 </div>
                                                 <br>
                                                 <div class="row">
-                                                    <div class="col-md-10 col-sm-12 col-xs-12">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
                                                         <h4><?php echo $row['title']?></h4>
                                                         <p><?php echo $row['description']?>
                                                         </p>

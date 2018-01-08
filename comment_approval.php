@@ -17,9 +17,9 @@
             } 
             if($result)
             {
-                $msg = "success";       
-                echo "<script type='text/javascript'>alert(<?php echo $msg; ?>);</script>";
-                    //echo "<script>window.open('admin_ref.php','_self')</script>";
-                     header("Location: comments.php");
+                echo "<script>window.open('comments.php?approved_id=approved&approved_msg=Approved successfully','_self')</script>";
+
+            }else{
+                echo "<script>window.open('comments.php?approved_id=approved&approved_msg=please select COMMENT','_self')</script>";
             }
 ?>        

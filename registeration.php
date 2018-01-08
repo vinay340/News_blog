@@ -38,34 +38,24 @@
           
                 if (mysqli_num_rows($res_u) > 0) {
                   echo '<div class="container">
-                            <div class="page-header">
+                            <div class="alert alert-warning">
                                 <h3> SORRY... username already taken please try another</h3>
                             </div>
-                            <style>
-                            #name{
-                            border-color:red;
-                            }
-                            </style>
                         </div>;';
 
                 } else if (mysqli_num_rows($res_e) > 0) {
                   echo '<div class="container">
-                            <div class="page-header">
+                            <div class="alert alert-warning">
                                 <h3> SORRY... email exits</h3>
                             </div>
-                            <style>
-                            #inputEmail{
-                            border-color:red;
-                            }
-                            </style>
                         </div>;';
 
                 } else{
                 
                 $query = "INSERT into `user` (name, email, password) VALUES ('$username', '$email','".md5($password)."')";
                 $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
-                echo '<div class="container">
-                        <div class="page-header">
+                echo '<div >
+                        <div class="alert alert-success">
                             <h3>Registration successfully completed</h3>
                         </div>
                     </div>;';

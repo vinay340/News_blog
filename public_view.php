@@ -17,7 +17,7 @@
                 $retval2=mysqli_query($conn, $sql2);
         ?>
         <div class="public_content">
-            <div class= "row">
+            <div class= "container-fluid row">
                 <div class="col-md-9 col-xs-8  ">
                     <?php while($row =mysqli_fetch_assoc($retval)) { ?>
                         <fieldset class="content">
@@ -26,14 +26,12 @@
                                         <ul class="news list-unstyled">
                                             <li class="d-flex justify-content-between" > 
                                                 <div class="left-col d-flex">
-                                                    <div class="col-md-2 col-xs-2">
-                                                        <img  class ="img1" src="assets/images/download.jpeg">
-                                                    </div>
-                                                    <div class="col-md-10 col-xs-10">
+                                                    <div class="col-md-12 col-xs-12">
                                                         <div class="title">
-                                                            <strong><h3><?php echo $row['title']?><b class="n_date"><?php echo $row['created_date']?></b></h3></strong>
+                                                        <strong><b class="n_date pull-right"><?php echo $row['created_date']?></b></strong>
+                                                        <strong><h3><b><?php echo $row['title']?></b></h3></strong>
                                                         </div> 
-                                                        <p><b><?php echo $row['date']?>,Bengaluru.</b><br>
+                                                        <p><b><?php echo $row['date']?></b><br>
                                                             <?php echo $row['description']?>
                                                         </p>
                                                     </div>
@@ -42,14 +40,13 @@
                                         </ul>
                                     </div>
                                 </div>
-                             <a class="right" href="news_view.php?id=<?php echo $row['id']?>" >View More</a>
+                             <div><a class="pull-right" href="news_view.php?id=<?php echo $row['id']?>" >View More....</a></div>
                         </fieldset>
                     <?php }?>
                     
                     <?php while($row2 =mysqli_fetch_assoc($retval2)) { ?>
                         <div class="col-md-2 col-xs-12  ">
                             <a href="news_view.php?id=<?php echo $row2['id']?>" >
-                                <img class ="img1"src="assets/images/download.png">
                             </a>
                             <p> <?php echo $row2['title'];?></p>
                         </div>

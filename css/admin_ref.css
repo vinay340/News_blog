@@ -73,3 +73,8 @@ textarea.form-control{
 .right{
     float:right;
 }
+
+.table>thead>tr>th {
+    padding: 15px;
+    width: max-content;
+}

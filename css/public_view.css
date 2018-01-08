@@ -98,13 +98,9 @@ padding: 0 10px;
 position: fixed;
 margin: 0px;
 z-index: 1;
+top:0;
 }
 .name{
-    font-size: 40px;
-    padding: 0 10px;
     color:white;
-padding: 23px 35px;
-    
-    
 }
 

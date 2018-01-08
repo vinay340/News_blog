@@ -12,12 +12,29 @@
     <?php
         include("sidebar.php");
         include("mysql_conn.php");  
-        include("auth.php");
 
-        $sql = 'SELECT a.title,a.description,a.content,a.date,a.id,b.name  FROM news AS a , user AS b  where a.author_id=b.id and status = 0'; 
+        $sql = 'SELECT a.title,a.description,a.content,a.date,a.created_date,a.id,b.name  FROM news AS a , user AS b  where a.author_id=b.id and status = 0'; 
         
-        $retval=mysqli_query($conn, $sql); 
+                $retval=mysqli_query($conn, $sql); 
+        if(isset($_GET['id'])){
+                $p_posts=$_GET['id'];
+        }
+        else{
+            $p_posts="";
+        }
+        if(isset($_GET['msg'])){
 
+        $message=$_GET['msg'];
+        }
+        else{
+            $message="";
+        }
+        if(isset($_GET['approved_msg'])){
+            $approved_msg=$_GET['approved_msg'];
+        }
+        else{
+            $approved_msg="";
+        }
     ?>
     <body>
      <div class="top">
@@ -25,14 +42,37 @@
                <div class="wrapper col-xs-12">
                    <div class=" col-mx-12 ">
                         <fieldset class="well col-md-12" >
+                        <?php if($p_posts=="approvelist"){
+                                $a="active";
+                                $c=$b="";
+                                }else if ($p_posts=="view1"){
+                                $b="active";
+                                $c=$a="";
+                                }
+                                else if ($p_posts=="c_post"){
+                                    $c="active";
+                                    $b=$a="";
+                                    }
+                               
+                               else{
+                                   $a="active";
+                                   $b=$c="";
+                               }
+                            
+                                ?>
+                                 
                             <ul class="nav nav-pills nav-justified" id="tab" >
-                                <li class="active"><a data-toggle="pill" href="#approve_posts">Approval List</a></li>
-                                <li><a data-toggle="pill" href="#view_posts">View </a></li>
-                                <li><a data-toggle="pill" href="#create_post">Create Post</a></li>
+                                <li  class=<?php echo $a?> ><a data-toggle="pill" href="#approve_posts">Approval List</a></li>
+                                <li class=<?php echo $b?>><a data-toggle="pill" href="#view_posts">View </a></li>
+                                <li class=<?php echo $c?>><a data-toggle="pill" href="#create_post">Create Post</a></li>
                             </ul>
-                                
+                            <?php if($message){?>
+                                <div class="nav-justified alert alert-success" >
+                                    <?php echo $message?>
+                                </div>
+                            <?php }?>
                             <div class="tab-content">
-                                <div id="approve_posts" class="tab-pane fade in active">
+                                <div id="approve_posts" class="tab-pane fade in <?php echo $a?>">
                                     <div class="wrapper col-xs-12">
                                         <div class=" col-mx-12 ">
                                             <h2 class="text-center">Posts Approval List</h2>
@@ -45,6 +85,24 @@
                                                 <div class="row" >
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                                         <div class="table-responsive"> 
+                                                        <?php if($approved_msg){ ?>
+                                                            <?php if($approved_msg=="Approved successfully"){ ?>
+                                                                <div class="alert alert-success">
+                                                                        <?php echo $approved_msg?>
+                                                                </div>
+                                                            <?php } ?>
+                                                            <?php if($approved_msg=="please select POST"){ ?>
+                                                                <div class="alert alert-warning">
+                                                                        <?php echo $approved_msg?>
+                                                                </div>
+                                                            <?php } ?>
+                                                        <?php } ?>
+                                                        <?php if(mysqli_num_rows($retval)==0) {?>
+                                                                    <div class="alert alert-warning">
+                                                                    <strong>Sorry!</strong> Nothing to display All posts are aprroved
+                                                                    </div>
+                                                                <?php }else{?>   
+                                                                    <button type="submit" class="btn btn-success pull-right" name="post_conf" id="post_conf">Approve</button>
 
                                                             <table class="table">
                                                                 <thead>
@@ -57,15 +115,7 @@
                                                                         <th>#</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <?php if(mysqli_num_rows($retval)==0) {?>
-                                                                    <div class="alert alert-warning">
-                                                                    <strong>Sorry!</strong> Nothing to display All posts are aprroved
-                                                                    </div>
-                                                            <button type="submit" class="btn btn-success pull-right" name="post_conf" id="post_conf" disabled>Approve</button>
-                                                                    
-                                                                <?php }else{?>   
-                                                                    <button type="submit" class="btn btn-success pull-right" name="post_conf" id="post_conf">Approve</button>
-
+                                                               
                                                                 <?php while($row = mysqli_fetch_assoc($retval)){?>
                                                                     <tbody>
                                                                         <tr>
@@ -93,13 +143,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="view_posts" class="tab-pane fade">
+                                <div id="view_posts" class="tab-pane fade in <?php echo $b?>">
                                     <div class="row">
                                         <h2 class="text-center">List of Posts</h2>
                                         <fieldset class="well">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                 <?php 
-                                                    $sql1 = 'SELECT a.title,a.description,a.content,a.date,a.id,b.name  FROM news AS a , user AS b  where a.author_id=b.id and status = 1'; 
+                                                    $sql1 = 'SELECT a.title,a.description,a.content,a.date,a.created_date,a.id,b.name  FROM news AS a , user AS b  where a.author_id=b.id and status = 1'; 
                                                     $retval1=mysqli_query($conn, $sql1);
                                                 ?>                                            
                                                 <div class="public_content">
@@ -120,7 +170,7 @@
                                                                                 <tbody>
                                                                                     <tr>
                                                                                         <td><?php echo $row['title']?></h3></td>
-                                                                                        <td> <?php echo $row['description']?></td>
+                                                                                        <td> <?php echo nl2br($row['description'])?></td>
                                                                                         <td> <?php echo $row['name']?></td>
                                                                                         <td>
                                                                                             <a type="submit" class="alink" data-toggle="modal" data-target="#myModal_<?php echo $row['id']?>" name="view_content" value= <?php echo $row['id']?>>More...</a>
@@ -133,13 +183,16 @@
                                                                                         <div class="modal-content">
                                                                                             <div class="modal-header">
                                                                                                 <p class="a_name" id="right"><b>Author:</b> <i><?php echo $row['name']?></i></p>
-                                                                                                <h4 class="modal-title">TITLE :<?php echo $row['title']?> </h4> 
+                                                                                                <h4 class="modal-title"> <b> TITLE : </b> <?php echo $row['title']?></h4> 
+                                                                                                <p><b>EVENT DATE :</b><?php echo $row['date']?></p>
                                                                                             </div>
                                                                                             <div class="modal-body">
-                                                                                                <p> DESCRIPTION :<?php echo $row['description']?></p>
-                                                                                                <p> CONTENT:<?php echo $row['content']?></p><br>
+                                                                                                <p><b> DESCRIPTION :</b><?php echo $row['description']?></p>
+                                                                                                <p> <b>CONTENT:</b><?php echo nl2br($row['content'])?></p><br>
                                                                                             </div>
                                                                                             <div class="modal-footer">
+                                                                                            <p class="pull-left"><b>CREATED DATE :</b><?php echo $row['created_date']?></p>
+
                                                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                                             </div>
                                                                                         </div>
@@ -157,7 +210,7 @@
                                         </fieldset>
                                     </div>
                                 </div>
-                                <div id="create_post" class="tab-pane fade">
+                                <div id="create_post" class="tab-pane fade in <?php echo $c?> ">
                                     <div class="row " id="check_btn">
                                         <?php
                                             $a =$_SESSION['sess_user_id'];
@@ -180,11 +233,11 @@
                                                 
                                         
                                                 if (mysqli_num_rows($res_u) > 0) {
-                                                echo '<div class="container">
-                                                            <div class="page-header">
-                                                                <h3> post has been updated</h3>
-                                                            </div>
-                                                        </div>';
+                                                echo '
+                                                    <div class="alert alert-success" >
+                                                        <h3>POST has been updated</h3>
+                                                    </div>
+                                                    ';
                                                 } else{
                                                
                                                 //$trn_date = date("Y-m-d H:i:s");
@@ -193,16 +246,15 @@
                                                     $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
                                                    if($result)
                                                    {
-                                                     echo "<div class='form'>    
-                                                     <h3>succesfully Posted.</h3>
-                                                       </div>";
+                                                     echo "<script>window.open('posts.php?id=c_post&msg=created successfully','_self')</script>";
                                                      }
                                                      }
                                             }       
                                         ?>
+                                            
                                         <div class="container">
                                             <div class="col-md-8 col-xs-12">
-                                                <h2 class="text-center">Create News</h2>
+                                                <h2 class="text-center">Create Post</h2>
                                                 <form action="" method="post" name="create_news">
                                                     <div class="form-group">
                                                         <input type="text"class="form-control" id="title" placeholder="Title" name="title" required  autofocus>

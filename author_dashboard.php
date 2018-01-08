@@ -9,28 +9,59 @@
     </head>
     <body>
         <?php 
-            include('adminheader.php');
-            include("author_auth.php");
+            include('authorheader.php');
             $a= $_SESSION['sess_user_id'];
             $sql = "SELECT title,description,content,date,id, created_date,status FROM news WHERE author_id = $a ORDER BY created_date DESC";  
             $sql1 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date FROM news AS a, user AS b WHERE a.author_id != $a  && a.author_id=b.id";  
             $retval=mysqli_query($conn, $sql);
             $retval1=mysqli_query($conn, $sql1); 
+            if(isset($_GET['id'])){
+                $p_post=$_GET['id'];
+            }
+            else{
+                $p_post="";
+            }
+            if(isset($_GET['msg'])){
+
+                $message=$_GET['msg'];
+                }
+                else{
+                    $message="";
+                }
+                if(isset($_GET['editmsg'])){
+                    $edit=$_GET['editmsg'];
+                }
+                else{
+                    $edit="";
+                }
         ?>
         <div class="container-fluid">
             <div class="wrapper a_header">
                 <div class="col-md-12 col-sm-12 col-xs-12 row ">     
                     <div class="col-md-4 col-xs-12 " id="right">
+                        </div>
                     </div>
-                </div>
-                <div class="tab">
-                    <ul class="nav nav-pills nav-justified" id="tab1">
-                        <li class="col-md-6 active" ><a  data-toggle="pill"  href="#me">POSTS BY ME</a></li>
+                    <div class="tab">
+                        <ul class="nav nav-pills nav-justified" id="tab1">
+                            <?php if($p_post=="c_post"){
+                                $other="active";
+                                $me="";
+                            }
+                            else{
+                                $me="active";
+                            }
+                            ?>
+                        <li class="col-md-6 <?php echo $me?>" ><a  data-toggle="pill"  href="#me">POSTS BY ME</a></li>
                         <li class="col-md-6"><a  data-toggle="pill"  href="#others">POSTS BY OTHERS</a></li>
-                        <li class="col-md-6">  <a  data-toggle="pill" href="#create_news">CREATE POST</a></li>
+                        <li class="col-md-6 <?php echo $other?>">  <a  data-toggle="pill" href="#create_news">CREATE POST</a></li>
                     </ul>
                     <div class="tab-content" >
-                        <div id="me" class="tab-pane fade in active">
+                        <div id="me" class="tab-pane fade in <?php echo $me?>">
+                        <?php if($edit){?>
+                                    <div class="nav-justified alert alert-success" >
+                                        <?php echo $edit?>
+                                    </div>
+                                <?php }?>        
                             <h2 class="text-center">MY POSTS</h2>
                             <?php while($row = mysqli_fetch_assoc($retval)){?>
                             <fieldset class=" container well">
@@ -43,7 +74,7 @@
                                                         <a href="edit_news.php?id= <?php echo $row['id']?>  ">
                                                             <i type="submit"id="right" class="fa fa-pencil-square-o " aria-hidden="true">&nbsp;</i>
                                                         </a><br>
-                                                        <b id="right"><?php echo $row['created_date']?></b><br>
+                                                        <b id="right">CREATED DATE</b><span class="pull-right" id="fogblack"><?php echo $row['created_date']?></span><br>
                                                     </div>
                                                     <div class="row">
                                                         <div class="title col-md-10">
@@ -53,7 +84,30 @@
                                                     <div class="col-md-12 col-xs-12">
                                                         <p id="fogblack"><b><?php echo $row['date']?></b></p><br>             
                                                         <p><?php echo $row['description']?></p><br>
-                                                        <p id="right"><?php if(($row['status'])==1){ echo '<spam class="alert alert-success">APPROVED</spam>'; }else{ echo '<spam class="alert alert-danger">NOT APPROVED</spam>'; }?></p>
+                                                        <p id="right"><?php if(($row['status'])==1){ echo '<spam class=" alert-success">APPROVED</spam>'; }else{ echo '<spam class=" alert-danger">NOT APPROVED</spam>'; }?></p><br>
+                                                        <a id="right" type="submit" class="alink" data-toggle="modal" data-target="#myModal_<?php echo $row['id']?>" name="view_content" value= <?php echo $row['id']?>>More...</a>
+                                                    </div>
+                                                    <div class="modal fade" id="myModal_<?php echo $row['id']?>" role="dialog">
+                                                        <div class="modal-dialog">
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title"><b>TITLE : </b><?php echo $row['title']?> </h4> 
+                                                                    <p><b>EVENT DATE :</b><?php echo $row['date']?></p>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p><b>DESCRIPTION : </b><i> <?php echo $row['description']?></i></p>
+                                                                    <b>CONTENT</b>
+                                                                    <div>
+                                                                        <p><?php echo nl2br($row['content'])?><br></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <p class="pull-left"><b>CREATED DATE :</b><?php echo $row['created_date']?></p>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </li>
@@ -72,7 +126,7 @@
                                         <ul class="news list-unstyled">
                                             <li class="d-flex justify-content-between" > 
                                                 <div class="left-col d-flex">
-                                                    <b id="right"><?php echo $row1['created_date']?></b><br>
+                                                <b id="right">CREATED DATE</b><span class="pull-right" id="fogblack"><?php echo $row1['created_date']?></span><br>
                                                     <div class="row">
                                                         <div class="title col-md-10">
                                                             <strong><h3><i><?php echo $row1['title']?></i></h3></strong>
@@ -91,6 +145,7 @@
                                                                 <div class="modal-header">
                                                                     <p class="a_name" id="right"><b>AUTHOR: </b> <i><?php echo $row1['name']?></i></p>
                                                                     <h4 class="modal-title"><b>TITLE : </b><?php echo $row1['title']?> </h4> 
+                                                                    <p><b>EVENT DATE :</b><?php echo $row1['date']?></p>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <p><b>DESCRIPTION : </b><i> <?php echo $row1['description']?></i></p>
@@ -98,6 +153,7 @@
                                                                     <p> <?php echo $row1['content']?></p><br>
                                                                 </div>
                                                                 <div class="modal-footer">
+                                                                    <p class="pull-left"><b>CREATED DATE :</b><?php echo $row1['created_date']?></p>
                                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>
@@ -111,16 +167,16 @@
                             </fieldset>
                             <?php }?>
                         </div>
-                        <div id="create_news" class="tab-pane fade">
+                        <div id="create_news" class="tab-pane fade in <?php echo $other?>">
                             <?php
 
                             // If form submitted, insert values into the database.
                                 if (isset($_POST['title']))
                                 {
-                                    $title=$_REQUEST['title'];
-                                    $description=$_REQUEST['description'];
-                                    $content=$_REQUEST['content'];
-                                    $date=$_REQUEST['date'];
+                                    $title=$_POST['title'];
+                                    $description=$_POST['description'];
+                                    $content=$_POST['content'];
+                                    $date=$_POST['date'];
                                     $title = mysqli_real_escape_string($conn,$title); 
                                     $description = mysqli_real_escape_string($conn,$description);
                                     $content = mysqli_real_escape_string($conn,$content);
@@ -147,13 +203,18 @@
                                         VALUES ('$title','$description','$content','$date', '$a' , CURDATE())";
                                         $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
                                         if($result){
-                                            echo "<div class='form text-center'>    
-                                            <h3>succesfully news updated.</h3>";
-                                        }
+                                            echo "<script>window.open('author_dashboard.php?id=c_post&msg=created successfully','_self')</script>";
+
+                                        }           
                                     }
                                 }
                             ?>
                             <div class="container">
+                                <?php if($message){?>
+                                    <div class="nav-justified alert alert-success" >
+                                        <?php echo $message?>
+                                    </div>
+                                <?php }?>
                                 <fieldset class="well">
                                     <div class="col-md-6 col-xs-12 top">
                                         <h2 class="text-center">CREATE POST</h2>

@@ -9,24 +9,37 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
 
-<?php
-include ("sidebar.php");
-include ("mysql_conn.php");
-$sql = 'SELECT name,email,phone_no FROM user WHERE role_id =1';  
-//$sql1 = 'SELECT a.name,a.email,a.phone_no,a.id,b.author_id FROM  user as a , news as b WHERE  a.role_id =2';  
-$sql2 = 'SELECT name,email,phone_no,id FROM user WHERE role_id =3';  
-$sql1 = 'SELECT name,email,phone_no,id FROM user WHERE role_id =2';  
-
-
-
-$retval=mysqli_query($conn, $sql); 
-$retval1=mysqli_query($conn, $sql1); 
-$retval2=mysqli_query($conn, $sql2); 
-
-
-?>
-
-
+    <?php
+            include ("sidebar.php");
+            include ("mysql_conn.php");
+            $sql = 'SELECT name,email,phone_no FROM user WHERE role_id =1';  
+            //$sql1 = 'SELECT a.name,a.email,a.phone_no,a.id,b.author_id FROM  user as a , news as b WHERE  a.role_id =2';  
+            $sql2 = 'SELECT name,email,phone_no,id FROM user WHERE role_id =3';  
+            $sql1 = 'SELECT name,email,phone_no,id FROM user WHERE role_id =2';  
+            $retval=mysqli_query($conn, $sql); 
+            $retval1=mysqli_query($conn, $sql1); 
+            $retval2=mysqli_query($conn, $sql2); 
+            if(isset($_GET['id'])){
+            $name=$_GET['id'];
+            }
+            else{
+                $name="";
+            }
+            
+            if(isset($_GET['approved_msg'])){
+                $approved_msg=$_GET['approved_msg'];
+            }
+            else{
+                $approved_msg="";
+            }
+            if(isset($_GET['approved_id'])){
+                $approved_id=$_GET['approved_id'];
+            }
+            else{
+                $approved_id="";
+            }
+            
+    ?>
     <body>
        <div class="top">
            <div class="container-fluid">
@@ -34,13 +47,28 @@ $retval2=mysqli_query($conn, $sql2);
                    <div class=" col-mx-12 ">
                         <fieldset class="well col-md-12" >
                             <ul class="nav nav-pills nav-justified" id="tab" >
-                                    <li class="active"><a data-toggle="pill" href="#admin">Admins</a></li>
-                                    <li><a data-toggle="pill" href="#authors">Authors</a></li>
-                                    <li><a data-toggle="pill" href="#new_reg">New registrations</a></li>
+                                <?php if($name=="adminid"){
+                                $a="active";
+                                $b=$c="";
+                                }else if($name=="authorid"){
+                                $b="active";
+                                $a=$c="";
+                                }else if($name=="regid"||$approved_id=="approved"){
+                                    $c="active";
+                                    $a=$b="";
+                                }
+                                else{
+                                    $a="active";
+                                    $b=$c="";
+                                }
+                                ?>
+                                    <li  class=<?php echo $a?>  ><a data-toggle="pill" href="#admin">Admins</a></li>
+                                    <li   class=<?php echo $b?>><a data-toggle="pill" href="#authors">Authors</a></li>
+                                    <li  class=<?php echo $c?>  ><a data-toggle="pill" href="#new_reg">New registrations</a></li>
                             </ul>
                                 
                             <div class="tab-content">
-                                    <div id="admin" class="tab-pane fade in active">
+                                    <div id="admin" class="tab-pane fade in <?php echo $a?>  ">
     
                                         <div class="row">
                                             
@@ -77,7 +105,7 @@ $retval2=mysqli_query($conn, $sql2);
                                             </fieldset>
                                         </div>
                                     </div>
-                                    <div id="authors" class="tab-pane fade">
+                                    <div id="authors" class="tab-pane fade in <?php echo $b?> ">
                                     <div class="row">
                                             
                                         <fieldset class="well">
@@ -116,7 +144,7 @@ $retval2=mysqli_query($conn, $sql2);
                                             </fieldset>
                                         </div>
                                     </div>
-                                    <div id="new_reg" class="tab-pane fade">
+                                    <div id="new_reg" class="tab-pane fade in <?php echo $c?> ">
                                    <h2 class="text-center">List Of New Registrations</h2>
                                         
                                    <div class="row " id="check_btn">
@@ -129,14 +157,24 @@ $retval2=mysqli_query($conn, $sql2);
                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                 
                                                 <div class="table-responsive table-hover"> 
+                                                    <?php if($approved_msg){ ?>
+                                                        <?php if($approved_msg=="Approved successfully"){ ?>
+                                                            <div class="alert alert-success">
+                                                                    <?php echo $approved_msg?>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php if($approved_msg=="please select ROLE"){ ?>
+                                                            <div class="alert alert-warning">
+                                                                    <?php echo $approved_msg?>
+                                                            </div>
+                                                        <?php } ?>
+                                                    <?php } ?>
                                                 <?php if(mysqli_num_rows($retval2)==0) {?>
-                                                                    <div class="alert alert-warning">
-                                                                    <strong>Sorry!</strong> Nothing to display All registered users are aprroved
-                                                                    </div>
-                                        <button type="submit" class="btn btn-success pull-right" name="confirm" id="confirm" disabled>Approve</i></button>
-                                                                    
-                                                                <?php }else{?>
-                                        <button type="submit" class="btn btn-success pull-right" name="confirm" id="confirm">Approve</i></button>
+                                                        <div class="alert alert-warning">
+                                                        <strong>Sorry!</strong> Nothing to display All registered users are aprroved
+                                                        </div>
+                                                        <?php }else{?>
+                                                         <button type="submit" class="btn btn-success pull-right" name="confirm" id="confirm">Approve</i></button>
                                                                              
                                                     <table class="table">
                                                        
