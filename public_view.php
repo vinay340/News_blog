@@ -10,7 +10,7 @@
         <?php 
             include('public_view_header.php');
             include('mysql_conn.php');
-                $sql = 'SELECT title,description,content,date,id, created_date,category_id FROM news where status = 1 ORDER BY created_date DESC'; 
+                $sql = 'SELECT a.title,a.description,a.content,a.date,a.id, a.created_date,a.category_id,b.category_name FROM news as a, category as b where a.category_id=b.id and status = 1 ORDER BY created_date DESC'; 
                 $sql2 = 'SELECT title,description,content,date,id, created_date FROM news where status = 1 limit 5';  
                 
                 $retval=mysqli_query($conn, $sql);
@@ -40,7 +40,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                             <div><a class="pull-right" href="news_view.php?id=<?php echo $row['id']?>" >View More....</a></div>
+                             <div><p class="pull-left"><b> Category : </b><?php echo $row['category_name'] ?></p><a class="pull-right" href="news_view.php?id=<?php echo $row['id']?>" >View More....</a></div>
                         </fieldset>
                     <?php }?>
                     

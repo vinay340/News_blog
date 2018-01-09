@@ -177,12 +177,12 @@
                                     $description=$_POST['description'];
                                     $content=$_POST['content'];
                                     $date=$_POST['date'];
+                                    $category=$_POST['category'];
                                     $title = mysqli_real_escape_string($conn,$title); 
                                     $description = mysqli_real_escape_string($conn,$description);
                                     $content = mysqli_real_escape_string($conn,$content);
                                     $date = mysqli_real_escape_string($conn,$date);
-
-
+                                    $category = mysqli_real_escape_string($conn,$category);
                                     $sql_u = "SELECT * FROM news  WHERE title='$title'";
                                     $sql_e = "SELECT * FROM news WHERE description='$description'";
                                                 
@@ -199,8 +199,8 @@
                                     {
                                             
                                         //$trn_date = date("Y-m-d H:i:s");
-                                        $query = "INSERT into `news` (title, description,content,date, author_id,created_date)
-                                        VALUES ('$title','$description','$content','$date', '$a' , CURDATE())";
+                                        $query = "INSERT into `news` (title, description,content,date, author_id,category_id,created_date)
+                                        VALUES ('$title','$description','$content','$date', '$a','$category' , CURDATE())";
                                         $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
                                         if($result){
                                             echo "<script>window.open('author_dashboard.php?id=c_post&msg=created successfully','_self')</script>";
@@ -227,6 +227,20 @@
                                             </div>
                                             <div class="form-group">
                                                 <textarea type="Content" class="form-control" id="content" placeholder="Content" name="content" required  autofocus></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control" id="sel" placeholder="select category" name="category" required  autofocus>
+                                                    <option  disabled>select category</option>
+                                                    <option value="1" >sports</option>
+                                                    <option value="2" >Entertainment</option>
+                                                    <option value="3">politics</option>
+                                                    <option value="4">world</option>
+                                                    <option value="5">Educational</option>
+                                                    <option value="6">Economy</option>
+                                                    <option value="7">Technology</option>
+                                                    <option value="8">Health</option>
+                                                    <option value="9">Horoscope</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <input type="date" class="form-control" id="content" placeholder="Event date" name="date" required  autofocus>
