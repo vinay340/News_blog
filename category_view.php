@@ -40,7 +40,9 @@
                             <ul class="news list-unstyled">
                                 <li class="d-flex justify-content-between" > 
                                     <div class="left-col d-flex">
-                                        
+                                        <div class="col-md-2 col-xs-2">
+                                            <img src="assets/images/<?php echo $row['image'] ?>" width="100px" height="100px"alt="">
+                                        </div>
                                         <div class="col-md-12 col-xs-12">
                                             <div class="title">
                                                 <strong><b class="n_date pull-right"><?php echo $row['created_date']?></b></strong>

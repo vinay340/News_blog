@@ -214,13 +214,19 @@
                                     <div class="row " id="check_btn">
                                         <?php
                                             $a =$_SESSION['sess_user_id'];
+                                            $msg = "";
                                             if (isset($_POST['submit']))
-                                            {
-                                                $title=$_POST['title'];
-                                                $description=$_POST['description'];
-                                                $content=$_POST['content'];
-                                                $date=$_POST['date'];
-                                                $category=$_POST['category'];
+                                            {   
+                                                $target_dir = "assets/images/";
+                                                $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                                                move_uploaded_file($_FILES["image"]["tmp_name"], $target_file) or die("File upload error: ".error_get_last());
+                                                $title = $_POST['title'];
+                                                $description = $_POST['description'];
+                                                $content = $_POST['content'];
+                                                $date = $_POST['date'];
+                                                $category = $_POST['category'];
+                                                $image = $_FILES['image']['name'];
+                                                $image = mysqli_real_escape_string($conn,$image); 
                                                 $title = mysqli_real_escape_string($conn,$title); 
                                                 $description = mysqli_real_escape_string($conn,$description);
                                                 $content = mysqli_real_escape_string($conn,$content);
@@ -240,23 +246,21 @@
                                                     </div>
                                                     ';
                                                 } else{
-                                               
-                                                //$trn_date = date("Y-m-d H:i:s");
-                                                    $query = "INSERT into `news` (title, description,content,date, author_id,category_id,created_date)
-                                                     VALUES ('$title','$description','$content','$date', '$a' ,'$category', CURDATE())";
-                                                    $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
-                                                   if($result)
-                                                   {
-                                                     echo "<script>window.open('posts.php?id=c_post&msg=created successfully','_self')</script>";
-                                                     }
-                                                     }
+                                                        $query = "INSERT into `news` (title, description,content,date, author_id,category_id,created_date,image)
+                                                        VALUES ('$title','$description','$content','$date', '$a' ,'$category', CURDATE(),'$image')";
+                                                        $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
+                                                        if($result)
+                                                        {
+                                                            echo "<script>window.open('posts.php?id=c_post&msg=created successfully','_self')</script>";
+                                                        }
+                                                    }
                                             }       
                                         ?>
                                             
                                         <div class="container">
                                             <div class="col-md-8 col-xs-12">
                                                 <h2 class="text-center">Create Post</h2>
-                                                <form action="" method="post" name="create_news">
+                                                <form action="" method="post" name="create_news" enctype="multipart/form-data">
                                                     <div class="form-group">
                                                         <input type="text"class="form-control" id="title" placeholder="Title" name="title" required  autofocus>
                                                     </div>
@@ -282,6 +286,9 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <input type="date" class="form-control" id="content" placeholder="Event date" name="date" required  autofocus>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="file" class="form-control" id="file" placeholder="Event date" name="image" required  autofocus>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary col-md-4 submit_button" name="submit">CREATE</button>
                                                     <a class="btn btn-warning col-md-4 cancel_button  " id="right" href="posts.php" >CANCEL</a>

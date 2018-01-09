@@ -13,7 +13,7 @@
             $tid=$_GET['id'];
         ?>
         <?php
-                $sql2 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date  FROM news AS a , user AS b  where a.author_id = b.id and a.id=$tid ";  
+                $sql2 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date,a.image  FROM news AS a , user AS b  where a.author_id = b.id and a.id=$tid ";  
                 $sql = "SELECT * FROM comment  where news_id = $tid";
                 $retval=mysqli_query($conn,$sql2) or die(mysqli_error());
                 $retval1=mysqli_query($conn,$sql) or die(mysqli_error());
@@ -34,8 +34,10 @@
                                                 <strong><h3><b><?php echo $row['title']?></b></h3></strong><br>
                                                 </div> 
                                                 <div class=" container-fluid row">
-                                                  
-                                                    <div class="col-md-12 col-xs-12">
+                                                    <div class="col-md-2 col-xs-2">
+                                                        <img src="assets/images/<?php echo $row['image'] ?>" width="100px" height="100px"alt="">
+                                                    </div>
+                                                    <div class="col-md-10 col-xs-10">
                                                         <p><b><?php echo $row['date']?></b><br>
                                                             <?php echo $row['description']?><br>
                                                             <?php echo nl2br($row['content']);?>
