@@ -19,7 +19,7 @@
             $retval1=mysqli_query($conn, $sql1);
             
             $adminid=$_SESSION['sess_user_id'];
-            $query5 = "SELECT count(*) from news where approved_by =$adminid ";
+            $query5 = "SELECT count(*) from news where status='0' ";
             $result5 = mysqli_query($conn,$query5);
             $rows5 = mysqli_fetch_assoc($result5);
             
@@ -35,7 +35,7 @@
             $result2 = mysqli_query($conn,$query2);
             $rows2 = mysqli_fetch_assoc($result2);
             
-            $query3 = "SELECT count(*) from news";
+            $query3 = "SELECT count(*) from news where status='1'";
             $result3 = mysqli_query($conn,$query3);
             $rows3 = mysqli_fetch_assoc($result3);
             

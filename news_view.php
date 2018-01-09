@@ -14,7 +14,7 @@
         ?>
         <?php
                 $sql2 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date  FROM news AS a , user AS b  where a.author_id = b.id and a.id=$tid ";  
-                $sql = "SELECT * FROM comment  where news_id = $tid";
+                $sql = "SELECT * FROM comment  where news_id = $tid and status='1'";
                 $retval=mysqli_query($conn,$sql2) or die(mysqli_error());
                 $retval1=mysqli_query($conn,$sql) or die(mysqli_error());
         ?>

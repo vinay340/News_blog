@@ -77,11 +77,6 @@
                                         <div class=" col-mx-12 ">
                                             <h2 class="text-center">Posts Approval List</h2>
                                             <form action="post_approve.php" method="post">
-                                                <div class="row " id="check_btn">
-                                                    <div class="btn-group">
-                                                            <!-- <button type="button" class="btn btn-danger"><i class="fa fa-close" aria-hidden="true"></i></button> -->
-                                                    </div>
-                                                 </div>
                                                 <div class="row" >
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                                         <div class="table-responsive"> 
@@ -149,7 +144,22 @@
                                         <fieldset class="well">
                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                 <?php 
-                                                    $sql1 = 'SELECT a.title,a.description,a.content,a.date,a.created_date,a.id,b.name  FROM news AS a , user AS b  where a.author_id=b.id and status = 1'; 
+                                                      $perpage =3;			;
+                                                      if(isset($_GET['pagination_post']) & !empty($_GET['pagination_post'])){
+                                                          $curpage = $_GET['pagination_post'];
+                                                      }else{
+                                                          $curpage = 1;
+                                                      }
+                                                      $start = ($curpage * $perpage) - $perpage;
+                                                      $PageSql = "SELECT * FROM `news`";
+                                                      $pageres = mysqli_query($conn, $PageSql);
+                                                      $totalres = mysqli_num_rows($pageres);
+                                          
+                                                      $endpage = round($totalres/$perpage);                           
+                                                      $startpage = 1;
+                                                      $nextpage = $curpage + 1;
+                                                      $previouspage = $curpage - 1;
+                                                    $sql1 = "SELECT a.title,a.description,a.content,a.date,a.created_date,a.id,b.name  FROM news AS a , user AS b  where a.author_id=b.id and status = 1 LIMIT $start, $perpage"; 
                                                     $retval1=mysqli_query($conn, $sql1);
                                                 ?>                                            
                                                 <div class="public_content">
@@ -206,6 +216,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <nav aria-label="Page navigation nav-justified">
+                                                    <ul class="pagination">
+                                                        <?php if($curpage >= 2){ ?>
+                                                            <li class="page-item"><a class="page-link" href="posts.php?id=view1&pagination_post=<?php echo $previouspage ?>"><?php echo $previouspage ?></a></li>
+                                                        <?php } ?>
+                                                            <li class="page-item active"><a class="page-link" href="posts.php?id=view1&pagination_post=<?php echo $curpage ?>"><?php echo $curpage ?></a></li>
+                                                        <?php if($curpage != $endpage){ ?>
+                                                            <li class="page-item"><a class="page-link" href="posts.php?id=view1&pagination_post=<?php echo $nextpage ?>"><?php echo $nextpage ?></a></li>
+                                                        <?php }?>
+                                                    </ul>
+                                                </nav>  
                                             </div>
                                         </fieldset>
                                     </div>
@@ -221,11 +242,14 @@
                                                 $content=$_POST['content'];
                                                 $date=$_POST['date'];
                                                 $category=$_POST['category'];
+                                                $image=$_POST['image'];
                                                 $title = mysqli_real_escape_string($conn,$title); 
                                                 $description = mysqli_real_escape_string($conn,$description);
                                                 $content = mysqli_real_escape_string($conn,$content);
                                                 $category = mysqli_real_escape_string($conn,$category);
                                                 $date = mysqli_real_escape_string($conn,$date);
+                                                $image = mysqli_real_escape_string($conn,$image);
+                                                
                                                 $sql_u = "SELECT * FROM news  WHERE title='$title'";
                                                 $sql_e = "SELECT * FROM news WHERE description='$description'";
                                                 
@@ -242,8 +266,8 @@
                                                 } else{
                                                
                                                 //$trn_date = date("Y-m-d H:i:s");
-                                                    $query = "INSERT into `news` (title, description,content,date, author_id,category_id,created_date)
-                                                     VALUES ('$title','$description','$content','$date', '$a' ,'$category', CURDATE())";
+                                                    $query = "INSERT into `news` (title, description,content,date, author_id,category_id,created_date,img)
+                                                     VALUES ('$title','$description','$content','$date', '$a' ,'$category', CURDATE(),'$image')";
                                                     $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
                                                    if($result)
                                                    {
@@ -282,6 +306,9 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <input type="date" class="form-control" id="content" placeholder="Event date" name="date" required  autofocus>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="file" class="form-control" id="img" placeholder="place a image" name="image" required  >
                                                     </div>
                                                     <button type="submit" class="btn btn-primary col-md-4 submit_button" name="submit">CREATE</button>
                                                     <a class="btn btn-warning col-md-4 cancel_button  " id="right" href="posts.php" >CANCEL</a>

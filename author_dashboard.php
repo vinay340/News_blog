@@ -11,8 +11,23 @@
         <?php 
             include('authorheader.php');
             $a= $_SESSION['sess_user_id'];
+            $perpage =2;
+            if(isset($_GET['pagination_post']) & !empty($_GET['pagination_post'])){
+                $curpage = $_GET['pagination_post'];
+            }else{
+                $curpage = 1;
+            }
+            $start = ($curpage * $perpage) - $perpage;
+            $PageSql = "SELECT * FROM `news`";
+            $pageres = mysqli_query($conn, $PageSql);
+            $totalres = mysqli_num_rows($pageres);
+
+            $endpage = round($totalres/$perpage);                           
+            $startpage = 1;
+            $nextpage = $curpage + 1;
+            $previouspage = $curpage - 1;
             $sql = "SELECT title,description,content,date,id, created_date,status FROM news WHERE author_id = $a ORDER BY created_date DESC";  
-            $sql1 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date FROM news AS a, user AS b WHERE a.author_id != $a  && a.author_id=b.id";  
+            $sql1 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date FROM news AS a, user AS b WHERE a.author_id != $a  && a.author_id=b.id LIMIT $start, $perpage";  
             $retval=mysqli_query($conn, $sql);
             $retval1=mysqli_query($conn, $sql1); 
             if(isset($_GET['id'])){
@@ -45,14 +60,18 @@
                         <ul class="nav nav-pills nav-justified" id="tab1">
                             <?php if($p_post=="c_post"){
                                 $other="active";
-                                $me="";
+                                $others_page=$me="";
+                            }else if($p_post=="page_post"){
+                            $others_page="active";
+                            $me=$other="";
                             }
                             else{
                                 $me="active";
+                                $others=$others_page="";
                             }
                             ?>
                         <li class="col-md-6 <?php echo $me?>" ><a  data-toggle="pill"  href="#me">POSTS BY ME</a></li>
-                        <li class="col-md-6"><a  data-toggle="pill"  href="#others">POSTS BY OTHERS</a></li>
+                        <li class="col-md-6 <?php echo $others_page?>"><a  data-toggle="pill"  href="#others">POSTS BY OTHERS</a></li>
                         <li class="col-md-6 <?php echo $other?>">  <a  data-toggle="pill" href="#create_news">CREATE POST</a></li>
                     </ul>
                     <div class="tab-content" >
@@ -117,7 +136,7 @@
                             </fieldset>
                             <?php }?>
                         </div>
-                        <div id="others" class="tab-pane fade">
+                        <div id="others" class="tab-pane fade in <?php echo $others_page?>">
                             <h2 class="text-center">OTHER POSTS</h2>
                             <?php while($row1  = mysqli_fetch_assoc($retval1)){?>
                             <fieldset class=" container well">
@@ -166,6 +185,17 @@
                                 </div>
                             </fieldset>
                             <?php }?>
+                            <nav aria-label="Page navigation nav-justified">
+                                <ul class="pagination">
+                                    <?php if($curpage >= 2){ ?>
+                                        <li class="page-item"><a class="page-link" href="author_dashboard.php?id=page_post&pagination_post=<?php echo $previouspage ?>"><?php echo $previouspage ?></a></li>
+                                    <?php } ?>
+                                        <li class="page-item active"><a class="page-link" href="author_dashboard.php?id=page_post&pagination_post=<?php echo $curpage ?>"><?php echo $curpage ?></a></li>
+                                    <?php if($curpage != $endpage){ ?>
+                                        <li class="page-item"><a class="page-link" href="author_dashboard.php?id=page_post&pagination_post=<?php echo $nextpage ?>"><?php echo $nextpage ?></a></li>
+                                    <?php }?>
+                                </ul>
+                            </nav>  
                         </div>
                         <div id="create_news" class="tab-pane fade in <?php echo $other?>">
                             <?php

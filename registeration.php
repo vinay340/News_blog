@@ -27,6 +27,9 @@
                 $username = mysqli_real_escape_string($conn,$username); 
                 $email = stripslashes($_REQUEST['email']);
                 $email = mysqli_real_escape_string($conn,$email);
+                $phone = $_REQUEST['phone'];
+                $phone = mysqli_real_escape_string($conn,$phone);
+                
                 $password = stripslashes($_REQUEST['password']);
                 $password = mysqli_real_escape_string($conn,$password);
                 $sql_u = "SELECT * FROM user WHERE name='$username'";
@@ -52,7 +55,7 @@
 
                 } else{
                 
-                $query = "INSERT into `user` (name, email, password) VALUES ('$username', '$email','".md5($password)."')";
+                $query = "INSERT into `user` (name, email, password,phone_no) VALUES ('$username', '$email','".md5($password)."','$phone')";
                 $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
                 echo '<div >
                         <div class="alert alert-success">
@@ -87,6 +90,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <div class="inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                                <input name="phone" placeholder="phone no" class="form-control" id="phone " type="number" required  />
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 
 
@@ -104,6 +115,7 @@
                                             <input type="submit" value="Register" name="submit" class="btn btn-primary">                           
                                         </div>
                                     </div>
+                                Already REGISTERED?<a href="loginform.php"> LOGIN</a>
                                 </form>
                             </fieldset>
                         </div>
