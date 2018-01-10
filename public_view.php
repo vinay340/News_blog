@@ -72,7 +72,7 @@
                             </nav>                              
                 </div>
                     <?php 
-                         include('public_view_rightmenu.php');
+                         include('public_view_rightmenu.php');  
                     ?>
             </div>
 

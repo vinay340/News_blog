@@ -154,8 +154,7 @@
                                                       $PageSql = "SELECT * FROM `news`";
                                                       $pageres = mysqli_query($conn, $PageSql);
                                                       $totalres = mysqli_num_rows($pageres);
-                                          
-                                                      $endpage = round($totalres/$perpage);                           
+                                                      $endpage = round($totalres/$perpage);
                                                       $startpage = 1;
                                                       $nextpage = $curpage + 1;
                                                       $previouspage = $curpage - 1;
@@ -170,7 +169,7 @@
                                                                     <div id="upadtes-box" role="tabpanel" class="collapse show">
                                                                         <table class="table">
                                                                             <thead>
-                                                                                <tr>
+                                                                                  <tr>
                                                                                     <th>News-Title</th>
                                                                                     <th>Description</th>
                                                                                     <th>Post_by</th>

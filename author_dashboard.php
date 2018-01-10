@@ -18,11 +18,12 @@
                 $curpage = 1;
             }
             $start = ($curpage * $perpage) - $perpage;
-            $PageSql = "SELECT * FROM `news`";
+            $PageSql = "SELECT * FROM `news`where author_id!=$a";
             $pageres = mysqli_query($conn, $PageSql);
             $totalres = mysqli_num_rows($pageres);
 
-            $endpage = round($totalres/$perpage);                           
+            $endpage = round($totalres/$perpage); 
+                                    
             $startpage = 1;
             $nextpage = $curpage + 1;
             $previouspage = $curpage - 1;
