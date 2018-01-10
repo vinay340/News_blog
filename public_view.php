@@ -25,8 +25,12 @@
             $startpage = 1;
             $nextpage = $curpage + 1;
             $previouspage = $curpage - 1;
-            $sql = "SELECT a.title,a.description,a.content,a.img,a.date,a.id, a.created_date,a.category_id,b.category_name FROM news as a, category as b where a.category_id=b.id and status = 1 LIMIT $start, $perpage"; 
-            $retval=mysqli_query($conn, $sql);
+         
+                $sql = "SELECT a.title,a.description,a.content,a.date,a.id, a.created_date,a.category_id,b.category_name,a.image FROM news as a, category as b where a.category_id=b.id and status = 1  LIMIT $start, $perpage"; 
+                $sql2 = "SELECT title,description,content,date,id, created_date,image FROM news where status = 1 limit 5";  
+                
+                $retval=mysqli_query($conn, $sql);
+                $retval2=mysqli_query($conn, $sql2);
         ?>
 
         <div class="public_content">
@@ -36,24 +40,17 @@
                         <fieldset class="content">
                                 <div class="wrapper recent-updated"> 
                                     <div id="upadtes-box" role="tabpanel" class="collapse show">
-                                        <ul class="news list-unstyled">
-                                            <li class="d-flex justify-content-between" > 
-                                                <div class="left-col d-flex">
-                                                <div class="col-md-2">
-                                                <img src="Pictures/<?php echo $row['img']?>" alt="">
-                                                </div>
-                                                    <div class="col-md-10 col-xs-12">
-                                                        <div class="title">
-                                                        <strong><b class="n_date pull-right"><?php echo $row['created_date']?></b></strong>
-                                                        <strong><h3><b><?php echo $row['title']?></b></h3></strong>
-                                                        </div> 
-                                                        <p><b><?php echo $row['date']?></b><br>
-                                                            <?php echo $row['description']?>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                    <div class="col-md-2 col-xs-2">
+                                        <img src="assets/images/<?php echo $row['image'] ?>" width="100px" height="100px"alt="">
+                                    </div>
+                                    <div class="col-md-10 col-xs-10">
+                                        <div class="title">
+                                        <strong><b class="n_date pull-right"><?php echo $row['created_date']?></b></strong>
+                                        <strong><h3><b><?php echo $row['title']?></b></h3></strong>
+                                        </div> 
+                                        <p><b><?php echo $row['date']?></b><br>
+                                            <?php echo $row['description']?>
+                                        </p>
                                     </div>
                                 </div>
                              <div><p class="pull-left"><b> Category : </b><?php echo $row['category_name'] ?></p><a class="pull-right" href="news_view.php?id=<?php echo $row['id']?>" >View More....</a></div>
@@ -62,14 +59,24 @@
                            <nav aria-label="Page navigation nav-justified">
                                 <ul class="pagination">
                                     <?php if($curpage >= 2){ ?>
-                                    <li class="page-item"><a class="page-link" href="?page=<?php echo $previouspage ?>"><?php echo $previouspage ?></a></li>
+                                    <li class="page-item"><a class="page-link" href="?page=<?php echo $previouspage ?>"><?php echo "prev" ?></a></li>
                                     <?php } ?>
                                     <li class="page-item active"><a class="page-link" href="?page=<?php echo $curpage ?>"><?php echo $curpage ?></a></li>
                                     <?php if($curpage != $endpage){ ?>
-                                        <li class="page-item"><a class="page-link" href="?page=<?php echo $nextpage ?>"><?php echo $nextpage ?></a></li>
+                                        <li class="page-item"><a class="page-link" href="?page=<?php echo $nextpage ?>"><?php echo "next" ?></a></li>
                                     <?php }?>
                                 </ul>
+                                <p class="pull-right">&laquo;PAGE : <?php echo $curpage ?>/<?php echo $endpage ?>&raquo;</p>
                             </nav>                              
+                    
+                    <?php while($row2 =mysqli_fetch_assoc($retval2)) { ?>
+                        <div class="col-md-2 col-xs-12  ">
+                            <a href="news_view.php?id=<?php echo $row2['id']?>" >
+                            <img src="assets/images/<?php echo $row2['image'] ?>" width="100px" height="100px"alt="">
+                            </a>
+                            <p> <?php echo $row2['title'];?></p>
+                        </div>
+                    <?php }?>
                 </div>
                     <?php 
                          include('public_view_rightmenu.php');  

@@ -57,7 +57,9 @@
                             <ul class="news list-unstyled">
                                 <li class="d-flex justify-content-between" > 
                                     <div class="left-col d-flex">
-                                        
+                                        <div class="col-md-2 col-xs-2">
+                                            <img src="assets/images/<?php echo $row['image'] ?>" width="100px" height="100px"alt="">
+                                        </div>
                                         <div class="col-md-12 col-xs-12">
                                             <div class="title">
                                                 <strong><b class="n_date pull-right"><?php echo $row['created_date']?></b></strong>
@@ -80,13 +82,14 @@
                     <nav aria-label="Page navigation nav-justified">
                         <ul class="pagination">
                             <?php if($curpage >= 2){ ?>
-                            <li class="page-item"><a class="page-link" href="?c_id=<?php echo $Categoryid?>&page=<?php echo $previouspage ?>"><?php echo $previouspage ?></a></li>
+                            <li class="page-item"><a class="page-link" href="?c_id=<?php echo $Categoryid?>&page=<?php echo $previouspage ?>"><?php echo "prev" ?></a></li>
                             <?php } ?>
                             <li class="page-item active"><a class="page-link" href="?c_id=<?php echo $Categoryid?>&page=<?php echo $curpage ?>"><?php echo $curpage ?></a></li>
                             <?php if($curpage != $endpage){ ?>
-                                <li class="page-item"><a class="page-link" href="?c_id=<?php echo $Categoryid?>&page=<?php echo $nextpage ?>"><?php echo $nextpage ?></a></li>
+                                <li class="page-item"><a class="page-link" href="?c_id=<?php echo $Categoryid?>&page=<?php echo $nextpage ?>"><?php echo "next" ?></a></li>
                             <?php }?>
                         </ul>
+                    <p class="pull-right">&laquo;PAGE : <?php echo $curpage ?>/<?php echo $endpage ?>&raquo;</p>
                     </nav>  
                 <?php }?>
             </div>

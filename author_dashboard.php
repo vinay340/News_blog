@@ -27,8 +27,8 @@
             $startpage = 1;
             $nextpage = $curpage + 1;
             $previouspage = $curpage - 1;
-            $sql = "SELECT title,description,content,date,id, created_date,status FROM news WHERE author_id = $a ORDER BY created_date DESC";  
-            $sql1 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date FROM news AS a, user AS b WHERE a.author_id != $a  && a.author_id=b.id LIMIT $start, $perpage";  
+            $sql = "SELECT title,description,content,date,id, created_date,status,image FROM news WHERE author_id = $a ORDER BY created_date DESC";  
+            $sql1 = "SELECT a.title,a.description,a.content,a.date,a.id,b.name,a.created_date,a.image FROM news AS a, user AS b WHERE a.author_id != $a  && a.author_id=b.id LIMIT $start, $perpage";  
             $retval=mysqli_query($conn, $sql);
             $retval1=mysqli_query($conn, $sql1); 
             if(isset($_GET['id'])){
@@ -90,6 +90,10 @@
                                         <ul class="news list-unstyled">
                                             <li class="d-flex justify-content-between" > 
                                                 <div class="left-col d-flex">
+                                                    <div class="col-md-2 col-xs-2">
+                                                        <img src="assets/images/<?php echo $row['image'] ?>" width="100px" height="100px"alt="">
+                                                      </div>
+                                                    <div class="col-md-10 col-xs-12">
                                                     <div class="col-md-2" id="right">
                                                         <a href="edit_news.php?id= <?php echo $row['id']?>  ">
                                                             <i type="submit"id="right" class="fa fa-pencil-square-o " aria-hidden="true">&nbsp;</i>
@@ -101,7 +105,6 @@
                                                             <strong><h3><i><?php echo $row['title']?></i></h3></strong>
                                                         </div> 
                                                     </div>
-                                                    <div class="col-md-12 col-xs-12">
                                                         <p id="fogblack"><b><?php echo $row['date']?></b></p><br>             
                                                         <p><?php echo $row['description']?></p><br>
                                                         <p id="right"><?php if(($row['status'])==1){ echo '<spam class=" alert-success">APPROVED</spam>'; }else{ echo '<spam class=" alert-danger">NOT APPROVED</spam>'; }?></p><br>
@@ -146,13 +149,19 @@
                                         <ul class="news list-unstyled">
                                             <li class="d-flex justify-content-between" > 
                                                 <div class="left-col d-flex">
-                                                <b id="right">CREATED DATE</b><span class="pull-right" id="fogblack"><?php echo $row1['created_date']?></span><br>
+                                                <div class="col-md-2 col-xs-2">
+                                                        <img src="assets/images/<?php echo $row1['image'] ?>" width="100px" height="100px"alt="">
+                                                      </div>
+                                                    <div class="col-md-10 col-xs-12">
+                                                    <div class="col-md-2" id="right">
+                                                        <b id="right">CREATED DATE</b><span class="pull-right" id="fogblack"><?php echo $row1['created_date']?></span><br>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="title col-md-10">
                                                             <strong><h3><i><?php echo $row1['title']?></i></h3></strong>
                                                         </div> 
                                                     </div>
-                                                    <div class="col-md-12 col-xs-12">
+
                                                         <p id="fogblack"><b><?php echo $row1['date']?></b></p><br>             
                                                         <p><?php echo $row1['description']?></p><br>
                                                         <p id="right"><b>Author:</b><?php echo $row1['name']?></p><br>
@@ -189,14 +198,16 @@
                             <nav aria-label="Page navigation nav-justified">
                                 <ul class="pagination">
                                     <?php if($curpage >= 2){ ?>
-                                        <li class="page-item"><a class="page-link" href="author_dashboard.php?id=page_post&pagination_post=<?php echo $previouspage ?>"><?php echo $previouspage ?></a></li>
+                                        <li class="page-item"><a class="page-link" href="author_dashboard.php?id=page_post&pagination_post=<?php echo $previouspage  ?>"><?php echo "prev" ?></a></li>
                                     <?php } ?>
                                         <li class="page-item active"><a class="page-link" href="author_dashboard.php?id=page_post&pagination_post=<?php echo $curpage ?>"><?php echo $curpage ?></a></li>
                                     <?php if($curpage != $endpage){ ?>
-                                        <li class="page-item"><a class="page-link" href="author_dashboard.php?id=page_post&pagination_post=<?php echo $nextpage ?>"><?php echo $nextpage ?></a></li>
+                                        <li class="page-item"><a class="page-link" href="author_dashboard.php?id=page_post&pagination_post=<?php echo $nextpage  ?>"><?php echo "next"?></a></li>
                                     <?php }?>
                                 </ul>
+                            <p class="pull-right">&laquo;PAGE : <?php echo $curpage ?>/<?php echo $endpage ?>&raquo;</p>
                             </nav>  
+
                         </div>
                         <div id="create_news" class="tab-pane fade in <?php echo $other?>">
                             <?php
@@ -209,6 +220,8 @@
                                     $content=$_POST['content'];
                                     $date=$_POST['date'];
                                     $category=$_POST['category'];
+                                    $image=$_POST['file'];
+                                    $image = mysqli_real_escape_string($conn,$image); 
                                     $title = mysqli_real_escape_string($conn,$title); 
                                     $description = mysqli_real_escape_string($conn,$description);
                                     $content = mysqli_real_escape_string($conn,$content);
@@ -230,8 +243,8 @@
                                     {
                                             
                                         //$trn_date = date("Y-m-d H:i:s");
-                                        $query = "INSERT into `news` (title, description,content,date, author_id,category_id,created_date)
-                                        VALUES ('$title','$description','$content','$date', '$a','$category' , CURDATE())";
+                                        $query = "INSERT into `news` (title, description,content,date, author_id,category_id,created_date,image)
+                                        VALUES ('$title','$description','$content','$date', '$a','$category' , CURDATE(),'$image')";
                                         $result = mysqli_query($conn,$query) or die("Insert Error: ".mysqli_error($conn));
                                         if($result){
                                             echo "<script>window.open('author_dashboard.php?id=c_post&msg=created successfully','_self')</script>";
@@ -275,6 +288,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="date" class="form-control" id="content" placeholder="Event date" name="date" required  autofocus>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="file" class="form-control" id="file" placeholder="Event date" name="file" required  autofocus>
                                             </div>
                                             <button type="submit" class="btn btn-primary col-md-4 submit_button">CREATE</button>
                                             <a class="btn btn-warning col-md-4 cancel_button  " id="right" href="author_dashboard.php" >CANCEL</a>
